@@ -272,39 +272,37 @@ function sendMessage() {
 
     const businessInfo = selectedBusiness ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".` : '';
 
-   fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-body: JSON.stringify({
-  messages: [
-    {
-      role: 'system',
-      content: 'Du bist ein professioneller Assistent für das Unternehmen Botkraft. Antworte immer kurz, präzise, freundlich und verständlich – wie ein echter Mitarbeiter, ohne Fachsprache.'
-    },
-    {
-      role: 'user',
-      content: `${businessInfo} ${message}`
-    }
-  ]
+ fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    messages: [
+      {
+        role: 'system',
+        content: 'Du bist ein professioneller Assistent für das Unternehmen Botkraft. Antworte immer kurz, präzise, freundlich und verständlich – wie ein echter Mitarbeiter, ohne Fachsprache.'
+      },
+      {
+        role: 'user',
+        content: `${businessInfo} ${message}`
+      }
+    ]
+  })
 })
+.then(res => res.json())
+.then(data => {
+  document.getElementById('typing-indicator')?.remove();
 
+  const botMsg = document.createElement('div');
+  Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
+  botMsg.textContent = data.choices[0].message.content;
+  messages.appendChild(botMsg);
 })
-
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById('typing-indicator')?.remove();
-
-        const botMsg = document.createElement('div');
-        Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
-        botMsg.textContent = data.choices[0].message.content;
-        messages.appendChild(botMsg);
-    })
-    .catch(err => {
-        console.error('Fehler:', err);
-        document.getElementById('typing-indicator')?.remove();
-    });
+.catch(err => {
+  console.error('Fehler:', err);
+  document.getElementById('typing-indicator')?.remove();
+});
 }
 
 chatbotBtn.addEventListener('click', toggleChatbot);
-
