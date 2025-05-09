@@ -276,10 +276,19 @@ function sendMessage() {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
+body: JSON.stringify({
+  messages: [
+    {
+      role: 'system',
+      content: 'Du bist ein professioneller Assistent für das Unternehmen Botkraft. Antworte immer kurz, präzise, freundlich und verständlich – wie ein echter Mitarbeiter, ohne Fachsprache.'
     },
-    body: JSON.stringify({
-        messages: [{ role: 'user', content: `${businessInfo} ${message}` }]
-    })
+    {
+      role: 'user',
+      content: `${businessInfo} ${message}`
+    }
+  ]
+})
+
 })
 
     .then(res => res.json())
