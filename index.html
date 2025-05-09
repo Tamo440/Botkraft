@@ -229,6 +229,92 @@
   <i class="fas fa-comment-dots"></i>
 </div>
  <script src="chatbot.js"></script>
+
+<!-- Chatbot-Hinweis-Nachricht -->
+<style>
+  .chatbot-callout {
+    position: fixed;
+    bottom: 100px;
+    right: 90px;
+    background-color: #ff6900;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    animation: fadeInOut 10s infinite;
+    z-index: 9998;
+    font-family: Arial, sans-serif;
+  }
+
+  @keyframes fadeInOut {
+    0% {opacity: 0;}
+    10% {opacity: 1;}
+    30% {opacity: 1;}
+    40% {opacity: 0;}
+    100% {opacity: 0;}
+  }
+
+  .chatbot-arrow {
+    position: fixed;
+    bottom: 90px;
+    right: 60px;
+    font-size: 30px;
+    color: #ff6900;
+    animation: bounce 2s infinite;
+    z-index: 9997;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .chatbot-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #085186;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    display: none;
+    z-index: 9999;
+  }
+
+  .scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #085186;
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 9999;
+  }
+</style>
+
+<!-- Pfeil & Nachricht -->
+<div class="chatbot-callout">👉 Jetzt den Bot testen!</div>
+<div class="chatbot-arrow">⬇️</div>
+
+<!-- Fake-Popup -->
+<div class="chatbot-popup" id="popupMessage">💬 Teste jetzt den Chatbot kostenlos!</div>
+
+<!-- Zurück-nach-oben Button -->
+<div class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
+
+<script>
+  // Popup alle 10 Sekunden anzeigen für 3 Sek.
+  setInterval(() => {
+    const popup = document.getElementById('popupMessage');
+    popup.style.display = 'block';
+    setTimeout(() => popup.style.display = 'none', 3000);
+  }, 10000);
+</script>
 </body>
 </html>
 
