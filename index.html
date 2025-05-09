@@ -169,31 +169,107 @@
     </div>
   </section>
 
- <section id="technologien" style="padding: 60px; background: #f8f9fc; text-align: center;">
-  <h2 style="font-size: 32px; font-weight: bold; margin-bottom: 20px;">💡 Unsere Technologien</h2>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 900px; margin: auto;">
-    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: all 0.3s;">
-      <div style="font-size: 24px;">🧠</div>
-      <strong>ChatGPT API</strong>
-      <p style="font-size: 14px;">Antwortet intelligent auf alle Kundenfragen.</p>
+<!-- Technologien-Block mit Animationen -->
+<style>
+  .tech-section {
+    padding: 60px;
+    background: #f8f9fc;
+    text-align: center;
+  }
+  .tech-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: auto;
+  }
+  .card {
+    background: white;
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  .card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+    animation: pop 0.6s ease-in-out forwards;
+  }
+  @keyframes pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .card-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .card-text {
+    font-size: 14px;
+    color: #333;
+  }
+</style>
+
+<section class="tech-section" id="technologien">
+  <h2 class="tech-title">💡 Unsere Technologien</h2>
+  <div class="tech-grid">
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <div class="card-title">ChatGPT API</div>
+      <div class="card-text">Antwortet intelligent und präzise auf Kundenfragen.</div>
     </div>
-    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: all 0.3s;">
-      <div style="font-size: 24px;">🔗</div>
-      <strong>Render / Vercel</strong>
-      <p style="font-size: 14px;">Hosting deiner Chatbot-Logik.</p>
+    <div class="card">
+      <div class="card-icon">🔗</div>
+      <div class="card-title">Render / Vercel</div>
+      <div class="card-text">Stabiles Hosting für deine Chatbot-Logik.</div>
     </div>
-    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: all 0.3s;">
-      <div style="font-size: 24px;">🌀</div>
-      <strong>WordPress Integration</strong>
-      <p style="font-size: 14px;">Schnelle Einbindung per Snippet.</p>
+    <div class="card">
+      <div class="card-icon">🌀</div>
+      <div class="card-title">WordPress Snippet</div>
+      <div class="card-text">Einfache Integration in bestehende Seiten.</div>
     </div>
-    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: all 0.3s;">
-      <div style="font-size: 24px;">⚙️</div>
-      <strong>No-Code Tools</strong>
-      <p style="font-size: 14px;">z. B. Landbot, Tidio für einfache Bots.</p>
+    <div class="card">
+      <div class="card-icon">⚙️</div>
+      <div class="card-title">No-Code Tools</div>
+      <div class="card-text">Tidio, Landbot und mehr für einfache Automationen.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎨</div>
+      <div class="card-title">Tailwind / HTML5</div>
+      <div class="card-text">Modernes Webdesign & saubere Umsetzung.</div>
     </div>
   </div>
 </section>
+
+<script>
+  // Scroll-Fade-In Effekt
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card').forEach(el => {
+    observer.observe(el);
+  });
+</script>
 
   <section id="preise" class="section">
     <h2>Pakete & Preise</h2>
