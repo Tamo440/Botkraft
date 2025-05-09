@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Botkraft – Smarte Chatbot-Integrationen</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom, #f9f9f9, #e0e7ff);
+      color: #1e1e2f;
+    }
+    header {
+      background: #0f172a;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 20px;
+      color: #cbd5e1;
+    }
+    nav {
+      background: white;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+    }
+    nav a {
+      text-decoration: none;
+      color: #1e293b;
+      margin: 0 12px;
+      font-weight: 600;
+    }
+    .section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .feature {
+      flex: 1 1 300px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .feature i {
+      font-size: 28px;
+      color: #6366f1;
+      margin-bottom: 10px;
+    }
+    .cta {
+      background: #4f46e5;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .cta h3 {
+      font-size: 28px;
+    }
+    .cta a {
+      margin-top: 20px;
+      display: inline-block;
+      background: white;
+      color: #4f46e5;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 14px;
+    }
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+    }
+    .chatbot-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #4f46e5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+    }
+    .chatbot-button i {
+      color: white;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><strong>Botkraft</strong></div>
+    <div>
+      <a href="#services">Leistungen</a>
+      <a href="#technologien">Technologien</a>
+      <a href="#preise">Preise</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Botkraft – Smarte Chatbot-Integrationen</h1>
+    <p>Wir bauen maßgeschneiderte Chatbots für Websites, Shops & Unternehmen</p>
+  </header>
+
+  <section id="services" class="section">
+    <h2>Unsere Leistungen</h2>
+    <div class="features">
+      <div class="feature">
+        <i class="fas fa-robot"></i>
+        <h4>Website-Chatbots</h4>
+        <p>Individuelle Chatbots, die Besucher führen, Fragen beantworten & Termine buchen.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-bolt"></i>
+        <h4>Automatisierungen</h4>
+        <p>Wir verbinden deinen Bot mit Google Sheets, E-Mail-Marketing, CRMs & mehr.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-shield-alt"></i>
+        <h4>Datenschutz & Sicherheit</h4>
+        <p>Hosting mit DSGVO-konformen Proxys & anonymem Nutzerhandling – made in Germany.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="technologien" class="section">
+    <h2>Technologien</h2>
+    <p>Wir arbeiten mit:</p>
+    <ul>
+      <li>ChatGPT (OpenAI API)</li>
+      <li>Render / Vercel Proxy-Hosting</li>
+      <li>WordPress + Snippet-Integration</li>
+      <li>No-Code Tools (Tidio, Landbot)</li>
+      <li>Tailwind CSS, HTML5, JavaScript</li>
+    </ul>
+  </section>
+
+  <section id="preise" class="section">
+    <h2>Pakete & Preise</h2>
+    <div class="features">
+      <div class="feature">
+        <h4>Starter</h4>
+        <p>1 Chatbot<br>1 Webseite<br><strong>99€ einmalig</strong></p>
+      </div>
+      <div class="feature">
+        <h4>Business</h4>
+        <p>1 Chatbot + Integration<br>Automatisierung<br><strong>299€ einmalig</strong></p>
+      </div>
+      <div class="feature">
+        <h4>Premium</h4>
+        <p>Individuell + API-Anbindung<br>DSGVO-Beratung<br><strong>599€ + Support</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="cta">
+    <h3>Lust auf deinen eigenen Chatbot?</h3>
+    <p>Schreib uns eine E-Mail an <a href="mailto:tamo.ra@outlook.de">tamo.ra@outlook.de</a> oder starte direkt den Chat!</p>
+    <a href="#" onclick="toggleChatbot()">Chat starten</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Botkraft – Smarte Chatbot-Integrationen<br>
+      Verantwortlich: Tamim Raschidi | Hamburg, DE</p>
+    <p><a href="#" onclick="alert('Dies ist ein Demo-Impressum. Verantwortlich: Tamim Raschidi, Hamburg. Kontakt wie oben.')">Impressum</a> |
+       <a href="#" onclick="alert('Diese Website verwendet keine Cookies. Für die Chatfunktion wird OpenAI API genutzt. Es werden keine Daten gespeichert.')">Datenschutz</a>
+    </p>
+  </footer>
+
+  <div class="chatbot-button" onclick="toggleChatbot()">
+    <i class="fas fa-comment-dots"></i>
+  </div>
+
+  <button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">⬆</button>
+  <script>
+    window.addEventListener('scroll', () => {
+      const btn = document.querySelector('.scroll-top');
+      if (window.scrollY > 200) btn.style.display = 'block';
+      else btn.style.display = 'none';
+    });
+  </script>
+ <div class="chatbot-button" onclick="toggleChatbot()">
+  <i class="fas fa-comment-dots"></i>
+</div>
+ <script src="chatbot.js"></script>
+</body>
+</html>
+
+
