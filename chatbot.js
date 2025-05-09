@@ -297,5 +297,7 @@ function sendMessage() {
     });
 }
 
+sendBtn.addEventListener('click', sendMessage);
 chatbotBtn.addEventListener('click', toggleChatbot);
+
 
