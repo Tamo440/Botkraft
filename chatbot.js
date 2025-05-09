@@ -278,7 +278,16 @@ function sendMessage() {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        messages: [{ role: 'user', content: `${businessInfo} ${message}` }]
+        messages: [
+  {
+    role: 'system',
+    content: 'Du bist ein professioneller, menschlich formulierender Assistent für das Unternehmen Botkraft. Antworte immer kurz, klar, sympathisch und hilfreich – wie ein echter Mitarbeiter. Vermeide Fachsprache, sei verständlich und freundlich.'
+  },
+  {
+    role: 'user',
+    content: `${businessInfo} ${message}`
+  }
+]
     })
 })
 
