@@ -297,23 +297,73 @@
   });
 </script>
 
-  <section id="preise" class="section">
-    <h2>Pakete & Preise</h2>
-    <div class="features">
-      <div class="feature">
-        <h4>Starter</h4>
-        <p>1 Chatbot<br>1 Webseite<br><strong>99€ einmalig</strong></p>
+<!-- 📦 Preis-Slider -->
+<style>
+  .pricing-slider {
+    position: relative;
+    max-width: 360px;
+    margin: 60px auto;
+    overflow: hidden;
+  }
+  ...
+</style>
+
+<section id="preise" style="text-align:center;">
+  <h2 style="font-size:32px; margin-bottom:20px;">📦 Unsere Pakete</h2>
+  <div class="pricing-slider" id="pricingSlider">
+    <div class="pricing-track">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <div class="price">79 € einmalig</div>
+        <p>Perfekt für Einsteiger, 1 Chatbot & 1 Website.</p>
       </div>
-      <div class="feature">
-        <h4>Business</h4>
-        <p>1 Chatbot + Integration<br>Automatisierung<br><strong>299€ einmalig</strong></p>
-      </div>
-      <div class="feature">
-        <h4>Premium</h4>
-        <p>Individuell + API-Anbindung<br>DSGVO-Beratung<br><strong>599€ + Support</strong></p>
+      <div class="pricing-card">
+        <h3>Flex</h3>
+        <div class="price">69 €/Monat</div>
+        <p>Jederzeit kündbar. Ideal für wachsende Unternehmen.</p>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="slider-controls">
+    <button class="slider-arrow" onclick="prevSlide()">←</button>
+    <button class="slider-arrow" onclick="nextSlide()">→</button>
+  </div>
+  <div class="slider-dots">
+    <div class="slider-dot active"></div>
+    <div class="slider-dot"></div>
+  </div>
+</section>
+
+<script>
+  const track = document.querySelector('.pricing-track');
+  const dots = document.querySelectorAll('.slider-dot');
+  let index = 0;
+
+  function updateSlider() {
+    track.style.transform = 'translateX(' + (-index * 100) + '%)';
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+  }
+
+  function nextSlide() {
+    index = (index + 1) % 2;
+    updateSlider();
+  }
+
+  function prevSlide() {
+    index = (index - 1 + 2) % 2;
+    updateSlider();
+  }
+
+  let startX = 0;
+  document.getElementById('pricingSlider').addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  document.getElementById('pricingSlider').addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (diff > 50) prevSlide();
+    if (diff < -50) nextSlide();
+  });
+</script>
 
   <section id="kontakt" class="cta">
     <h3>Lust auf deinen eigenen Chatbot?</h3>
