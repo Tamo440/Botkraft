@@ -297,7 +297,7 @@
   });
 </script>
 
-<!-- 📦 Preis-Slider -->
+<!-- 📦 Neuer Preis-Slider -->
 <style>
   .pricing-slider {
     position: relative;
@@ -305,7 +305,76 @@
     margin: 60px auto;
     overflow: hidden;
   }
-  ...
+
+  .pricing-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .pricing-card {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    padding: 24px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    text-align: center;
+  }
+
+  .pricing-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .pricing-card p {
+    font-size: 14px;
+    color: #444;
+  }
+
+  .pricing-card .price {
+    font-size: 28px;
+    color: #ff6900;
+    margin: 15px 0;
+  }
+
+  .slider-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    transition: background 0.3s ease;
+  }
+
+  .slider-dot.active {
+    background: #ff6900;
+  }
+
+  .slider-arrow {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  @media (hover: hover) {
+    .slider-arrow:hover {
+      color: #ff6900;
+    }
+  }
 </style>
 
 <section id="preise" style="text-align:center;">
