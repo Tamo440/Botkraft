@@ -582,6 +582,33 @@
 </body>
   <!-- ganz am Ende der Datei -->
 <script src="chatbot.js"></script>
+
+  <script>
+  const form = document.querySelector('form[action="https://formspree.io/f/xpwradny"]');
+  const dankeMessage = document.getElementById('dankeMessage');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      form.reset();
+      dankeMessage.style.display = 'block';
+    } else {
+      alert("Fehler beim Senden. Bitte versuch es später nochmal.");
+    }
+  });
+</script>
+
 </body>
 </html>
 
