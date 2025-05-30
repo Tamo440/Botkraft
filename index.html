@@ -463,21 +463,29 @@
   <h2>📨 Kontakt aufnehmen</h2>
   <p>Hinterlasse uns deine Anfrage – wir melden uns in Kürze!</p>
 
-  <form action="https://formspree.io/f/DEIN_FORM_ID" method="POST" style="max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 15px;">
-    <input type="text" name="name" placeholder="Dein Name" required style="padding: 12px; border-radius: 8px; border: none;">
-    <input type="email" name="email" placeholder="Deine E-Mail" required style="padding: 12px; border-radius: 8px; border: none;">
-    <textarea name="message" placeholder="Deine Nachricht..." rows="5" required style="padding: 12px; border-radius: 8px; border: none;"></textarea>
+  <form action="https://formspree.io/f/xpwradny" method="POST" style="max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 15px;">
     
-    <!-- Automatische Antwort -->
+    <input type="text" name="name" placeholder="Dein Name" required style="padding: 12px; border-radius: 8px; border: none; font-size: 16px;">
+    
+    <input type="email" name="email" placeholder="Deine E-Mail" required style="padding: 12px; border-radius: 8px; border: none; font-size: 16px;">
+    
+    <textarea name="message" placeholder="Deine Nachricht..." rows="5" required style="padding: 12px; border-radius: 8px; border: none; font-size: 16px;"></textarea>
+
+    <!-- 🔁 Automatische Antwort -->
     <input type="hidden" name="_autoresponse" value="Vielen Dank für deine Anfrage bei Botkraft. Wir melden uns in Kürze. – Tamim Raschidi">
 
-    <!-- Weiterleitung optional -->
+    <!-- ✅ Optionale Weiterleitung nach dem Absenden -->
     <input type="hidden" name="_redirect" value="https://tamo440.github.io/mein-chatbot/#danke">
 
-    <button type="submit" style="padding: 14px; background: white; color: #4f46e5; font-weight: bold; border: none; border-radius: 8px; cursor: pointer;">Anfrage senden</button>
+    <button type="submit" style="padding: 14px; background: white; color: #4f46e5; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Anfrage senden</button>
   </form>
 </section>
 
+<section id="danke" style="padding: 60px 20px; text-align: center; background: #e0fce9; color: #065f46;">
+  <h2>🎉 Danke für deine Nachricht!</h2>
+  <p>Wir melden uns so schnell wie möglich zurück.</p>
+</section>
+  
   <footer>
     <p>&copy; 2025 Botkraft – Smarte Chatbot-Integrationen<br>
       Verantwortlich: Tamim Raschidi | Hamburg, DE</p>
