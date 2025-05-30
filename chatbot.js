@@ -205,48 +205,60 @@ chatbotContainer.appendChild(inputWrapper);
 document.body.appendChild(chatbotContainer);
 
 function toggleChatbot() {
-    const display = window.getComputedStyle(chatbotContainer).display;
-    chatbotContainer.style.display = (display === 'none' || display === '') ? 'flex' : 'none';
+  const display = window.getComputedStyle(chatbotContainer).display;
+  const isVisible = (display !== 'none' && chatbotContainer.style.opacity !== '0');
 
-    const existingBadge = chatbotBtn.querySelector('.chatbot-notify');
-    if (existingBadge) existingBadge.remove();
+  if (!isVisible) {
+    chatbotContainer.style.display = 'flex';
+    chatbotContainer.classList.remove('chatbot-container-hidden');
+    chatbotContainer.classList.add('chatbot-container-animated');
+  } else {
+    chatbotContainer.classList.remove('chatbot-container-animated');
+    chatbotContainer.classList.add('chatbot-container-hidden');
+    setTimeout(() => {
+      chatbotContainer.style.display = 'none';
+    }, 300);
+  }
 
-    if (messages.innerHTML.trim() === '') {
-        const intro = document.createElement('div');
-        Object.assign(intro.style, { ...styles.messageBase, ...styles.botMessage });
-        intro.innerHTML = '👋 Willkommen! Ich bin Tamims digitaler Assistent. Für welches Unternehmen interessierst du dich?';
-        messages.appendChild(intro);
+  const existingBadge = chatbotBtn.querySelector('.chatbot-notify');
+  if (existingBadge) existingBadge.remove();
 
-        const options = ['Friseursalon ✂️', 'Immobilienbüro 🏠', 'Coaching 👔', 'Webdesign 💻', 'Reinigungsservice 🧼', 'Autohaus 🚗', 'Arztpraxis 🩺'];
-        const buttonContainer = document.createElement('div');
-        buttonContainer.style.display = 'flex';
-        buttonContainer.style.flexWrap = 'wrap';
-        buttonContainer.style.gap = '10px';
-        buttonContainer.style.marginTop = '10px';
+  if (messages.innerHTML.trim() === '') {
+    const intro = document.createElement('div');
+    Object.assign(intro.style, { ...styles.messageBase, ...styles.botMessage });
+    intro.innerHTML = '👋 Willkommen! Ich bin Tamims digitaler Assistent. Für welches Unternehmen interessierst du dich?';
+    messages.appendChild(intro);
 
-        options.forEach(option => {
-            const btn = document.createElement('button');
-            btn.textContent = option;
-            btn.style.padding = '8px 12px';
-            btn.style.border = '1px solid #ccc';
-            btn.style.borderRadius = '8px';
-            btn.style.cursor = 'pointer';
-            btn.style.backgroundColor = '#fff';
-            btn.onmouseover = () => btn.style.backgroundColor = '#f0f0f0';
-            btn.onmouseout = () => btn.style.backgroundColor = '#fff';
-            btn.onclick = () => {
-                selectedBusiness = option;
-                const confirmMsg = document.createElement('div');
-                Object.assign(confirmMsg.style, { ...styles.messageBase, ...styles.botMessage });
-                confirmMsg.textContent = `Super! Ich bin Tamims virtueller Assistent für "${option}". Was möchtest du wissen?`;
-                messages.appendChild(confirmMsg);
-                buttonContainer.remove();
-            };
-            buttonContainer.appendChild(btn);
-        });
+    const options = ['Friseursalon ✂️', 'Immobilienbüro 🏠', 'Coaching 👔', 'Webdesign 💻', 'Reinigungsservice 🧼', 'Autohaus 🚗', 'Arztpraxis 🩺'];
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.flexWrap = 'wrap';
+    buttonContainer.style.gap = '10px';
+    buttonContainer.style.marginTop = '10px';
 
-        messages.appendChild(buttonContainer);
-    }
+    options.forEach(option => {
+      const btn = document.createElement('button');
+      btn.textContent = option;
+      btn.style.padding = '8px 12px';
+      btn.style.border = '1px solid #ccc';
+      btn.style.borderRadius = '8px';
+      btn.style.cursor = 'pointer';
+      btn.style.backgroundColor = '#fff';
+      btn.onmouseover = () => btn.style.backgroundColor = '#f0f0f0';
+      btn.onmouseout = () => btn.style.backgroundColor = '#fff';
+      btn.onclick = () => {
+        selectedBusiness = option;
+        const confirmMsg = document.createElement('div');
+        Object.assign(confirmMsg.style, { ...styles.messageBase, ...styles.botMessage });
+        confirmMsg.textContent = `Super! Ich bin Tamims virtueller Assistent für "${option}". Was möchtest du wissen?`;
+        messages.appendChild(confirmMsg);
+        buttonContainer.remove();
+      };
+      buttonContainer.appendChild(btn);
+    });
+
+    messages.appendChild(buttonContainer);
+  }
 }
 
 function sendMessage() {
