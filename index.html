@@ -297,109 +297,100 @@
   });
 </script>
 
-<!-- 📦 Neuer Preis-Slider -->
+<!-- 🎯 Neuer Preisbereich mit Glow, Icons & Action -->
 <style>
-  .pricing-slider {
-    position: relative;
-    max-width: 360px;
-    margin: 60px auto;
-    overflow: hidden;
-  }
-
-  .pricing-track {
+  .price-container {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 40px 20px;
+    justify-content: center;
+    scroll-snap-type: x mandatory;
   }
 
-  .pricing-card {
-    flex: 0 0 100%;
-    box-sizing: border-box;
+  .price-card {
+    flex: 0 0 300px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     padding: 24px;
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    scroll-snap-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
     text-align: center;
+    position: relative;
   }
 
-  .pricing-card h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
+  .price-card:hover {
+    transform: scale(1.04) rotateX(1deg);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
   }
 
-  .pricing-card p {
-    font-size: 14px;
-    color: #444;
-  }
-
-  .pricing-card .price {
-    font-size: 28px;
+  .price-tag {
+    font-size: 26px;
     color: #ff6900;
+    font-weight: bold;
     margin: 15px 0;
   }
 
-  .slider-controls {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  .feature-list {
+    text-align: left;
+    padding: 0;
+    list-style: none;
   }
 
-  .slider-dots {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+  .feature-list li::before {
+    content: "✔️";
+    margin-right: 8px;
+    color: green;
   }
 
-  .slider-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ccc;
+  .price-cta {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #ff6900;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 12px #ff690080;
     transition: background 0.3s ease;
   }
 
-  .slider-dot.active {
-    background: #ff6900;
-  }
-
-  .slider-arrow {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #333;
-  }
-
-  @media (hover: hover) {
-    .slider-arrow:hover {
-      color: #ff6900;
-    }
+  .price-cta:hover {
+    background: #e65a00;
   }
 </style>
 
 <section id="preise" style="text-align:center;">
-  <h2 style="font-size:32px; margin-bottom:20px;">📦 Unsere Pakete</h2>
-  <div class="pricing-slider" id="pricingSlider">
-    <div class="pricing-track">
-      <div class="pricing-card">
-        <h3>Starter</h3>
-        <div class="price">79 € einmalig</div>
-        <p>Perfekt für Einsteiger, 1 Chatbot & 1 Website.</p>
-      </div>
-      <div class="pricing-card">
-        <h3>Flex</h3>
-        <div class="price">69 €/Monat</div>
-        <p>Jederzeit kündbar. Ideal für wachsende Unternehmen.</p>
-      </div>
+  <h2 style="font-size:32px;">💸 Unsere Pakete</h2>
+  <div class="price-container">
+    
+    <div class="price-card">
+      <h3>Starter</h3>
+      <div class="price-tag">79 € einmalig</div>
+      <ul class="feature-list">
+        <li>1 Website</li>
+        <li>1 Chatbot</li>
+        <li>Fix & fertig eingebaut</li>
+        <li>Design inklusive</li>
+      </ul>
+      <a href="#kontakt" class="price-cta">Jetzt starten</a>
     </div>
-  </div>
-  <div class="slider-controls">
-    <button class="slider-arrow" onclick="prevSlide()">←</button>
-    <button class="slider-arrow" onclick="nextSlide()">→</button>
-  </div>
-  <div class="slider-dots">
-    <div class="slider-dot active"></div>
-    <div class="slider-dot"></div>
+
+    <div class="price-card">
+      <h3>Flex</h3>
+      <div class="price-tag">69 €/Monat</div>
+      <ul class="feature-list">
+        <li>Hosting & Support inkl.</li>
+        <li>Unbegrenzte Änderungen</li>
+        <li>Immer aktuell</li>
+        <li>DSGVO & API-Pflege</li>
+      </ul>
+      <a href="#kontakt" class="price-cta">Flex buchen</a>
+    </div>
+
   </div>
 </section>
 
