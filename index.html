@@ -461,6 +461,78 @@
 
   </div>
 </section>
+
+  <section id="faq" style="background: #0f172a; color: #f1f5f9; padding: 80px 20px;">
+  <h2 style="text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 40px;">❓ Häufige Fragen (FAQ)</h2>
+  
+  <div style="max-width: 800px; margin: auto;">
+
+    <div class="faq-item">
+      <button class="faq-question">📅 Wie lange dauert die Einrichtung?</button>
+      <div class="faq-answer">In der Regel 2–4 Werktage – je nach Anforderungen sogar schneller!</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">🌐 Brauche ich eine eigene Website?</button>
+      <div class="faq-answer">Nein! Wir können dir auch ohne eigene Seite eine Demo erstellen oder einbauen.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">✏️ Kann ich den Chatbot später ändern?</button>
+      <div class="faq-answer">Ja, jederzeit. Im Flex-Paket sind alle Änderungen inklusive.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">❌ Was passiert bei Kündigung?</button>
+      <div class="faq-answer">Du kannst jederzeit kündigen. Der Bot bleibt aktiv bis zum Monatsende.</div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    padding: 16px 20px;
+    background: #1e293b;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background 0.3s ease;
+  }
+
+  .faq-question:hover {
+    background: #334155;
+  }
+
+  .faq-answer {
+    background: #1e293b;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+    font-size: 15px;
+    color: #cbd5e1;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const answer = button.nextElementSibling;
+      const isOpen = answer.style.display === 'block';
+
+      document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+      if (!isOpen) answer.style.display = 'block';
+    });
+  });
+</script>
   
 <script>
   const track = document.querySelector('.pricing-track');
