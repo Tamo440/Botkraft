@@ -152,6 +152,11 @@ const styles = {
     }
 };
 
+function scrollToBottom() {
+  const messages = document.getElementById('messages');
+  messages.scrollTop = messages.scrollHeight;
+}
+
 const chatbotBtn = document.createElement('div');
 Object.assign(chatbotBtn.style, styles.button);
 chatbotBtn.innerHTML = '<i class="fas fa-comment-dots"></i>';
@@ -274,6 +279,7 @@ function sendMessage() {
     const typingIndicator = document.createElement('div');
     typingIndicator.className = 'typing-indicator';
   messages.appendChild(typingIndicator);
+scrollToBottom();
     typingIndicator.id = 'typing-indicator';
 
     for (let i = 0; i < 3; i++) {
@@ -281,8 +287,7 @@ function sendMessage() {
         dot.className = 'typing-dot';
         typingIndicator.appendChild(dot);
     }
-    messages.appendChild(typingIndicator);
-
+  
     const businessInfo = selectedBusiness ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".` : '';
 
    fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
