@@ -317,7 +317,11 @@ body: JSON.stringify({
         Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
         botMsg.textContent = data.choices[0].message.content;
         messages.appendChild(botMsg);
-      scrollToBottom();
+      botMsg.textContent = data.choices[0].message.content;
+messages.appendChild(botMsg);
+setTimeout(() => {
+  scrollToBottom(); // ✅ Scrollt jetzt richtig nach unten
+}, 50);
     })
     .catch(err => {
         console.error('Fehler:', err);
