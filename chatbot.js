@@ -273,13 +273,11 @@ function sendMessage() {
     Object.assign(userMsg.style, { ...styles.messageBase, ...styles.userMessage });
     userMsg.textContent = message;
     messages.appendChild(userMsg);
-scrollToBottom();
     input.value = '';
 
     const typingIndicator = document.createElement('div');
     typingIndicator.className = 'typing-indicator';
   messages.appendChild(typingIndicator);
-scrollToBottom(); ✅
     typingIndicator.id = 'typing-indicator';
 
     for (let i = 0; i < 3; i++) {
