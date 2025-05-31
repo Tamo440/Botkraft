@@ -317,6 +317,7 @@ body: JSON.stringify({
         Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
         botMsg.textContent = data.choices[0].message.content;
         messages.appendChild(botMsg);
+      scrollToBottom();
     })
     .catch(err => {
         console.error('Fehler:', err);
