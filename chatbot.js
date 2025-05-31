@@ -321,4 +321,10 @@ body: JSON.stringify({
 sendBtn.addEventListener('click', sendMessage);
 chatbotBtn.addEventListener('click', toggleChatbot);
 
+function scrollToBottom() {
+  const chatArea = document.getElementById('messages');
+  chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+
 
