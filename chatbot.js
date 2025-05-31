@@ -151,6 +151,10 @@ const styles = {
         border: 'none'
     }
 };
+function scrollToBottom() {
+  const messages = document.getElementById('messages');
+  messages.scrollTop = messages.scrollHeight;
+}
 
 const chatbotBtn = document.createElement('div');
 Object.assign(chatbotBtn.style, styles.button);
@@ -274,6 +278,8 @@ scrollToBottom();
 
     const typingIndicator = document.createElement('div');
     typingIndicator.className = 'typing-indicator';
+  messages.appendChild(typingIndicator);
+scrollToBottom(); ✅
     typingIndicator.id = 'typing-indicator';
 
     for (let i = 0; i < 3; i++) {
@@ -321,11 +327,4 @@ body: JSON.stringify({
 
 sendBtn.addEventListener('click', sendMessage);
 chatbotBtn.addEventListener('click', toggleChatbot);
-
-function scrollToBottom() {
-  const chatArea = document.getElementById('messages');
-  chatArea.scrollTop = chatArea.scrollHeight;
-}
-
-
 
