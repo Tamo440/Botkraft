@@ -151,10 +151,6 @@ const styles = {
         border: 'none'
     }
 };
-function scrollToBottom() {
-  const messages = document.getElementById('messages');
-  messages.scrollTop = messages.scrollHeight;
-}
 
 const chatbotBtn = document.createElement('div');
 Object.assign(chatbotBtn.style, styles.button);
