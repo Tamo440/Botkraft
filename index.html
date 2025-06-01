@@ -331,7 +331,6 @@
   });
 </script>
 
-<!-- 🎯 Neuer Preisbereich mit Glow, Icons & Action -->
 <style>
   .price-container {
     display: flex;
@@ -339,17 +338,19 @@
     overflow-x: auto;
     gap: 20px;
     padding: 40px 20px;
-    justify-content: center;
     scroll-snap-type: x mandatory;
+    scroll-padding: 20px;
+    -webkit-overflow-scrolling: touch;
   }
 
   .price-card {
-    flex: 0 0 300px;
+    flex: 0 0 85%;
+    max-width: 320px;
     background: white;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     padding: 24px;
-    scroll-snap-align: center;
+    scroll-snap-align: start;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     text-align: center;
     position: relative;
@@ -394,6 +395,15 @@
 
   .price-cta:hover {
     background: #e65a00;
+  }
+
+  @media (min-width: 768px) {
+    .price-container {
+      justify-content: center;
+    }
+    .price-card {
+      flex: 0 0 300px;
+    }
   }
 </style>
 
