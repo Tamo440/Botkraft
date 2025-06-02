@@ -153,10 +153,21 @@ const styles = {
 };
 const resetStyles = document.createElement('style');
 resetStyles.textContent = `
-  #chatbot *, #chatbot *::before, #chatbot *::after {
-    all: unset;
+  #chatbot * {
+    font-family: 'Inter', sans-serif !important;
     box-sizing: border-box;
+    line-height: 1.4;
+  }
+
+  #chatbot button {
+    all: unset;
     font-family: 'Inter', sans-serif;
+    cursor: pointer;
+  }
+
+  #chatbot input {
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
   }
 `;
 document.head.appendChild(resetStyles);
