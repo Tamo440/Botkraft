@@ -151,6 +151,15 @@ const styles = {
         border: 'none'
     }
 };
+const resetStyles = document.createElement('style');
+resetStyles.textContent = `
+  #chatbot *, #chatbot *::before, #chatbot *::after {
+    all: unset;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+`;
+document.head.appendChild(resetStyles);
 
 function scrollToBottom() {
   const messages = document.getElementById('messages');
