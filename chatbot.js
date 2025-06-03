@@ -144,18 +144,24 @@ messageBase: {
   boxShadow: 'none',
   wordBreak: 'break-word'
 },
-    botMessage: {
-        backgroundColor: colors.botBackground,
-        color: colors.botText,
-        textAlign: 'left'
-    },
-    userMessage: {
-        backgroundColor: colors.userBackground,
-        color: colors.userText,
-        textAlign: 'right',
-        marginLeft: 'auto',
-        border: 'none'
-    }
+   botMessage: {
+  backgroundColor: colors.botBackground,
+  color: colors.botText,
+  textAlign: 'left',
+  maxWidth: '90%',
+  width: 'fit-content',
+  alignSelf: 'flex-start'
+},
+   userMessage: {
+  backgroundColor: colors.userBackground,
+  color: colors.userText,
+  textAlign: 'right',
+  marginLeft: 'auto',
+  border: 'none',
+  maxWidth: '90%',
+  width: 'fit-content',
+  alignSelf: 'flex-end'
+}
 };
 const resetStyles = document.createElement('style');
 resetStyles.textContent = `
