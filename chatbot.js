@@ -323,69 +323,24 @@ scrollToBottom();
   
     const businessInfo = selectedBusiness ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".` : '';
 
-   let chatHistory = [
-  {
-    role: 'system',
-    content:
-      'Du bist ein professioneller, sachlicher Assistent für Kundenanfragen. Antworte kurz, hilfreich und seriös – ohne Emojis oder Begrüßungen. Gib präzise Antworten.'
-  }
-];
-
-function sendMessage() {
-  const message = input.value.trim();
-  if (message === '') return;
-
-  // UI: Usernachricht anzeigen
-  const userMsg = document.createElement('div');
-  Object.assign(userMsg.style, { ...styles.messageBase, ...styles.userMessage });
-  userMsg.textContent = message;
-  messages.appendChild(userMsg);
-  input.value = '';
-
-  // Verlauf speichern
-  chatHistory.push({ role: 'user', content: message });
-
-  // Tipp-Indikator anzeigen
-  const typingIndicator = document.createElement('div');
-  typingIndicator.className = 'typing-indicator';
-  typingIndicator.id = 'typing-indicator';
-  for (let i = 0; i < 3; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'typing-dot';
-    typingIndicator.appendChild(dot);
-  }
-  messages.appendChild(typingIndicator);
-
-  // Anfrage an API
-  fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      messages: chatHistory
-    })
+fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    messages: [
+      {
+        role: 'system',
+        content: '...'
+      },
+      {
+        role: 'user',
+        content: `${businessInfo} ${message}`
+      }
+    ]
   })
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('typing-indicator')?.remove();
-
-      const botText = data.choices[0].message.content;
-
-      // UI: Bot-Antwort anzeigen
-      const botMsg = document.createElement('div');
-      Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
-      botMsg.textContent = botText;
-      messages.appendChild(botMsg);
-
-      // Antwort im Verlauf speichern
-      chatHistory.push({ role: 'assistant', content: botText });
-    })
-    .catch(err => {
-      console.error('Fehler:', err);
-      document.getElementById('typing-indicator')?.remove();
-    });
-}
+})
   
     .then(res => res.json())
     .then(data => {
