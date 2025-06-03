@@ -362,5 +362,10 @@ setTimeout(() => {
 }
 
 sendBtn.addEventListener('click', sendMessage);
+input.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') {
+    sendMessage();
+  }
+});
 chatbotBtn.addEventListener('click', toggleChatbot);
 
