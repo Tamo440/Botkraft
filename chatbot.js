@@ -300,78 +300,61 @@ function toggleChatbot() {
 }
 
 function sendMessage() {
-    const message = input.value.trim();
-    if (message === '') return;
+  const message = input.value.trim();
+  if (message === '') return;
 
-    const userMsg = document.createElement('div');
-    Object.assign(userMsg.style, { ...styles.messageBase, ...styles.userMessage });
-    userMsg.textContent = message;
-    messages.appendChild(userMsg);
-    input.value = '';
+  const userMsg = document.createElement('div');
+  Object.assign(userMsg.style, { ...styles.messageBase, ...styles.userMessage });
+  userMsg.textContent = message;
+  messages.appendChild(userMsg);
+  input.value = '';
 
-    const typingIndicator = document.createElement('div');
-    typingIndicator.className = 'typing-indicator';
+  const typingIndicator = document.createElement('div');
+  typingIndicator.className = 'typing-indicator';
+  typingIndicator.id = 'typing-indicator';
   messages.appendChild(typingIndicator);
-scrollToBottom();
-    typingIndicator.id = 'typing-indicator';
 
-    for (let i = 0; i < 3; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'typing-dot';
-        typingIndicator.appendChild(dot);
-    }
-  
- const businessInfo = selectedBusiness
-  ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
-  : '';
-
-let chatHistory = [
-  {
-    role: 'system',
-    content: "Du bist ein professioneller Assistent des Unternehmens Botkraft24. Deine Aufgabe ist es, Besucher sachlich und hilfreich zu beraten. Antworte immer direkt auf die Frage. Verwende keine Floskeln, keine Begrüßung, keine Emojis. Stelle nur Rückfragen, wenn es wirklich notwendig ist. Wiederhole dich nicht. Antworte klar, kurz und direkt – als wärst du ein echter Mitarbeiter in einem professionellen Chat. Sprich Kunden mit 'Sie' an."
-  },
-  {
-    role: 'user',
-    content: `${businessInfo} ${message}`
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'typing-dot';
+    typingIndicator.appendChild(dot);
   }
-];
 
-fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    messages: chatHistory
+  const businessInfo = selectedBusiness
+    ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
+    : '';
+
+  fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      messages: [
+        {
+          role: 'system',
+          content: 'Du bist ein professioneller, menschlich formulierender Assistent für das Unternehmen Botkraft. Antworte immer kurz, klar, sympathisch und hilfreich – wie ein echter Mitarbeiter. Vermeide Fachsprache, sei verständlich und freundlich.'
+        },
+        {
+          role: 'user',
+          content: `${businessInfo} ${message}`
+        }
+      ]
+    })
   })
-})
-.then(res => res.json())
-.then(data => {
-  document.getElementById('typing-indicator')?.remove();
-  const botMsg = document.createElement('div');
-  Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
-  botMsg.textContent = data.choices[0].message.content;
-  messages.appendChild(botMsg);
-  scrollToBottom();
-})
-.catch(err => {
-  console.error('Fehler:', err);
-  document.getElementById('typing-indicator')?.remove();
-});
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('typing-indicator')?.remove();
 
-        const botMsg = document.createElement('div');
-        Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
-        botMsg.textContent = data.choices[0].message.content;
-        messages.appendChild(botMsg);
+      const botMsg = document.createElement('div');
+      Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
       botMsg.textContent = data.choices[0].message.content;
-messages.appendChild(botMsg);
-setTimeout(() => {
-  scrollToBottom(); // ✅ Scrollt jetzt richtig nach unten
-}, 50);
+      messages.appendChild(botMsg);
+      scrollToBottom();
     })
     .catch(err => {
-        console.error('Fehler:', err);
-        document.getElementById('typing-indicator')?.remove();
+      console.error('Fehler:', err);
+      document.getElementById('typing-indicator')?.remove();
     });
 }
 
