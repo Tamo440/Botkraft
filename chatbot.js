@@ -341,7 +341,6 @@ fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     ]
   })
 })
-  
     .then(res => res.json())
     .then(data => {
         document.getElementById('typing-indicator')?.remove();
