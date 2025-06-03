@@ -165,7 +165,8 @@ resetStyles.textContent = `
 
   #chatbot button {
     all: unset;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif !important;
+font-size: 14px;
     cursor: pointer;
   }
 
