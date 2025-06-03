@@ -255,7 +255,7 @@ function toggleChatbot() {
   if (messages.innerHTML.trim() === '') {
     const intro = document.createElement('div');
     Object.assign(intro.style, { ...styles.messageBase, ...styles.botMessage });
-    intro.innerHTML = '👋 Willkommen! Ich bin Tamims digitaler Assistent. Für welches Unternehmen interessierst du dich?';
+   intro.textContent = 'Hallo, wie kann ich Ihnen helfen?';
     messages.appendChild(intro);
 
     const options = ['Friseursalon ✂️', 'Immobilienbüro 🏠', 'Coaching 👔', 'Webdesign 💻', 'Reinigungsservice 🧼', 'Autohaus 🚗', 'Arztpraxis 🩺'];
