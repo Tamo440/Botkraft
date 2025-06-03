@@ -351,10 +351,6 @@ fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     document.getElementById('typing-indicator')?.remove();
   });
 
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById('typing-indicator')?.remove();
-
         const botMsg = document.createElement('div');
         Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
         botMsg.textContent = data.choices[0].message.content;
