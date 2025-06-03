@@ -184,6 +184,23 @@ font-size: 14px;
   }
 `;
 document.head.appendChild(resetStyles);
+const messageAnimationStyle = document.createElement('style');
+messageAnimationStyle.textContent = `
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-message {
+  animation: fadeInUp 0.3s ease-out;
+}
+`;
+document.head.appendChild(messageAnimationStyle);
 
 function scrollToBottom() {
   const messages = document.getElementById('messages');
@@ -307,6 +324,7 @@ function sendMessage() {
   if (message === '') return;
 
   const userMsg = document.createElement('div');
+  userMsg.classList.add('fade-in-message');
   Object.assign(userMsg.style, { ...styles.messageBase, ...styles.userMessage });
   userMsg.textContent = message;
   messages.appendChild(userMsg);
