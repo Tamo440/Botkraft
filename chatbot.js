@@ -320,9 +320,7 @@ function sendMessage() {
     typingIndicator.appendChild(dot);
   }
 
-  const businessInfo = selectedBusiness
-    ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
-    : '';
+  const businessInfo = selectedBusiness ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`   : '';
 
   fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     method: 'POST',
