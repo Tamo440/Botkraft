@@ -351,7 +351,7 @@ function sendMessage() {
       botMsg.textContent = data.choices[0].message.content;
       messages.appendChild(botMsg);
       scrollToBottom();
-    })
+    }
     .catch(err => {
       console.error('Fehler:', err);
       document.getElementById('typing-indicator')?.remove();
