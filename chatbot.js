@@ -187,7 +187,10 @@ document.head.appendChild(resetStyles);
 
 function scrollToBottom() {
   const messages = document.getElementById('messages');
-  messages.scrollTop = messages.scrollHeight;
+  messages.scrollTo({
+    top: messages.scrollHeight,
+    behavior: 'smooth'
+  });
 }
 
 const chatbotBtn = document.createElement('div');
