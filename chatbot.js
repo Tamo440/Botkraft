@@ -131,13 +131,17 @@ const styles = {
     sendButtonHover: {
         backgroundColor: '#e65a00'
     },
-    messageBase: {
-        borderRadius: '12px',
-        padding: '12px',
-        marginBottom: '12px',
-        boxShadow: '2px 2px 6px rgba(0, 0, 0, 0.1)',
-        maxWidth: '80%'
-    },
+  messageBase: {
+  borderRadius: '8px',
+  padding: '8px 12px',
+  marginBottom: '10px',
+  fontSize: '14px',
+  lineHeight: '1.4',
+  background: '#f5f5f5',
+  color: '#333',
+  maxWidth: '85%',
+  boxShadow: 'none'
+},
     botMessage: {
         backgroundColor: colors.botBackground,
         color: colors.botText,
