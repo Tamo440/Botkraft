@@ -366,6 +366,7 @@ function sendMessage() {
       document.getElementById('typing-indicator')?.remove();
 
       const botMsg = document.createElement('div');
+      botMsg.classList.add('fade-in-message');
       Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
       botMsg.textContent = data.choices[0].message.content;
       messages.appendChild(botMsg);
