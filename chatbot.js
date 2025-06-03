@@ -83,7 +83,7 @@ const styles = {
         bottom: '80px',
         right: '20px',
         width: '360px',
-        height: '480px',
+        height: '65vh', // passt sich je nach Bildschirmgröße an
         backgroundColor: 'white',
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
         borderRadius: '12px',
