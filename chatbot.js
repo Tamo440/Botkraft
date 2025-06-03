@@ -332,7 +332,7 @@ fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     messages: [
       {
         role: 'system',
-        content: '...'
+        content: 'Du bist ein professioneller, geschäftlicher Chatbot im Auftrag von Botkraft. Deine Aufgabe ist es, Kunden präzise, hilfreich und freundlich zu unterstützen. Antworte immer kurz, sachlich, klar und ohne Emojis. Stelle Rückfragen, wenn nötig, aber sei niemals zu lang.',
       },
       {
         role: 'user',
