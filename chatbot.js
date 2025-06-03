@@ -321,11 +321,18 @@ scrollToBottom();
         typingIndicator.appendChild(dot);
     }
   
-    const businessInfo = selectedBusiness ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".` : '';
+ const businessInfo = selectedBusiness
+  ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
+  : '';
+
 let chatHistory = [
   {
     role: 'system',
     content: "Du bist ein professioneller Assistent des Unternehmens Botkraft24. Deine Aufgabe ist es, Besucher sachlich und hilfreich zu beraten. Antworte immer direkt auf die Frage. Verwende keine Floskeln, keine Begrüßung, keine Emojis. Stelle nur Rückfragen, wenn es wirklich notwendig ist. Wiederhole dich nicht. Antworte klar, kurz und direkt – als wärst du ein echter Mitarbeiter in einem professionellen Chat. Sprich Kunden mit 'Sie' an."
+  },
+  {
+    role: 'user',
+    content: `${businessInfo} ${message}`
   }
 ];
 
@@ -334,22 +341,23 @@ fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
   headers: {
     'Content-Type': 'application/json'
   },
-  body: JSON.stringify({ messages: chatHistory }) // ← muss HIER rein!
-})
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('typing-indicator')?.remove();
-
-    const botMsg = document.createElement('div');
-    Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
-    botMsg.textContent = data.choices[0].message.content;
-    messages.appendChild(botMsg);
-    scrollToBottom();
+  body: JSON.stringify({
+    messages: chatHistory
   })
-  .catch(err => {
-    console.error('Fehler:', err);
-    document.getElementById('typing-indicator')?.remove();
-  });
+})
+.then(res => res.json())
+.then(data => {
+  document.getElementById('typing-indicator')?.remove();
+  const botMsg = document.createElement('div');
+  Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
+  botMsg.textContent = data.choices[0].message.content;
+  messages.appendChild(botMsg);
+  scrollToBottom();
+})
+.catch(err => {
+  console.error('Fehler:', err);
+  document.getElementById('typing-indicator')?.remove();
+});
 
         const botMsg = document.createElement('div');
         Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
