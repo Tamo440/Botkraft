@@ -331,8 +331,10 @@ scrollToBottom();
 body: JSON.stringify({
   messages: [
     {
-      role: 'system',
-      content: 'Du bist ein professioneller, menschlich formulierender Assistent für das Unternehmen Botkraft. Antworte immer kurz, klar, sympathisch und hilfreich – wie ein echter Mitarbeiter. Vermeide Fachsprache, sei verständlich und freundlich.'
+      {
+  role: 'system',
+  content: `Du bist ein professioneller Assistent für das Unternehmen Botkraft24. Du gibst kurze, sachliche und hilfreiche Antworten auf konkrete Nutzerfragen. Du wiederholst keine Begrüßung. Keine Emojis. Kein Smalltalk. Keine Rückfragen wie "Kann ich sonst noch helfen?" – antworte direkt zur Sache.`
+}
     },
     {
       role: 'user',
