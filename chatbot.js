@@ -332,7 +332,7 @@ fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     messages: [
       {
         role: 'system',
-        content: `
+        content: 
 Du bist ein professioneller Chatbot im Auftrag von Botkraft24 – einer Firma für smarte Chatbot-Integrationen für Websites, Shops und Unternehmen.
 
 Du bist digitaler Assistent für Kunden, die sich über unsere Chatbots informieren wollen oder Interesse an einem Projekt haben.
