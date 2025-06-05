@@ -319,20 +319,6 @@ function toggleChatbot() {
   }
 }
 
-let chatHistory = [
-  {
-    role: 'system',
-    content: `
-content: `
-Du bist ein professioneller, sachlicher Kundenberater von Botkraft24.
-Merke dir Anliegen der Kunden und führe Gespräche logisch weiter, ohne Rückfragen zu wiederholen.
-Fasse dich klar und direkt, ohne Begrüßungen, Emojis oder Floskeln. Sprich Kunden mit "Sie" an.
-Wenn ein Thema genannt wird (z. B. "Arzttermin"), behalte dieses Thema im Kopf und frage konkret nach Details dazu – ohne vom Thema abzuweichen.
-`
-`
-  }
-];
-
 function sendMessage() {
   const message = input.value.trim();
   if (message === '') return;
@@ -361,17 +347,59 @@ function sendMessage() {
     ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
     : '';
 
-  // Neue Eingabe in Verlauf speichern
-  chatHistory.push({
-    role: 'user',
-    content: `${businessInfo} ${message}`
-  });
+  const chatHistory = [
+    {
+      role: 'system',
+      content: `
+Du bist ein professioneller, sachlicher Kundenberater des Unternehmens Botkraft24.
+
+Botkraft24 erstellt smarte Chatbot-Integrationen für Websites, Shops und Unternehmen. 
+Ziel ist es, Anfragen zu automatisieren, Kunden schnell zu helfen und Arbeitszeit zu sparen.
+Sprich Kunden immer höflich mit "Sie" an. Keine Emojis, keine Begrüßung, keine Floskeln, keine Wiederholungen.
+
+Du beantwortest Fragen zu Preisen, Leistungen, Kontakt und Vorgehensweise:
+
+🔸 Preise:
+– Starter: 79 € einmalig – 1 Website + 1 Chatbot
+– Flex: 69 €/Monat – inkl. Hosting, Updates & Änderungen
+
+🔸 Leistungen:
+– Individuelle Website-Chatbots
+– Integration mit Tools wie Google Sheets, CRM, E-Mail-Systemen
+– DSGVO-konformes Hosting & Proxy-Setup
+– Keine Baukästen, sondern maßgeschneiderte Bots
+
+🔸 Technologien:
+– ChatGPT API
+– Render / Vercel Hosting
+– WordPress Snippets
+– Tailwind / HTML5
+– No-Code Tools wie Tidio, Landbot
+
+🔸 Kontakt:
+E-Mail: tamo.ra@outlook.de  
+WhatsApp: 0176 70726250  
+Website: www.botkraft24.de
+
+🔸 Verhalten im Chat:
+– Antworte **nur auf die gestellte Frage**
+– Sei klar, direkt, sachlich
+– Wenn der Kunde eine Firma nennt, bleibe thematisch bei dieser Firma
+– Wenn der Kunde unklar fragt, stelle gezielte Rückfragen
+
+Wenn das Thema „Bot auf eigener Website“ oder „Angebot“ genannt wird, erkläre, dass der Ablauf individuell ist – 
+du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Unternehmen nennt oder beschreibt.
+`
+    },
+    {
+      role: 'user',
+      content: `${businessInfo} ${message}`
+    }
+  ];
 
   fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ messages: chatHistory })
   })
     .then(res => res.json())
@@ -382,13 +410,7 @@ function sendMessage() {
       botMsg.textContent = data.choices[0].message.content;
       botMsg.classList.add('fade-in-message');
       messages.appendChild(botMsg);
-      scrollToBottom();
-
-      // Bot-Antwort in Verlauf speichern
-      chatHistory.push({
-        role: 'assistant',
-        content: data.choices[0].message.content
-      });
+      setTimeout(() => scrollToBottom(), 50);
     })
     .catch(err => {
       console.error('Fehler:', err);
