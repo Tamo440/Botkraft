@@ -1,4 +1,15 @@
-// ==== STYLE-ANIMATION für "Bot tippt..." ====
+const fadeInStyle = document.createElement('style');
+fadeInStyle.textContent = `
+.fade-in-message {
+  animation: fadeIn 0.3s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+`;
+document.head.appendChild(fadeInStyle);
+
 const styleTag = document.createElement('style');
 styleTag.textContent = `
 @keyframes bounce {
