@@ -361,7 +361,7 @@ function sendMessage() {
   const chatHistory = [
     {
       role: 'system',
-      content: `
+    content: `
 Du bist ein professioneller, sachlicher Kundenberater des Unternehmens Botkraft24.
 
 Botkraft24 erstellt smarte Chatbot-Integrationen für Websites, Shops und Unternehmen. 
@@ -388,7 +388,7 @@ Du beantwortest Fragen zu Preisen, Leistungen, Kontakt und Vorgehensweise:
 – No-Code Tools wie Tidio, Landbot
 
 🔸 Kontakt:
-E-Mail: tamo.ra@outlook.de  
+E-Mail: Tamim.Raschidi@outlook.de  
 WhatsApp: 0176 70726250  
 Website: www.botkraft24.de
 
