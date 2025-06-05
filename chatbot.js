@@ -332,6 +332,7 @@ function toggleChatbot() {
 
 function sendMessage() {
   const message = input.value.trim();
+  chatHistory.push({ role: 'user', content: message });
   if (message === '') return;
 
   const userMsg = document.createElement('div');
@@ -419,6 +420,10 @@ du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Untern
       const botMsg = document.createElement('div');
       Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
       botMsg.textContent = data.choices[0].message.content;
+      chatHistory.push({
+  role: 'assistant',
+  content: data.choices[0].message.content
+});
       botMsg.classList.add('fade-in-message');
       messages.appendChild(botMsg);
       setTimeout(() => scrollToBottom(), 50);
