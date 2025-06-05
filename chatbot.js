@@ -324,9 +324,9 @@ function sendMessage() {
   if (message === '') return;
 
   const userMsg = document.createElement('div');
-  userMsg.classList.add('fade-in-message');
   Object.assign(userMsg.style, { ...styles.messageBase, ...styles.userMessage });
   userMsg.textContent = message;
+  userMsg.classList.add('fade-in-message');
   messages.appendChild(userMsg);
   input.value = '';
 
@@ -341,34 +341,46 @@ function sendMessage() {
     typingIndicator.appendChild(dot);
   }
 
-  const businessInfo = selectedBusiness ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`   : '';
+  scrollToBottom();
+
+  const businessInfo = selectedBusiness
+    ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
+    : '';
+
+  const chatHistory = [
+    {
+      role: 'system',
+      content: `
+Du bist ein smarter, professioneller Kundenberater von Botkraft24.
+- Antworte nur auf die Frage
+- Keine Begrüßungen, keine Floskeln
+- Keine Emojis
+- Nie wiederholen, was der Kunde schon weiß
+- Antworte so kurz und direkt wie möglich
+- Wenn nötig, stelle eine gezielte Rückfrage
+- Duzen ist verboten – sprich Kunden professionell mit "Sie" an.
+`
+    },
+    {
+      role: 'user',
+      content: `${businessInfo} ${message}`
+    }
+  ];
 
   fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      messages: [
-        {
-          role: 'system',
-          content: 'Du bist ein professioneller, menschlich formulierender Assistent für das Unternehmen Botkraft. Antworte immer kurz, klar, sympathisch und hilfreich – wie ein echter Mitarbeiter. Vermeide Fachsprache, sei verständlich und freundlich.'
-        },
-        {
-          role: 'user',
-          content: `${businessInfo} ${message}`
-        }
-      ]
-    })
+    body: JSON.stringify({ messages: chatHistory })
   })
     .then(res => res.json())
     .then(data => {
       document.getElementById('typing-indicator')?.remove();
-
       const botMsg = document.createElement('div');
-      botMsg.classList.add('fade-in-message');
       Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
       botMsg.textContent = data.choices[0].message.content;
+      botMsg.classList.add('fade-in-message');
       messages.appendChild(botMsg);
       scrollToBottom();
     })
