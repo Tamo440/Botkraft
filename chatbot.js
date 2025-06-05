@@ -319,6 +319,22 @@ function toggleChatbot() {
   }
 }
 
+let chatHistory = [
+  {
+    role: 'system',
+    content: `
+Du bist ein smarter, professioneller Kundenberater von Botkraft24.
+- Antworte nur auf die Frage
+- Keine Begrüßungen, keine Floskeln
+- Keine Emojis
+- Nie wiederholen, was der Kunde schon weiß
+- Antworte so kurz und direkt wie möglich
+- Wenn nötig, stelle eine gezielte Rückfrage
+- Duzen ist verboten – sprich Kunden professionell mit "Sie" an.
+`
+  }
+];
+
 function sendMessage() {
   const message = input.value.trim();
   if (message === '') return;
@@ -347,25 +363,11 @@ function sendMessage() {
     ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
     : '';
 
-  const chatHistory = [
-    {
-      role: 'system',
-      content: `
-Du bist ein smarter, professioneller Kundenberater von Botkraft24.
-- Antworte nur auf die Frage
-- Keine Begrüßungen, keine Floskeln
-- Keine Emojis
-- Nie wiederholen, was der Kunde schon weiß
-- Antworte so kurz und direkt wie möglich
-- Wenn nötig, stelle eine gezielte Rückfrage
-- Duzen ist verboten – sprich Kunden professionell mit "Sie" an.
-`
-    },
-    {
-      role: 'user',
-      content: `${businessInfo} ${message}`
-    }
-  ];
+  // Neue Eingabe in Verlauf speichern
+  chatHistory.push({
+    role: 'user',
+    content: `${businessInfo} ${message}`
+  });
 
   fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     method: 'POST',
@@ -383,6 +385,12 @@ Du bist ein smarter, professioneller Kundenberater von Botkraft24.
       botMsg.classList.add('fade-in-message');
       messages.appendChild(botMsg);
       scrollToBottom();
+
+      // Bot-Antwort in Verlauf speichern
+      chatHistory.push({
+        role: 'assistant',
+        content: data.choices[0].message.content
+      });
     })
     .catch(err => {
       console.error('Fehler:', err);
