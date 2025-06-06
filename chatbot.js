@@ -1,15 +1,4 @@
-const fadeInStyle = document.createElement('style');
-fadeInStyle.textContent = `
-.fade-in-message {
-  animation: fadeIn 0.3s ease forwards;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-`;
-document.head.appendChild(fadeInStyle);
-
+// ==== STYLE-ANIMATION für "Bot tippt..." ====
 const styleTag = document.createElement('style');
 styleTag.textContent = `
 @keyframes bounce {
@@ -243,7 +232,6 @@ chatbotContainer.id = 'chatbot';
 Object.assign(chatbotContainer.style, styles.container);
 
 const header = document.createElement('div');
-header.innerHTML = `
 header.innerHTML = '<strong>Botkraft24</strong>';
 Object.assign(header.style, styles.header);
 
@@ -435,17 +423,11 @@ du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Untern
     });
 }
 
-// Klick auf ➤ senden
-sendBtn.addEventListener('click', sendMessage);
 
-// Enter-Taste drücken → senden
+sendBtn.addEventListener('click', sendMessage);
 input.addEventListener('keydown', function (e) {
   if (e.key === 'Enter') {
-    e.preventDefault(); // verhindert Zeilenumbruch
     sendMessage();
   }
 });
-
-// Klick auf Chatbot-Button
 chatbotBtn.addEventListener('click', toggleChatbot);
-
