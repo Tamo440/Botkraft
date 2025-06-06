@@ -469,19 +469,6 @@ input.addEventListener('keydown', function (e) {
 });
 chatbotBtn.addEventListener('click', toggleChatbot);
 
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('colorToggle');
-  if (toggle) {
-    toggle.onclick = () => {
-      const themes = ['default', 'orange', 'green', 'dark'];
-      let current = themes.indexOf(toggle.dataset.theme || 'default');
-      let next = (current + 1) % themes.length;
-      toggle.dataset.theme = themes[next];
-      setBotTheme(themes[next]);
-    };
-  }
-});
-
 function setBotTheme(theme) {
   if (theme === 'default') {
     styles.header.backgroundColor = '#085186';
