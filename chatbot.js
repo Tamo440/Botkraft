@@ -321,7 +321,16 @@ function toggleChatbot() {
 
 function sendMessage() {
   const message = input.value.trim();
-  chatHistory.push({ role: 'user', content: message });
+ const chatHistory = [
+  {
+    role: 'system',
+    content: `...` // (dein kompletter system prompt)
+  },
+  {
+    role: 'user',
+    content: `${businessInfo} ${message}`
+  }
+];
   if (message === '') return;
 
   const userMsg = document.createElement('div');
