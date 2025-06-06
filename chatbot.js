@@ -321,18 +321,9 @@ function toggleChatbot() {
 
 function sendMessage() {
   const message = input.value.trim();
- const chatHistory = [
-  {
-    role: 'system',
-    content: `...` // (dein kompletter system prompt)
-  },
-  {
-    role: 'user',
-    content: `${businessInfo} ${message}`
-  }
-];
   if (message === '') return;
 
+  // Nutzer-Nachricht anzeigen
   const userMsg = document.createElement('div');
   Object.assign(userMsg.style, { ...styles.messageBase, ...styles.userMessage });
   userMsg.textContent = message;
@@ -340,27 +331,28 @@ function sendMessage() {
   messages.appendChild(userMsg);
   input.value = '';
 
+  // Tippen-Indikator anzeigen
   const typingIndicator = document.createElement('div');
   typingIndicator.className = 'typing-indicator';
   typingIndicator.id = 'typing-indicator';
   messages.appendChild(typingIndicator);
-
   for (let i = 0; i < 3; i++) {
     const dot = document.createElement('div');
     dot.className = 'typing-dot';
     typingIndicator.appendChild(dot);
   }
-
   scrollToBottom();
 
+  // Kontext-Info
   const businessInfo = selectedBusiness
     ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
     : '';
 
+  // Einmaliger Verlauf für diesen Prompt
   const chatHistory = [
     {
       role: 'system',
-    content: `
+      content: `
 Du bist ein professioneller, sachlicher Kundenberater des Unternehmens Botkraft24.
 
 Botkraft24 erstellt smarte Chatbot-Integrationen für Websites, Shops und Unternehmen. 
@@ -399,7 +391,7 @@ Website: www.botkraft24.de
 
 Wenn das Thema „Bot auf eigener Website“ oder „Angebot“ genannt wird, erkläre, dass der Ablauf individuell ist – 
 du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Unternehmen nennt oder beschreibt.
-`
+      `.trim()
     },
     {
       role: 'user',
@@ -407,6 +399,7 @@ du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Untern
     }
   ];
 
+  // API senden
   fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -418,10 +411,6 @@ du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Untern
       const botMsg = document.createElement('div');
       Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
       botMsg.textContent = data.choices[0].message.content;
-      chatHistory.push({
-  role: 'assistant',
-  content: data.choices[0].message.content
-});
       botMsg.classList.add('fade-in-message');
       messages.appendChild(botMsg);
       setTimeout(() => scrollToBottom(), 50);
@@ -431,7 +420,6 @@ du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Untern
       document.getElementById('typing-indicator')?.remove();
     });
 }
-
 
 sendBtn.addEventListener('click', sendMessage);
 input.addEventListener('keydown', function (e) {
