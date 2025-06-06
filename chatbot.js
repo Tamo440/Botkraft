@@ -320,6 +320,7 @@ function toggleChatbot() {
 }
 
 function sendMessage() {
+  let fullChatHistory = [];
   const message = input.value.trim();
   if (message === '') return;
 
@@ -394,8 +395,9 @@ du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Untern
       `.trim()
     },
     {
-      role: 'user',
-      content: `${businessInfo} ${message}`
+fullChatHistory.push({
+  role: 'user',
+  content: `${businessInfo} ${message}`
     }
   ];
 
@@ -403,7 +405,7 @@ du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Untern
   fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages: chatHistory })
+    body: JSON.stringify({ messages: fullChatHistory })
   })
     .then(res => res.json())
     .then(data => {
@@ -411,6 +413,10 @@ du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Untern
       const botMsg = document.createElement('div');
       Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
       botMsg.textContent = data.choices[0].message.content;
+      fullChatHistory.push({
+  role: 'assistant',
+  content: data.choices[0].message.content
+});
       botMsg.classList.add('fade-in-message');
       messages.appendChild(botMsg);
       setTimeout(() => scrollToBottom(), 50);
