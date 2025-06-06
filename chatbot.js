@@ -435,11 +435,17 @@ du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Untern
     });
 }
 
+// Klick auf ➤ senden
 sendBtn.addEventListener('click', sendMessage);
+
+// Enter-Taste drücken → senden
 input.addEventListener('keydown', function (e) {
   if (e.key === 'Enter') {
+    e.preventDefault(); // verhindert Zeilenumbruch
     sendMessage();
   }
 });
+
+// Klick auf Chatbot-Button
 chatbotBtn.addEventListener('click', toggleChatbot);
 
