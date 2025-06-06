@@ -318,42 +318,10 @@ function toggleChatbot() {
     messages.appendChild(buttonContainer);
   }
 }
-let fullChatHistory = [];
-
-function sendMessage() {
-  const message = input.value.trim();
-  if (message === '') return;
-
-  // Nutzer-Nachricht anzeigen
-  const userMsg = document.createElement('div');
-  Object.assign(userMsg.style, { ...styles.messageBase, ...styles.userMessage });
-  userMsg.textContent = message;
-  userMsg.classList.add('fade-in-message');
-  messages.appendChild(userMsg);
-  input.value = '';
-
-  // Tippen-Indikator anzeigen
-  const typingIndicator = document.createElement('div');
-  typingIndicator.className = 'typing-indicator';
-  typingIndicator.id = 'typing-indicator';
-  messages.appendChild(typingIndicator);
-  for (let i = 0; i < 3; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'typing-dot';
-    typingIndicator.appendChild(dot);
-  }
-  scrollToBottom();
-
-  // Kontext-Info
-  const businessInfo = selectedBusiness
-    ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
-    : '';
-
-  // Einmaliger Verlauf für diesen Prompt
-if (fullChatHistory.length === 0) {
-  fullChatHistory.push({
+let chatHistory = [
+  {
     role: 'system',
-      content: `
+    content: `
 Du bist ein professioneller, sachlicher Kundenberater des Unternehmens Botkraft24.
 
 Botkraft24 erstellt smarte Chatbot-Integrationen für Websites, Shops und Unternehmen. 
@@ -392,20 +360,45 @@ Website: www.botkraft24.de
 
 Wenn das Thema „Bot auf eigener Website“ oder „Angebot“ genannt wird, erkläre, dass der Ablauf individuell ist – 
 du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Unternehmen nennt oder beschreibt.
-      `.trim()
-    },
-    {
-fullChatHistory.push({
-  role: 'user',
-  content: `${businessInfo} ${message}`
-    }
-  ];
+`
+  }
+];
 
-  // API senden
+function sendMessage() {
+  const message = input.value.trim();
+  if (message === '') return;
+
+  const userMsg = document.createElement('div');
+  Object.assign(userMsg.style, { ...styles.messageBase, ...styles.userMessage });
+  userMsg.textContent = message;
+  userMsg.classList.add('fade-in-message');
+  messages.appendChild(userMsg);
+  input.value = '';
+
+  const typingIndicator = document.createElement('div');
+  typingIndicator.className = 'typing-indicator';
+  typingIndicator.id = 'typing-indicator';
+  messages.appendChild(typingIndicator);
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'typing-dot';
+    typingIndicator.appendChild(dot);
+  }
+  scrollToBottom();
+
+  const businessInfo = selectedBusiness
+    ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
+    : '';
+
+  chatHistory.push({
+    role: 'user',
+    content: `${businessInfo} ${message}`
+  });
+
   fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages: fullChatHistory })
+    body: JSON.stringify({ messages: chatHistory })
   })
     .then(res => res.json())
     .then(data => {
@@ -413,13 +406,14 @@ fullChatHistory.push({
       const botMsg = document.createElement('div');
       Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
       botMsg.textContent = data.choices[0].message.content;
-      fullChatHistory.push({
-  role: 'assistant',
-  content: data.choices[0].message.content
-});
       botMsg.classList.add('fade-in-message');
       messages.appendChild(botMsg);
-      setTimeout(() => scrollToBottom(), 50);
+      scrollToBottom();
+
+      chatHistory.push({
+        role: 'assistant',
+        content: data.choices[0].message.content
+      });
     })
     .catch(err => {
       console.error('Fehler:', err);
