@@ -318,9 +318,9 @@ function toggleChatbot() {
     messages.appendChild(buttonContainer);
   }
 }
+let fullChatHistory = [];
 
 function sendMessage() {
-  let fullChatHistory = [];
   const message = input.value.trim();
   if (message === '') return;
 
@@ -350,9 +350,9 @@ function sendMessage() {
     : '';
 
   // Einmaliger Verlauf für diesen Prompt
-  const chatHistory = [
-    {
-      role: 'system',
+if (fullChatHistory.length === 0) {
+  fullChatHistory.push({
+    role: 'system',
       content: `
 Du bist ein professioneller, sachlicher Kundenberater des Unternehmens Botkraft24.
 
