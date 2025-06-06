@@ -249,6 +249,30 @@ header.innerHTML = `
 `;
 Object.assign(header.style, styles.header);
 
+const colorToggle = document.createElement('div');
+colorToggle.id = 'colorMenu';
+colorToggle.style.position = 'absolute';
+colorToggle.style.top = '50px';
+colorToggle.style.right = '12px';
+colorToggle.style.background = 'white';
+colorToggle.style.border = '1px solid #ccc';
+colorToggle.style.borderRadius = '8px';
+colorToggle.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+colorToggle.style.display = 'none';
+colorToggle.style.zIndex = '99999';
+colorToggle.style.padding = '8px';
+colorToggle.innerHTML = `
+  <div style="margin-bottom:6px; cursor:pointer;" onclick="setBotTheme('default')">🔵 Blau</div>
+  <div style="margin-bottom:6px; cursor:pointer;" onclick="setBotTheme('orange')">🟠 Orange</div>
+  <div style="margin-bottom:6px; cursor:pointer;" onclick="setBotTheme('green')">🟢 Grün</div>
+  <div style="cursor:pointer;" onclick="setBotTheme('dark')">🌙 Darkmode</div>
+`;
+document.body.appendChild(colorToggle);
+
+document.getElementById("colorToggle").onclick = () => {
+  colorToggle.style.display = (colorToggle.style.display === 'none') ? 'block' : 'none';
+};
+
 const messages = document.createElement('div');
 messages.id = 'messages';
 Object.assign(messages.style, styles.messages);
