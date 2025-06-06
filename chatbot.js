@@ -244,9 +244,7 @@ Object.assign(chatbotContainer.style, styles.container);
 
 const header = document.createElement('div');
 header.innerHTML = `
-  <strong>Botkraft24</strong>
-  <span id="colorToggle" style="position:absolute; right:12px; top:12px; cursor:pointer;">🎨</span>
-`;
+header.innerHTML = '<strong>Botkraft24</strong>';
 Object.assign(header.style, styles.header);
 
 const messages = document.createElement('div');
