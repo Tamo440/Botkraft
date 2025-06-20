@@ -409,7 +409,7 @@ botMsgWrapper.style.alignItems = 'flex-start';
 botMsgWrapper.style.gap = '8px';
 
 const botIcon = document.createElement('img');
-botIcon.src = 'https://chatgpt-site-files.s3.eu-west-1.amazonaws.com/botkraft-bot-icon.png';
+botIcon.src = 'https://i.imgur.com/VbR2eeF.png';
 botIcon.alt = 'Bot';
 botIcon.style.width = '28px';
 botIcon.style.height = '28px';
