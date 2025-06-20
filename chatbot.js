@@ -409,7 +409,13 @@ botMsgWrapper.style.alignItems = 'flex-start';
 botMsgWrapper.style.gap = '8px';
 
 const botIcon = document.createElement('img');
-botIcon.src = 'https://i.imgur.com/VbR2eeF.png';
+botIcon.src = 'https://i.imgur.com/VbR2eeF.png';botIcon.style.width = '32px';
+botIcon.style.height = '32px';
+botIcon.style.objectFit = 'contain';
+botIcon.style.borderRadius = '50%';
+botIcon.style.background = '#e6efff';
+botIcon.style.padding = '4px';
+botIcon.style.marginTop = '0';
 botIcon.alt = 'Bot';
 botIcon.style.width = '28px';
 botIcon.style.height = '28px';
