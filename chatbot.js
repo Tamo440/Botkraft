@@ -403,11 +403,26 @@ function sendMessage() {
     .then(res => res.json())
     .then(data => {
       document.getElementById('typing-indicator')?.remove();
-      const botMsg = document.createElement('div');
-      Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
-      botMsg.textContent = data.choices[0].message.content;
-      botMsg.classList.add('fade-in-message');
-      messages.appendChild(botMsg);
+    const botMsgWrapper = document.createElement('div');
+botMsgWrapper.style.display = 'flex';
+botMsgWrapper.style.alignItems = 'flex-start';
+botMsgWrapper.style.gap = '8px';
+
+const botIcon = document.createElement('img');
+botIcon.src = 'https://chatgpt-site-files.s3.eu-west-1.amazonaws.com/botkraft-bot-icon.png';
+botIcon.alt = 'Bot';
+botIcon.style.width = '28px';
+botIcon.style.height = '28px';
+botIcon.style.marginTop = '4px';
+
+const botMsg = document.createElement('div');
+Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
+botMsg.textContent = data.choices[0].message.content;
+botMsg.classList.add('fade-in-message');
+
+botMsgWrapper.appendChild(botIcon);
+botMsgWrapper.appendChild(botMsg);
+messages.appendChild(botMsgWrapper);
       scrollToBottom();
 
       chatHistory.push({
