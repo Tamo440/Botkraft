@@ -402,35 +402,48 @@ function sendMessage() {
   })
     .then(res => res.json())
     .then(data => {
-      document.getElementById('typing-indicator')?.remove();
-    const botMsgWrapper = document.createElement('div');
-botMsgWrapper.style.display = 'flex';
-botMsgWrapper.style.alignItems = 'flex-start';
-botMsgWrapper.style.gap = '8px';
+  document.getElementById('typing-indicator')?.remove();
 
-const botIcon = document.createElement('img');
-botIcon.src = 'https://i.imgur.com/VbR2eeF.png';botIcon.style.width = '32px';
-botIcon.style.height = '32px';
-botIcon.style.objectFit = 'contain';
-botIcon.style.borderRadius = '50%';
-botIcon.style.background = '#e6efff';
-botIcon.style.padding = '4px';
-botIcon.style.marginTop = '0';
-botIcon.alt = 'Bot';
-botIcon.style.width = '28px';
-botIcon.style.height = '28px';
-botIcon.style.marginTop = '4px';
+  // Bot-Antwort
+  const botMsg = document.createElement('div');
+  Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
+  botMsg.textContent = data.choices[0].message.content;
+  botMsg.classList.add('fade-in-message');
 
-const botMsg = document.createElement('div');
-Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
-botMsg.textContent = data.choices[0].message.content;
-botMsg.classList.add('fade-in-message');
+  // BOT-ICON (wie im Screenshot)
+  const botIconWrapper = document.createElement('div');
+  botIconWrapper.style.width = '36px';
+  botIconWrapper.style.height = '36px';
+  botIconWrapper.style.minWidth = '36px';
+  botIconWrapper.style.borderRadius = '50%';
+  botIconWrapper.style.backgroundColor = '#1d4ed8'; // Dunkelblau
+  botIconWrapper.style.display = 'flex';
+  botIconWrapper.style.alignItems = 'center';
+  botIconWrapper.style.justifyContent = 'center';
+  botIconWrapper.style.marginRight = '10px';
+  botIconWrapper.style.marginTop = '2px';
 
-botMsgWrapper.appendChild(botIcon);
-botMsgWrapper.appendChild(botMsg);
-messages.appendChild(botMsgWrapper);
-      scrollToBottom();
+  const botIcon = document.createElement('img');
+  botIcon.src = 'https://i.imgur.com/VbR2eeF.png';
+  botIcon.alt = 'Bot';
+  botIcon.style.width = '18px';
+  botIcon.style.height = '18px';
 
+  botIconWrapper.appendChild(botIcon);
+
+  // Kombinieren in einer Zeile (Icon + Nachricht)
+  const botMsgRow = document.createElement('div');
+  botMsgRow.style.display = 'flex';
+  botMsgRow.style.alignItems = 'flex-start';
+  botMsgRow.style.marginBottom = '10px';
+
+  botMsgRow.appendChild(botIconWrapper);
+  botMsgRow.appendChild(botMsg);
+
+  messages.appendChild(botMsgRow);
+
+  scrollToBottom();
+      
       chatHistory.push({
         role: 'assistant',
         content: data.choices[0].message.content
