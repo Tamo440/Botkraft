@@ -401,46 +401,35 @@ function sendMessage() {
     body: JSON.stringify({ messages: chatHistory })
   })
     .then(res => res.json())
-    .then(data => {
+  .then(data => {
   document.getElementById('typing-indicator')?.remove();
 
-  // Bot-Antwort
+  // Wrapper für Bild + Nachricht
+  const wrapper = document.createElement('div');
+  wrapper.style.display = 'flex';
+  wrapper.style.alignItems = 'flex-start';
+  wrapper.style.gap = '10px';
+  wrapper.style.marginBottom = '12px';
+
+  // Bot-Bild direkt rund und ohne Extra-Hintergrund
+  const botImg = document.createElement('img');
+  botImg.src = 'https://i.imgur.com/VbR2eeF.png'; // Dein rundes Bild mit blauem Hintergrund
+  botImg.alt = 'Bot';
+  botImg.style.width = '36px';
+  botImg.style.height = '36px';
+  botImg.style.borderRadius = '50%';
+  botImg.style.objectFit = 'cover';
+  botImg.style.flexShrink = '0';
+
+  // Nachricht
   const botMsg = document.createElement('div');
   Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
-  botMsg.textContent = data.choices[0].message.content;
   botMsg.classList.add('fade-in-message');
+  botMsg.textContent = data.choices[0].message.content;
 
-  // BOT-ICON (wie im Screenshot)
-  const botIconWrapper = document.createElement('div');
-  botIconWrapper.style.width = '36px';
-  botIconWrapper.style.height = '36px';
-  botIconWrapper.style.minWidth = '36px';
-  botIconWrapper.style.borderRadius = '50%';
-  botIconWrapper.style.backgroundColor = '#1d4ed8'; // Dunkelblau
-  botIconWrapper.style.display = 'flex';
-  botIconWrapper.style.alignItems = 'center';
-  botIconWrapper.style.justifyContent = 'center';
-  botIconWrapper.style.marginRight = '10px';
-  botIconWrapper.style.marginTop = '2px';
-
-  const botIcon = document.createElement('img');
-  botIcon.src = 'https://i.imgur.com/VbR2eeF.png';
-  botIcon.alt = 'Bot';
-  botIcon.style.width = '18px';
-  botIcon.style.height = '18px';
-
-  botIconWrapper.appendChild(botIcon);
-
-  // Kombinieren in einer Zeile (Icon + Nachricht)
-  const botMsgRow = document.createElement('div');
-  botMsgRow.style.display = 'flex';
-  botMsgRow.style.alignItems = 'flex-start';
-  botMsgRow.style.marginBottom = '10px';
-
-  botMsgRow.appendChild(botIconWrapper);
-  botMsgRow.appendChild(botMsg);
-
-  messages.appendChild(botMsgRow);
+  wrapper.appendChild(botImg);
+  wrapper.appendChild(botMsg);
+  messages.appendChild(wrapper);
 
   scrollToBottom();
       
