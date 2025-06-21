@@ -306,85 +306,82 @@ introWrapper.appendChild(introImg);
 introWrapper.appendChild(introMsg);
 messages.appendChild(introWrapper);
 
-// 🟨 Neue Ja/Nein-Auswahl
-const questionWrapper = document.createElement('div');
-questionWrapper.style.display = 'flex';
-questionWrapper.style.flexDirection = 'column';
-questionWrapper.style.gap = '8px';
-questionWrapper.style.marginTop = '12px';
+// Buttons
+const buttonContainer = document.createElement('div');
+buttonContainer.style.display = 'flex';
+buttonContainer.style.gap = '10px';
+buttonContainer.style.marginBottom = '12px';
 
-const questionText = document.createElement('div');
-questionText.textContent = 'Möchten Sie eine Branche auswählen?';
-Object.assign(questionText.style, {
-  fontWeight: '500',
-  color: '#333'
-});
+['Ja', 'Nein'].forEach(label => {
+  const btn = document.createElement('button');
+  btn.textContent = label;
+  btn.style.padding = '6px 12px';
+  btn.style.border = '1px solid #ccc';
+  btn.style.borderRadius = '6px';
+  btn.style.backgroundColor = '#fff';
+  btn.style.cursor = 'pointer';
+  btn.style.fontSize = '13px';
+  btn.onmouseover = () => btn.style.backgroundColor = '#f0f0f0';
+  btn.onmouseout = () => btn.style.backgroundColor = '#fff';
+  buttonContainer.appendChild(btn);
 
-const buttonsRow = document.createElement('div');
-buttonsRow.style.display = 'flex';
-buttonsRow.style.gap = '10px';
+  if (label === 'Ja') {
+    btn.onclick = () => {
+      buttonContainer.remove();
 
-const yesBtn = document.createElement('button');
-yesBtn.textContent = 'Ja';
-Object.assign(yesBtn.style, {
-  padding: '6px 12px',
-  border: '1px solid #ccc',
-  borderRadius: '6px',
-  backgroundColor: '#f9f9f9',
-  cursor: 'pointer'
-});
+      const branchenMsg = document.createElement('div');
+      Object.assign(branchenMsg.style, { ...styles.messageBase, ...styles.botMessage });
+      branchenMsg.textContent = 'Welche Branche interessiert Sie?';
 
-const noBtn = document.createElement('button');
-noBtn.textContent = 'Nein';
-Object.assign(noBtn.style, {
-  padding: '6px 12px',
-  border: '1px solid #ccc',
-  borderRadius: '6px',
-  backgroundColor: '#f9f9f9',
-  cursor: 'pointer'
-});
+      const branchenBtns = document.createElement('div');
+      branchenBtns.style.display = 'flex';
+      branchenBtns.style.flexWrap = 'wrap';
+      branchenBtns.style.gap = '8px';
+      branchenBtns.style.marginTop = '10px';
 
-buttonsRow.appendChild(yesBtn);
-buttonsRow.appendChild(noBtn);
-questionWrapper.appendChild(questionText);
-questionWrapper.appendChild(buttonsRow);
-messages.appendChild(questionWrapper);
-    yesBtn.onclick = () => {
-  questionWrapper.remove();
+      const options = ['Friseur ✂️', 'Immobilien 🏠', 'Coaching 👔', 'Webdesign 💻', 'Reinigung 🧼', 'Autohaus 🚗', 'Arztpraxis 🩺'];
+      options.forEach(option => {
+        const obtn = document.createElement('button');
+        obtn.textContent = option;
+        obtn.style.padding = '6px 10px';
+        obtn.style.border = '1px solid #ccc';
+        obtn.style.borderRadius = '6px';
+        obtn.style.backgroundColor = '#fff';
+        obtn.style.fontSize = '13px';
+        obtn.style.cursor = 'pointer';
+        obtn.onmouseover = () => obtn.style.backgroundColor = '#f0f0f0';
+        obtn.onmouseout = () => obtn.style.backgroundColor = '#fff';
+        obtn.onclick = () => {
+          selectedBusiness = option;
+          branchenBtns.remove();
 
-  const branchen = ['Friseursalon', 'Immobilienbüro', 'Webdesign', 'Coaching', 'Reinigungsservice', 'Autohaus', 'Arztpraxis'];
-  
-  const list = document.createElement('div');
-  list.style.display = 'flex';
-  list.style.flexDirection = 'column';
-  list.style.gap = '6px';
+          const confirmMsg = document.createElement('div');
+          Object.assign(confirmMsg.style, { ...styles.messageBase, ...styles.botMessage });
+          confirmMsg.textContent = `Verstanden – ich bin Ihr Assistent für "${option}". Was möchten Sie wissen?`;
+          messages.appendChild(confirmMsg);
+          scrollToBottom();
+        };
+        branchenBtns.appendChild(obtn);
+      });
 
-  branchen.forEach(name => {
-    const item = document.createElement('div');
-    item.textContent = name;
-    item.style.padding = '6px 10px';
-    item.style.border = '1px solid #ddd';
-    item.style.borderRadius = '6px';
-    item.style.cursor = 'pointer';
-    item.style.backgroundColor = '#fff';
-    item.onmouseover = () => item.style.backgroundColor = '#f0f0f0';
-    item.onmouseout = () => item.style.backgroundColor = '#fff';
-
-    item.onclick = () => {
-      selectedBusiness = name;
-      const confirm = document.createElement('div');
-      Object.assign(confirm.style, { ...styles.messageBase, ...styles.botMessage });
-      confirm.textContent = `Super! Ich bin Tamims Assistent für "${name}". Was möchten Sie wissen?`;
-      messages.appendChild(confirm);
-      list.remove();
+      messages.appendChild(branchenMsg);
+      messages.appendChild(branchenBtns);
       scrollToBottom();
     };
+  } else {
+    btn.onclick = () => {
+      buttonContainer.remove();
+      const skipMsg = document.createElement('div');
+      Object.assign(skipMsg.style, { ...styles.messageBase, ...styles.botMessage });
+      skipMsg.textContent = 'Kein Problem – stellen Sie einfach Ihre Frage.';
+      messages.appendChild(skipMsg);
+      scrollToBottom();
+    };
+  }
+});
 
-    list.appendChild(item);
-  });
-
-  messages.appendChild(list);
-  scrollToBottom();
+messages.appendChild(buttonContainer);
+scrollToBottom();
 };
 
 noBtn.onclick = () => {
