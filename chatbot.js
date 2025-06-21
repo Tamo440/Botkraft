@@ -482,4 +482,4 @@ input.addEventListener('keydown', function (e) {
     sendMessage();
   }
 });
-hatbotBtn.addEventListener('click', toggleChatbot);
+chatbotBtn.addEventListener('click', toggleChatbot);
