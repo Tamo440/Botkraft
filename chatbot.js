@@ -383,7 +383,7 @@ if (messages.innerHTML.trim() === '') {
   messages.appendChild(buttonContainer);
 scrollToBottom();
 }
-}
+  
 let chatHistory = [
   {
     role: 'system',
