@@ -381,10 +381,8 @@ if (messages.innerHTML.trim() === '') {
   });
 
   messages.appendChild(buttonContainer);
-  scrollToBottom();
-} // ✅ diese schließende Klammer war vorher falsch oder fehlte
-};
-
+scrollToBottom();
+}
 }
 let chatHistory = [
   {
