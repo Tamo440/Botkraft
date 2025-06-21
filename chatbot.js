@@ -282,10 +282,29 @@ function toggleChatbot() {
   if (existingBadge) existingBadge.remove();
 
   if (messages.innerHTML.trim() === '') {
-    const intro = document.createElement('div');
-    Object.assign(intro.style, { ...styles.messageBase, ...styles.botMessage });
-   intro.textContent = 'Hallo, wie kann ich Ihnen helfen?';
-    messages.appendChild(intro);
+ const introWrapper = document.createElement('div');
+introWrapper.style.display = 'flex';
+introWrapper.style.alignItems = 'flex-start';
+introWrapper.style.gap = '10px';
+introWrapper.style.marginBottom = '12px';
+
+const introImg = document.createElement('img');
+introImg.src = 'https://i.imgur.com/VbR2eeF.png';
+introImg.alt = 'Bot';
+introImg.style.width = '36px';
+introImg.style.height = '36px';
+introImg.style.borderRadius = '50%';
+introImg.style.objectFit = 'cover';
+introImg.style.flexShrink = '0';
+
+const introMsg = document.createElement('div');
+Object.assign(introMsg.style, { ...styles.messageBase, ...styles.botMessage });
+introMsg.classList.add('fade-in-message');
+introMsg.textContent = 'Hallo, wie kann ich Ihnen helfen?';
+
+introWrapper.appendChild(introImg);
+introWrapper.appendChild(introMsg);
+messages.appendChild(introWrapper);
 
     const options = ['Friseursalon ✂️', 'Immobilienbüro 🏠', 'Coaching 👔', 'Webdesign 💻', 'Reinigungsservice 🧼', 'Autohaus 🚗', 'Arztpraxis 🩺'];
     const buttonContainer = document.createElement('div');
