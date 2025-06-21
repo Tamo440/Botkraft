@@ -47,6 +47,19 @@ styleExtras.textContent = `
 }`;
 document.head.appendChild(styleExtras);
 
+const toggleStyles = document.createElement('style');
+toggleStyles.textContent = `
+  .chatbot-container-hidden {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+  .chatbot-container-animated {
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+  }
+`;
+document.head.appendChild(toggleStyles);
+
 let selectedBusiness = null;
 
 const colors = {
