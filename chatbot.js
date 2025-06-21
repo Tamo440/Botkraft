@@ -278,7 +278,7 @@ function toggleChatbot() {
     }, 300);
   }
 
-  const existingBadge = chatbotBtn.querySelector('.chatbot-notify');
+const existingBadge = chatbotBtn.querySelector('.chatbot-notify');
 if (existingBadge) existingBadge.remove();
 
 if (messages.innerHTML.trim() === '') {
@@ -381,8 +381,9 @@ if (messages.innerHTML.trim() === '') {
   });
 
   messages.appendChild(buttonContainer);
-scrollToBottom();
-}
+  scrollToBottom();
+} // ✅ diese schließende Klammer war vorher falsch oder fehlte
+
   
 let chatHistory = [
   {
