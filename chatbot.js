@@ -279,118 +279,110 @@ function toggleChatbot() {
   }
 
   const existingBadge = chatbotBtn.querySelector('.chatbot-notify');
-  if (existingBadge) existingBadge.remove();
+if (existingBadge) existingBadge.remove();
 
-  if (messages.innerHTML.trim() === '') {
- const introWrapper = document.createElement('div');
-introWrapper.style.display = 'flex';
-introWrapper.style.alignItems = 'flex-start';
-introWrapper.style.gap = '10px';
-introWrapper.style.marginBottom = '12px';
+if (messages.innerHTML.trim() === '') {
+  const introWrapper = document.createElement('div');
+  introWrapper.style.display = 'flex';
+  introWrapper.style.alignItems = 'flex-start';
+  introWrapper.style.gap = '10px';
+  introWrapper.style.marginBottom = '12px';
 
-const introImg = document.createElement('img');
-introImg.src = 'https://i.imgur.com/VbR2eeF.png';
-introImg.alt = 'Bot';
-introImg.style.width = '36px';
-introImg.style.height = '36px';
-introImg.style.borderRadius = '50%';
-introImg.style.objectFit = 'cover';
-introImg.style.flexShrink = '0';
+  const introImg = document.createElement('img');
+  introImg.src = 'https://i.imgur.com/VbR2eeF.png';
+  introImg.alt = 'Bot';
+  introImg.style.width = '36px';
+  introImg.style.height = '36px';
+  introImg.style.borderRadius = '50%';
+  introImg.style.objectFit = 'cover';
+  introImg.style.flexShrink = '0';
 
-const introMsg = document.createElement('div');
-Object.assign(introMsg.style, { ...styles.messageBase, ...styles.botMessage });
-introMsg.classList.add('fade-in-message');
-introMsg.textContent = 'Hallo, wie kann ich Ihnen helfen?';
+  const introMsg = document.createElement('div');
+  Object.assign(introMsg.style, { ...styles.messageBase, ...styles.botMessage });
+  introMsg.classList.add('fade-in-message');
+  introMsg.textContent = 'Hallo, wie kann ich Ihnen helfen?';
 
-introWrapper.appendChild(introImg);
-introWrapper.appendChild(introMsg);
-messages.appendChild(introWrapper);
+  introWrapper.appendChild(introImg);
+  introWrapper.appendChild(introMsg);
+  messages.appendChild(introWrapper);
 
-// Buttons
-const buttonContainer = document.createElement('div');
-buttonContainer.style.display = 'flex';
-buttonContainer.style.gap = '10px';
-buttonContainer.style.marginBottom = '12px';
+  // Buttons
+  const buttonContainer = document.createElement('div');
+  buttonContainer.style.display = 'flex';
+  buttonContainer.style.gap = '10px';
+  buttonContainer.style.marginBottom = '12px';
 
-['Ja', 'Nein'].forEach(label => {
-  const btn = document.createElement('button');
-  btn.textContent = label;
-  btn.style.padding = '6px 12px';
-  btn.style.border = '1px solid #ccc';
-  btn.style.borderRadius = '6px';
-  btn.style.backgroundColor = '#fff';
-  btn.style.cursor = 'pointer';
-  btn.style.fontSize = '13px';
-  btn.onmouseover = () => btn.style.backgroundColor = '#f0f0f0';
-  btn.onmouseout = () => btn.style.backgroundColor = '#fff';
-  buttonContainer.appendChild(btn);
+  ['Ja', 'Nein'].forEach(label => {
+    const btn = document.createElement('button');
+    btn.textContent = label;
+    btn.style.padding = '6px 12px';
+    btn.style.border = '1px solid #ccc';
+    btn.style.borderRadius = '6px';
+    btn.style.backgroundColor = '#fff';
+    btn.style.cursor = 'pointer';
+    btn.style.fontSize = '13px';
+    btn.onmouseover = () => btn.style.backgroundColor = '#f0f0f0';
+    btn.onmouseout = () => btn.style.backgroundColor = '#fff';
+    buttonContainer.appendChild(btn);
 
-  if (label === 'Ja') {
-    btn.onclick = () => {
-      buttonContainer.remove();
+    if (label === 'Ja') {
+      btn.onclick = () => {
+        buttonContainer.remove();
 
-      const branchenMsg = document.createElement('div');
-      Object.assign(branchenMsg.style, { ...styles.messageBase, ...styles.botMessage });
-      branchenMsg.textContent = 'Welche Branche interessiert Sie?';
+        const branchenMsg = document.createElement('div');
+        Object.assign(branchenMsg.style, { ...styles.messageBase, ...styles.botMessage });
+        branchenMsg.textContent = 'Welche Branche interessiert Sie?';
 
-      const branchenBtns = document.createElement('div');
-      branchenBtns.style.display = 'flex';
-      branchenBtns.style.flexWrap = 'wrap';
-      branchenBtns.style.gap = '8px';
-      branchenBtns.style.marginTop = '10px';
+        const branchenBtns = document.createElement('div');
+        branchenBtns.style.display = 'flex';
+        branchenBtns.style.flexWrap = 'wrap';
+        branchenBtns.style.gap = '8px';
+        branchenBtns.style.marginTop = '10px';
 
-      const options = ['Friseur ✂️', 'Immobilien 🏠', 'Coaching 👔', 'Webdesign 💻', 'Reinigung 🧼', 'Autohaus 🚗', 'Arztpraxis 🩺'];
-      options.forEach(option => {
-        const obtn = document.createElement('button');
-        obtn.textContent = option;
-        obtn.style.padding = '6px 10px';
-        obtn.style.border = '1px solid #ccc';
-        obtn.style.borderRadius = '6px';
-        obtn.style.backgroundColor = '#fff';
-        obtn.style.fontSize = '13px';
-        obtn.style.cursor = 'pointer';
-        obtn.onmouseover = () => obtn.style.backgroundColor = '#f0f0f0';
-        obtn.onmouseout = () => obtn.style.backgroundColor = '#fff';
-        obtn.onclick = () => {
-          selectedBusiness = option;
-          branchenBtns.remove();
+        const options = ['Friseur ✂️', 'Immobilien 🏠', 'Coaching 👔', 'Webdesign 💻', 'Reinigung 🧼', 'Autohaus 🚗', 'Arztpraxis 🩺'];
+        options.forEach(option => {
+          const obtn = document.createElement('button');
+          obtn.textContent = option;
+          obtn.style.padding = '6px 10px';
+          obtn.style.border = '1px solid #ccc';
+          obtn.style.borderRadius = '6px';
+          obtn.style.backgroundColor = '#fff';
+          obtn.style.fontSize = '13px';
+          obtn.style.cursor = 'pointer';
+          obtn.onmouseover = () => obtn.style.backgroundColor = '#f0f0f0';
+          obtn.onmouseout = () => obtn.style.backgroundColor = '#fff';
+          obtn.onclick = () => {
+            selectedBusiness = option;
+            branchenBtns.remove();
 
-          const confirmMsg = document.createElement('div');
-          Object.assign(confirmMsg.style, { ...styles.messageBase, ...styles.botMessage });
-          confirmMsg.textContent = `Verstanden – ich bin Ihr Assistent für "${option}". Was möchten Sie wissen?`;
-          messages.appendChild(confirmMsg);
-          scrollToBottom();
-        };
-        branchenBtns.appendChild(obtn);
-      });
+            const confirmMsg = document.createElement('div');
+            Object.assign(confirmMsg.style, { ...styles.messageBase, ...styles.botMessage });
+            confirmMsg.textContent = `Verstanden – ich bin Ihr Assistent für "${option}". Was möchten Sie wissen?`;
+            messages.appendChild(confirmMsg);
+            scrollToBottom();
+          };
+          branchenBtns.appendChild(obtn);
+        });
 
-      messages.appendChild(branchenMsg);
-      messages.appendChild(branchenBtns);
-      scrollToBottom();
-    };
-  } else {
-    btn.onclick = () => {
-      buttonContainer.remove();
-      const skipMsg = document.createElement('div');
-      Object.assign(skipMsg.style, { ...styles.messageBase, ...styles.botMessage });
-      skipMsg.textContent = 'Kein Problem – stellen Sie einfach Ihre Frage.';
-      messages.appendChild(skipMsg);
-      scrollToBottom();
-    };
-  }
-});
+        messages.appendChild(branchenMsg);
+        messages.appendChild(branchenBtns);
+        scrollToBottom();
+      };
+    } else {
+      btn.onclick = () => {
+        buttonContainer.remove();
+        const skipMsg = document.createElement('div');
+        Object.assign(skipMsg.style, { ...styles.messageBase, ...styles.botMessage });
+        skipMsg.textContent = 'Kein Problem – stellen Sie einfach Ihre Frage.';
+        messages.appendChild(skipMsg);
+        scrollToBottom();
+      };
+    }
+  });
 
-messages.appendChild(buttonContainer);
-scrollToBottom();
-};
-
-noBtn.onclick = () => {
-  questionWrapper.remove();
-  const info = document.createElement('div');
-  Object.assign(info.style, { ...styles.messageBase, ...styles.botMessage });
-  info.textContent = 'Alles klar. Stellen Sie mir einfach Ihre Frage.';
-  messages.appendChild(info);
+  messages.appendChild(buttonContainer);
   scrollToBottom();
+} // ✅ diese schließende Klammer war vorher falsch oder fehlte
 };
   }
 }
