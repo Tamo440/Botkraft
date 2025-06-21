@@ -278,120 +278,65 @@ function toggleChatbot() {
     }, 300);
   }
 
-const existingBadge = chatbotBtn.querySelector('.chatbot-notify');
-if (existingBadge) existingBadge.remove();
+  const existingBadge = chatbotBtn.querySelector('.chatbot-notify');
+  if (existingBadge) existingBadge.remove();
 
-if (messages.innerHTML.trim() === '') {
-// ⬇️ Das ersetzt die bisherige Branchen-Auswahl komplett
-
-const introWrapper = document.createElement('div');
+  if (messages.innerHTML.trim() === '') {
+ const introWrapper = document.createElement('div');
 introWrapper.style.display = 'flex';
-introWrapper.style.alignItems = 'center';
+introWrapper.style.alignItems = 'flex-start';
 introWrapper.style.gap = '10px';
-introWrapper.style.marginBottom = '10px';
+introWrapper.style.marginBottom = '12px';
 
 const introImg = document.createElement('img');
-introImg.src = 'https://i.imgur.com/VbR2eeF.png'; // dein Bot-Profilbild
-introImg.alt = 'Botkraft Icon';
-introImg.style.width = '40px';
-introImg.style.height = '40px';
+introImg.src = 'https://i.imgur.com/VbR2eeF.png';
+introImg.alt = 'Bot';
+introImg.style.width = '36px';
+introImg.style.height = '36px';
 introImg.style.borderRadius = '50%';
+introImg.style.objectFit = 'cover';
+introImg.style.flexShrink = '0';
+
+const introMsg = document.createElement('div');
+Object.assign(introMsg.style, { ...styles.messageBase, ...styles.botMessage });
+introMsg.classList.add('fade-in-message');
+introMsg.textContent = 'Hallo, wie kann ich Ihnen helfen?';
 
 introWrapper.appendChild(introImg);
-introWrapper.appendChild(intro);
+introWrapper.appendChild(introMsg);
 messages.appendChild(introWrapper);
 
-// 🟨 Neue Ja/Nein-Auswahl
-const questionWrapper = document.createElement('div');
-questionWrapper.style.display = 'flex';
-questionWrapper.style.flexDirection = 'column';
-questionWrapper.style.gap = '8px';
-questionWrapper.style.marginTop = '12px';
+    const options = ['Friseursalon ✂️', 'Immobilienbüro 🏠', 'Coaching 👔', 'Webdesign 💻', 'Reinigungsservice 🧼', 'Autohaus 🚗', 'Arztpraxis 🩺'];
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.flexWrap = 'wrap';
+    buttonContainer.style.gap = '10px';
+    buttonContainer.style.marginTop = '10px';
 
-const questionText = document.createElement('div');
-questionText.textContent = 'Möchten Sie eine Branche auswählen?';
-Object.assign(questionText.style, {
-  fontWeight: '500',
-  color: '#333'
-});
+    options.forEach(option => {
+      const btn = document.createElement('button');
+      btn.textContent = option;
+      btn.style.padding = '8px 12px';
+      btn.style.border = '1px solid #ccc';
+      btn.style.borderRadius = '8px';
+      btn.style.cursor = 'pointer';
+      btn.style.backgroundColor = '#fff';
+      btn.onmouseover = () => btn.style.backgroundColor = '#f0f0f0';
+      btn.onmouseout = () => btn.style.backgroundColor = '#fff';
+      btn.onclick = () => {
+        selectedBusiness = option;
+        const confirmMsg = document.createElement('div');
+        Object.assign(confirmMsg.style, { ...styles.messageBase, ...styles.botMessage });
+        confirmMsg.textContent = `Super! Ich bin Tamims virtueller Assistent für "${option}". Was möchtest du wissen?`;
+        messages.appendChild(confirmMsg);
+        buttonContainer.remove();
+      };
+      buttonContainer.appendChild(btn);
+    });
 
-const buttonsRow = document.createElement('div');
-buttonsRow.style.display = 'flex';
-buttonsRow.style.gap = '10px';
-
-const yesBtn = document.createElement('button');
-yesBtn.textContent = 'Ja';
-Object.assign(yesBtn.style, {
-  padding: '6px 12px',
-  border: '1px solid #ccc',
-  borderRadius: '6px',
-  backgroundColor: '#f9f9f9',
-  cursor: 'pointer'
-});
-
-const noBtn = document.createElement('button');
-noBtn.textContent = 'Nein';
-Object.assign(noBtn.style, {
-  padding: '6px 12px',
-  border: '1px solid #ccc',
-  borderRadius: '6px',
-  backgroundColor: '#f9f9f9',
-  cursor: 'pointer'
-});
-
-buttonsRow.appendChild(yesBtn);
-buttonsRow.appendChild(noBtn);
-questionWrapper.appendChild(questionText);
-questionWrapper.appendChild(buttonsRow);
-messages.appendChild(questionWrapper);
-yesBtn.onclick = () => {
-  questionWrapper.remove();
-
-  const branchen = ['Friseursalon', 'Immobilienbüro', 'Webdesign', 'Coaching', 'Reinigungsservice', 'Autohaus', 'Arztpraxis'];
-  
-  const list = document.createElement('div');
-  list.style.display = 'flex';
-  list.style.flexDirection = 'column';
-  list.style.gap = '6px';
-
-  branchen.forEach(name => {
-    const item = document.createElement('div');
-    item.textContent = name;
-    item.style.padding = '6px 10px';
-    item.style.border = '1px solid #ddd';
-    item.style.borderRadius = '6px';
-    item.style.cursor = 'pointer';
-    item.style.backgroundColor = '#fff';
-    item.onmouseover = () => item.style.backgroundColor = '#f0f0f0';
-    item.onmouseout = () => item.style.backgroundColor = '#fff';
-
-    item.onclick = () => {
-      selectedBusiness = name;
-      const confirm = document.createElement('div');
-      Object.assign(confirm.style, { ...styles.messageBase, ...styles.botMessage });
-      confirm.textContent = `Super! Ich bin Tamims Assistent für "${name}". Was möchten Sie wissen?`;
-      messages.appendChild(confirm);
-      list.remove();
-      scrollToBottom();
-    };
-
-    list.appendChild(item);
-  });
-
-  messages.appendChild(list);
-  scrollToBottom();
-};
-
-noBtn.onclick = () => {
-  questionWrapper.remove();
-  const info = document.createElement('div');
-  Object.assign(info.style, { ...styles.messageBase, ...styles.botMessage });
-  info.textContent = 'Alles klar. Stellen Sie mir einfach Ihre Frage.';
-  messages.appendChild(info);
-  scrollToBottom();
-};
-
-  
+    messages.appendChild(buttonContainer);
+  }
+}
 let chatHistory = [
   {
     role: 'system',
@@ -524,4 +469,4 @@ input.addEventListener('keydown', function (e) {
     sendMessage();
   }
 });
-chatbotBtn.addEventListener('click', toggleChatbot);
+hatbotBtn.addEventListener('click', toggleChatbot);
