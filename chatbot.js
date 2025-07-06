@@ -305,7 +305,7 @@ introWrapper.style.gap = '10px';
 introWrapper.style.marginBottom = '10px';
 
 const introImg = document.createElement('img');
-introImg.src = 'https://imgur.com/dwNdraR'; // dein Bot-Icon
+introImg.src = 'https://imgur.com/a/Vut9foW'; // dein Bot-Icon
 introImg.alt = 'Bot';
 introImg.style.width = '32px';
 introImg.style.height = '32px';
