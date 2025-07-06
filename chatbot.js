@@ -305,7 +305,7 @@ introWrapper.style.gap = '10px';
 introWrapper.style.marginBottom = '10px';
 
 const introImg = document.createElement('img');
-introImg.src = 'https://imgur.com/a/Vut9foW'; // dein Bot-Icon
+introImg.src = 'https://i.imgur.com/9sYEklx.png'; // dein Bot-Icon
 introImg.alt = 'Bot';
 introImg.style.width = '32px';
 introImg.style.height = '32px';
@@ -496,7 +496,7 @@ function sendMessage() {
 
   // Bot-Bild direkt rund und ohne Extra-Hintergrund
   const botImg = document.createElement('img');
-  botImg.src = 'https://imgur.com/a/Vut9foW'; // Dein rundes Bild mit blauem Hintergrund
+  botImg.src = 'https://i.imgur.com/9sYEklx.png'; // Dein rundes Bild mit blauem Hintergrund
   botImg.alt = 'Bot';
   botImg.style.width = '36px';
   botImg.style.height = '36px';
