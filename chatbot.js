@@ -496,7 +496,7 @@ function sendMessage() {
 
   // Bot-Bild direkt rund und ohne Extra-Hintergrund
   const botImg = document.createElement('img');
-  botImg.src = 'https://i.imgur.com/VbR2eeF.png'; // Dein rundes Bild mit blauem Hintergrund
+  botImg.src = 'https://imgur.com/a/Vut9foW'; // Dein rundes Bild mit blauem Hintergrund
   botImg.alt = 'Bot';
   botImg.style.width = '36px';
   botImg.style.height = '36px';
