@@ -231,14 +231,17 @@ document.body.appendChild(chatbotBtn);
 const chatbotIcon = chatbotBtn.querySelector('i');
 Object.assign(chatbotIcon.style, styles.icon);
 
-const notificationDot = document.createElement('div');
-notificationDot.className = 'chatbot-notify';
-chatbotBtn.appendChild(notificationDot);
-
-chatbotBtn.classList.add('pulse');
-setTimeout(() => {
-  chatbotBtn.classList.remove('pulse');
-}, 1000);
+const onlineStatus = document.createElement('div');
+onlineStatus.style.position = 'absolute';
+onlineStatus.style.bottom = '6px';
+onlineStatus.style.right = '6px';
+onlineStatus.style.width = '12px';
+onlineStatus.style.height = '12px';
+onlineStatus.style.backgroundColor = '#28c76f'; // grünes Online-Zeichen
+onlineStatus.style.border = '2px solid white';
+onlineStatus.style.borderRadius = '50%';
+onlineStatus.style.boxShadow = '0 0 4px rgba(0,0,0,0.2)';
+chatbotBtn.appendChild(onlineStatus);
 
 const chatbotContainer = document.createElement('div');
 chatbotContainer.id = 'chatbot';
