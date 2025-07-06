@@ -502,49 +502,16 @@ function sendMessage() {
   botImg.style.flexShrink = '0';
 
   // Nachricht
- document.getElementById('typing-indicator')?.remove();
+  const botMsg = document.createElement('div');
+  Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
+  botMsg.classList.add('fade-in-message');
+  botMsg.textContent = data.choices[0].message.content;
 
-// Wrapper für Bild + Nachricht
-const botWrapper = document.createElement('div');
-botWrapper.style.display = 'flex';
-botWrapper.style.alignItems = 'flex-start';
-botWrapper.style.gap = '10px';
-botWrapper.style.marginBottom = '12px';
+  wrapper.appendChild(botImg);
+  wrapper.appendChild(botMsg);
+  messages.appendChild(wrapper);
 
-// Profilbild
-const botImg = document.createElement('img');
-botImg.src = 'https://i.imgur.com/fbqLoR1.png';
-botImg.alt = 'Assistent';
-botImg.style.width = '36px';
-botImg.style.height = '36px';
-botImg.style.borderRadius = '50%';
-botImg.style.objectFit = 'cover';
-botImg.style.flexShrink = '0';
-
-// Wrapper für Name + Nachricht
-const botContent = document.createElement('div');
-
-// Name
-const botName = document.createElement('div');
-botName.textContent = 'Virtueller Assistent';
-botName.style.fontSize = '12px';
-botName.style.color = '#888';
-botName.style.marginBottom = '2px';
-
-// Nachricht
-const botMsg = document.createElement('div');
-Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
-botMsg.classList.add('fade-in-message');
-botMsg.textContent = data.choices[0].message.content;
-
-// Zusammenfügen
-botContent.appendChild(botName);
-botContent.appendChild(botMsg);
-botWrapper.appendChild(botImg);
-botWrapper.appendChild(botContent);
-messages.appendChild(botWrapper);
-
-scrollToBottom();
+  scrollToBottom();
       
       chatHistory.push({
         role: 'assistant',
