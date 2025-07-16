@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jetzt eigenen Bot erstellen – Botkraft24</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 16px 0 6px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+    button {
+      margin-top: 24px;
+      padding: 12px;
+      width: 100%;
+      background: #ff6900;
+      color: white;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #output {
+      background: #eee;
+      white-space: pre-wrap;
+      padding: 16px;
+      margin-top: 30px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .cta {
+      margin-top: 20px;
+      background: #085186;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Erstellen Sie Ihren Website-Chatbot</h1>
+    <label for="branche">Branche</label>
+    <select id="branche">
+      <option>Friseur</option>
+      <option>Autohaus</option>
+      <option>Immobilien</option>
+      <option>Webdesign</option>
+      <option>Reinigung</option>
+    </select>
+
+    <label for="firma">Firmenname</label>
+    <input id="firma" type="text" placeholder="z.B. Friseur Müller">
+
+    <label for="farbe">Hauptfarbe (HEX)</label>
+    <input id="farbe" type="text" value="#ff6900">
+
+    <label for="buttontext">Chat-Button Text</label>
+    <input id="buttontext" type="text" placeholder="z.B. Jetzt chatten">
+
+    <button onclick="generateCode()">🪄 Code generieren</button>
+
+    <div id="output"></div>
+    <div class="cta">🚀 Bereit für den echten Bot? <br><a href="#kontakt" style="color:#fff; text-decoration:underline">Jetzt aktivieren lassen</a></div>
+  </div>
+
+  <script>
+    function generateCode() {
+      const branche = document.getElementById('branche').value;
+      const firma = document.getElementById('firma').value || 'Ihr Unternehmen';
+      const farbe = document.getElementById('farbe').value;
+      const buttontext = document.getElementById('buttontext').value || 'Chat starten';
+
+      const code = `<!-- Botkraft24 Chatbot -->\n<script>\n  alert('Chatbot für ${firma} (${branche}) mit Farbe ${farbe} und Button: ${buttontext}');\n<\/script>`;
+
+      document.getElementById('output').textContent = code;
+    }
+  </script>
+</body>
+</html>
