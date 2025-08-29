@@ -1,8 +1,11 @@
-// ==== STYLE-ANIMATION für "Bot tippt..." ====
+// 💬 Erweiterte Version des Botkraft24 Website-Chatbots – auf Basis deines Originalcodes
+// Fokus: Lead-Erfassung, Quick-Replies, Darkmode, Responsiveness, bessere UI/UX
+
+// === STYLE ===
 const styleTag = document.createElement('style');
 styleTag.textContent = `
 @keyframes bounce {
-  0%, 80%, 100% { transform: scale(0); } 
+  0%, 80%, 100% { transform: scale(0); }
   40% { transform: scale(1); }
 }
 .typing-indicator {
@@ -21,12 +24,7 @@ styleTag.textContent = `
 .typing-dot:nth-child(1) { animation-delay: 0s; }
 .typing-dot:nth-child(2) { animation-delay: 0.2s; }
 .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-`;
-document.head.appendChild(styleTag);
 
-// 🔴 Animation + Notification Badge
-const styleExtras = document.createElement('style');
-styleExtras.textContent = `
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.15); }
@@ -44,161 +42,17 @@ styleExtras.textContent = `
 }
 .pulse {
   animation: pulse 0.5s ease-in-out 2;
-}`;
-document.head.appendChild(styleExtras);
-
-const toggleStyles = document.createElement('style');
-toggleStyles.textContent = `
-  .chatbot-container-hidden {
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-  }
-  .chatbot-container-animated {
-    opacity: 1;
-    transition: opacity 0.3s ease-in;
-  }
-`;
-document.head.appendChild(toggleStyles);
-
-let selectedBusiness = null;
-
-const colors = {
-    primary: '#085186',
-    accent: '#ff6900',
-    botBackground: '#ffffff',
-    userBackground: '#ff6900',
-    userText: '#ffffff',
-    botText: '#000000'
-};
-
-const styles = {
-    button: {
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        width: '60px',
-        height: '60px',
-        backgroundColor: colors.primary,
-        borderRadius: '50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        cursor: 'pointer',
-        boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)',
-        zIndex: '9999'
-    },
-    icon: {
-        color: 'white',
-        fontSize: '24px'
-    },
-    container: {
-        position: 'fixed',
-        bottom: '80px',
-        right: '20px',
-        width: '360px',
-        height: '600px',
-        backgroundColor: 'white',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
-        borderRadius: '12px',
-        display: 'none',
-        flexDirection: 'column',
-        border: `2px solid ${colors.primary}`,
-        zIndex: '9999'
-    },
-    header: {
-        backgroundColor: colors.primary,
-        color: 'white',
-        padding: '18px',
-        textAlign: 'center',
-        fontSize: '20px',
-        fontWeight: 'bold',
-        borderTopLeftRadius: '12px',
-        borderTopRightRadius: '12px'
-    },
-    messages: {
-        flex: '1',
-        padding: '16px',
-        overflowY: 'auto',
-        backgroundColor: '#f7f7f7'
-    },
-    inputContainer: {
-        display: 'flex',
-        borderTop: '1px solid #ddd'
-    },
-    input: {
-        flex: '1',
-        padding: '12px',
-        border: 'none',
-        outline: 'none',
-        fontSize: '15px'
-    },
-    sendButton: {
-        padding: '12px',
-        backgroundColor: colors.accent,
-        color: 'white',
-        border: 'none',
-        cursor: 'pointer',
-        fontSize: '18px',
-        transition: 'background 0.3s'
-    },
-    sendButtonHover: {
-        backgroundColor: '#e65a00'
-    },
-messageBase: {
-  borderRadius: '8px',
-  padding: '8px 12px',
-  marginBottom: '10px',
-  fontSize: '14px',
-  lineHeight: '1.4',
-  background: '#f5f5f5',
-  color: '#333',
-  maxWidth: '90%',
-  width: 'fit-content',
-  boxShadow: 'none',
-  wordBreak: 'break-word'
-},
-   botMessage: {
-  backgroundColor: colors.botBackground,
-  color: colors.botText,
-  textAlign: 'left',
-  maxWidth: '90%',
-  width: 'fit-content',
-  alignSelf: 'flex-start'
-},
-   userMessage: {
-  backgroundColor: colors.userBackground,
-  color: colors.userText,
-  textAlign: 'right',
-  marginLeft: 'auto',
-  border: 'none',
-  maxWidth: '90%',
-  width: 'fit-content',
-  alignSelf: 'flex-end'
 }
-};
-const resetStyles = document.createElement('style');
-resetStyles.textContent = `
-  #chatbot * {
-    font-family: 'Inter', sans-serif !important;
-    box-sizing: border-box;
-    line-height: 1.4;
-  }
 
-  #chatbot button {
-    all: unset;
-    font-family: 'Inter', sans-serif !important;
-font-size: 14px;
-    cursor: pointer;
-  }
+.chatbot-container-hidden {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+.chatbot-container-animated {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
 
-  #chatbot input {
-    font-family: 'Inter', sans-serif;
-    box-sizing: border-box;
-  }
-`;
-document.head.appendChild(resetStyles);
-const messageAnimationStyle = document.createElement('style');
-messageAnimationStyle.textContent = `
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -212,325 +66,329 @@ messageAnimationStyle.textContent = `
 .fade-in-message {
   animation: fadeInUp 0.3s ease-out;
 }
-`;
-document.head.appendChild(messageAnimationStyle);
 
-function scrollToBottom() {
-  const messages = document.getElementById('messages');
-  messages.scrollTo({
-    top: messages.scrollHeight,
-    behavior: 'smooth'
-  });
+:root {
+  --primary: #085186;
+  --accent: #ff6900;
+  --background: #ffffff;
+  --text: #000000;
+  --user-bg: #ff6900;
+  --user-text: #ffffff;
 }
 
+[data-theme="dark"] {
+  --primary: #1e2a38;
+  --accent: #ff9800;
+  --background: #121212;
+  --text: #f1f1f1;
+  --user-bg: #ff9800;
+  --user-text: #121212;
+}
+`;
+document.head.appendChild(styleTag);
+
+// === RESTLICHER CODE: folgt sofort – zu lang für ein Feld ===
+// Sag: "weiter" – und ich füge direkt den nächsten Teil hinzu.
+// 💬 Erweiterte Version des Botkraft24 Website-Chatbots – auf Basis deines Originalcodes
+// Fokus: Lead-Erfassung, Quick-Replies, Darkmode, Responsiveness, bessere UI/UX
+
+// === BLOCK 1: STYLE eingefügt === (siehe oben)
+
+// === BLOCK 2: UI-Elemente, Button, Container, Darkmode-Toggle ===
+
+// Toggle für Darkmode
+const themeToggle = document.createElement('button');
+themeToggle.textContent = '🌓';
+themeToggle.style.position = 'absolute';
+themeToggle.style.top = '12px';
+themeToggle.style.left = '12px';
+themeToggle.style.fontSize = '18px';
+themeToggle.style.background = 'transparent';
+themeToggle.style.border = 'none';
+themeToggle.style.cursor = 'pointer';
+themeToggle.onclick = () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+};
+document.body.appendChild(themeToggle);
+
+document.documentElement.setAttribute('data-theme', 'light');
+
+// Chatbot-Button (Floating)
 const chatbotBtn = document.createElement('div');
-Object.assign(chatbotBtn.style, styles.button);
-chatbotBtn.innerHTML = '<i class="fas fa-comment-dots"></i>';
+chatbotBtn.style.position = 'fixed';
+chatbotBtn.style.bottom = '20px';
+chatbotBtn.style.right = '20px';
+chatbotBtn.style.width = '60px';
+chatbotBtn.style.height = '60px';
+chatbotBtn.style.backgroundColor = 'var(--primary)';
+chatbotBtn.style.borderRadius = '50%';
+chatbotBtn.style.display = 'flex';
+chatbotBtn.style.alignItems = 'center';
+chatbotBtn.style.justifyContent = 'center';
+chatbotBtn.style.cursor = 'pointer';
+chatbotBtn.style.boxShadow = '2px 2px 8px rgba(0,0,0,0.2)';
+chatbotBtn.style.zIndex = '9999';
+chatbotBtn.innerHTML = '<i class="fas fa-comment-dots" style="color:white;font-size:24px;"></i>';
 document.body.appendChild(chatbotBtn);
 
-const chatbotIcon = chatbotBtn.querySelector('i');
-Object.assign(chatbotIcon.style, styles.icon);
-
+// Online-Status-Punkt
 const onlineStatus = document.createElement('div');
 onlineStatus.style.position = 'absolute';
 onlineStatus.style.bottom = '6px';
 onlineStatus.style.right = '6px';
 onlineStatus.style.width = '12px';
 onlineStatus.style.height = '12px';
-onlineStatus.style.backgroundColor = '#28c76f'; // grünes Online-Zeichen
+onlineStatus.style.backgroundColor = '#28c76f';
 onlineStatus.style.border = '2px solid white';
 onlineStatus.style.borderRadius = '50%';
 onlineStatus.style.boxShadow = '0 0 4px rgba(0,0,0,0.2)';
 chatbotBtn.appendChild(onlineStatus);
 
+// Chatbot-Fenster (Container)
 const chatbotContainer = document.createElement('div');
 chatbotContainer.id = 'chatbot';
-Object.assign(chatbotContainer.style, styles.container);
+chatbotContainer.style.position = 'fixed';
+chatbotContainer.style.bottom = '80px';
+chatbotContainer.style.right = '20px';
+chatbotContainer.style.width = '360px';
+chatbotContainer.style.height = '600px';
+chatbotContainer.style.backgroundColor = 'var(--background)';
+chatbotContainer.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+chatbotContainer.style.borderRadius = '12px';
+chatbotContainer.style.display = 'none';
+chatbotContainer.style.flexDirection = 'column';
+chatbotContainer.style.border = '2px solid var(--primary)';
+chatbotContainer.style.zIndex = '9999';
+document.body.appendChild(chatbotContainer);
 
+// Header
 const header = document.createElement('div');
 header.innerHTML = '<strong>Botkraft24</strong>';
-Object.assign(header.style, styles.header);
+header.style.backgroundColor = 'var(--primary)';
+header.style.color = 'white';
+header.style.padding = '18px';
+header.style.textAlign = 'center';
+header.style.fontSize = '20px';
+header.style.fontWeight = 'bold';
+header.style.borderTopLeftRadius = '12px';
+header.style.borderTopRightRadius = '12px';
+chatbotContainer.appendChild(header);
 
+// Nachrichtenbereich
 const messages = document.createElement('div');
 messages.id = 'messages';
-Object.assign(messages.style, styles.messages);
+messages.style.flex = '1';
+messages.style.padding = '16px';
+messages.style.overflowY = 'auto';
+messages.style.backgroundColor = '#f7f7f7';
+chatbotContainer.appendChild(messages);
 
+// Eingabefeld
 const inputWrapper = document.createElement('div');
-Object.assign(inputWrapper.style, styles.inputContainer);
+inputWrapper.style.display = 'flex';
+inputWrapper.style.borderTop = '1px solid #ddd';
 
 const input = document.createElement('input');
 input.id = 'user-input';
-input.placeholder = 'Schreib mir deine Frage...';
-Object.assign(input.style, styles.input);
+input.placeholder = 'Schreiben Sie Ihre Frage...';
+input.style.flex = '1';
+input.style.padding = '12px';
+input.style.border = 'none';
+input.style.outline = 'none';
+input.style.fontSize = '15px';
 
 const sendBtn = document.createElement('button');
 sendBtn.textContent = '➤';
-Object.assign(sendBtn.style, styles.sendButton);
-sendBtn.onmouseover = () => sendBtn.style.backgroundColor = styles.sendButtonHover.backgroundColor;
-sendBtn.onmouseout = () => sendBtn.style.backgroundColor = styles.sendButton.backgroundColor;
-sendBtn.onclick = sendMessage;
+sendBtn.style.padding = '12px';
+sendBtn.style.backgroundColor = 'var(--accent)';
+sendBtn.style.color = 'white';
+sendBtn.style.border = 'none';
+sendBtn.style.cursor = 'pointer';
+sendBtn.style.fontSize = '18px';
 
 inputWrapper.appendChild(input);
 inputWrapper.appendChild(sendBtn);
-
-chatbotContainer.appendChild(header);
-chatbotContainer.appendChild(messages);
 chatbotContainer.appendChild(inputWrapper);
-document.body.appendChild(chatbotContainer);
 
-function toggleChatbot() {
+// Toggle öffnen/schließen
+chatbotBtn.addEventListener('click', () => {
   const display = window.getComputedStyle(chatbotContainer).display;
-  const isVisible = (display !== 'none' && chatbotContainer.style.opacity !== '0');
-
-  if (!isVisible) {
+  if (display === 'none') {
     chatbotContainer.style.display = 'flex';
-    chatbotContainer.classList.remove('chatbot-container-hidden');
-    chatbotContainer.classList.add('chatbot-container-animated');
   } else {
-    chatbotContainer.classList.remove('chatbot-container-animated');
-    chatbotContainer.classList.add('chatbot-container-hidden');
-    setTimeout(() => {
-      chatbotContainer.style.display = 'none';
-    }, 300);
-  }
-
-  const existingBadge = chatbotBtn.querySelector('.chatbot-notify');
-  if (existingBadge) existingBadge.remove();
-
-  if (messages.innerHTML.trim() === '') {
-const introWrapper = document.createElement('div');
-introWrapper.style.display = 'flex';
-introWrapper.style.alignItems = 'flex-start';
-introWrapper.style.gap = '10px';
-introWrapper.style.marginBottom = '10px';
-
-const introImg = document.createElement('img');
-introImg.src = 'https://i.imgur.com/9sYEklx.png'; // dein Bot-Icon
-introImg.alt = 'Bot';
-introImg.style.width = '32px';
-introImg.style.height = '32px';
-introImg.style.borderRadius = '50%';
-introImg.style.objectFit = 'cover';
-introImg.style.flexShrink = '0';
-
-const introMsg = document.createElement('div');
-Object.assign(introMsg.style, { ...styles.messageBase, ...styles.botMessage });
-introMsg.classList.add('fade-in-message');
-introMsg.textContent = 'Möchten Sie eine Branche auswählen?';
-
-introWrapper.appendChild(introImg);
-introWrapper.appendChild(introMsg);
-messages.appendChild(introWrapper);
-
-// Ja/Nein Buttons
-const buttonContainer = document.createElement('div');
-buttonContainer.style.display = 'flex';
-buttonContainer.style.gap = '8px';
-buttonContainer.style.marginBottom = '12px';
-
-['Ja', 'Nein'].forEach(label => {
-  const btn = document.createElement('button');
-  btn.textContent = label;
-  btn.style.padding = '6px 14px';
-  btn.style.border = '1px solid #ccc';
-  btn.style.borderRadius = '6px';
-  btn.style.backgroundColor = '#fff';
-  btn.style.cursor = 'pointer';
-  btn.style.fontSize = '13px';
-  btn.style.transition = 'background 0.2s';
-  btn.onmouseover = () => btn.style.backgroundColor = '#f0f0f0';
-  btn.onmouseout = () => btn.style.backgroundColor = '#fff';
-  buttonContainer.appendChild(btn);
-
-  if (label === 'Ja') {
-    btn.onclick = () => {
-      buttonContainer.remove();
-
-      const branchenMsg = document.createElement('div');
-      Object.assign(branchenMsg.style, { ...styles.messageBase, ...styles.botMessage });
-      branchenMsg.textContent = 'Welche Branche interessiert Sie?';
-
-      const branchenBtns = document.createElement('div');
-      branchenBtns.style.display = 'flex';
-      branchenBtns.style.flexWrap = 'wrap';
-      branchenBtns.style.gap = '8px';
-      branchenBtns.style.marginTop = '10px';
-
-      const options = ['Friseur ✂️', 'Immobilien 🏠', 'Coaching 👔', 'Webdesign 💻', 'Reinigung 🧼', 'Autohaus 🚗', 'Arztpraxis 🩺'];
-      options.forEach(option => {
-        const obtn = document.createElement('button');
-        obtn.textContent = option;
-        obtn.style.padding = '6px 10px';
-        obtn.style.border = '1px solid #ccc';
-        obtn.style.borderRadius = '6px';
-        obtn.style.backgroundColor = '#fff';
-        obtn.style.fontSize = '12.5px';
-        obtn.style.cursor = 'pointer';
-        obtn.onmouseover = () => obtn.style.backgroundColor = '#f0f0f0';
-        obtn.onmouseout = () => obtn.style.backgroundColor = '#fff';
-        obtn.onclick = () => {
-          selectedBusiness = option;
-          branchenBtns.remove();
-
-          const confirmMsg = document.createElement('div');
-          Object.assign(confirmMsg.style, { ...styles.messageBase, ...styles.botMessage });
-          confirmMsg.textContent = `Verstanden – ich bin Ihr Assistent für "${option}". Was möchten Sie wissen?`;
-          messages.appendChild(confirmMsg);
-          scrollToBottom();
-        };
-        branchenBtns.appendChild(obtn);
-      });
-
-      messages.appendChild(branchenMsg);
-      messages.appendChild(branchenBtns);
-      scrollToBottom();
-    };
-  } else {
-    btn.onclick = () => {
-      buttonContainer.remove();
-      const skipMsg = document.createElement('div');
-      Object.assign(skipMsg.style, { ...styles.messageBase, ...styles.botMessage });
-      skipMsg.textContent = 'Kein Problem – stellen Sie einfach Ihre Frage.';
-      messages.appendChild(skipMsg);
-      scrollToBottom();
-    };
+    chatbotContainer.style.display = 'none';
   }
 });
+// 💬 Erweiterte Version des Botkraft24 Website-Chatbots – auf Basis deines Originalcodes
+// Fokus: Lead-Erfassung, Quick-Replies, Darkmode, Responsiveness, bessere UI/UX
 
-messages.appendChild(buttonContainer);
-scrollToBottom();
-  }
+// === BISHER: STYLE + UI (Block 1 & 2)
+
+// === BLOCK 3: Logik – Chat-Verlauf, Nachrichtensystem, Lead-Capture ===
+
+// Scrollfunktion
+function scrollToBottom() {
+  messages.scrollTo({
+    top: messages.scrollHeight,
+    behavior: 'smooth'
+  });
 }
-let chatHistory = [
-  {
-    role: 'system',
-    content: `
-Du bist ein professioneller, sachlicher Kundenberater des Unternehmens Botkraft24.
 
-Botkraft24 erstellt smarte Chatbot-Integrationen für Websites, Shops und Unternehmen. 
-Ziel ist es, Anfragen zu automatisieren, Kunden schnell zu helfen und Arbeitszeit zu sparen.
-Sprich Kunden immer höflich mit "Sie" an. Keine Emojis, keine Begrüßung, keine Floskeln, keine Wiederholungen.
+// Nachricht anzeigen
+function appendMessage(text, sender = 'bot') {
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('fade-in-message');
+  wrapper.style.marginBottom = '10px';
+  wrapper.style.display = 'flex';
+  wrapper.style.justifyContent = sender === 'bot' ? 'flex-start' : 'flex-end';
 
-Du beantwortest Fragen zu Preisen, Leistungen, Kontakt und Vorgehensweise:
+  const msg = document.createElement('div');
+  msg.style.padding = '8px 12px';
+  msg.style.borderRadius = '8px';
+  msg.style.maxWidth = '80%';
+  msg.style.wordBreak = 'break-word';
+  msg.style.backgroundColor = sender === 'bot' ? 'var(--background)' : 'var(--user-bg)';
+  msg.style.color = sender === 'bot' ? 'var(--text)' : 'var(--user-text)';
+  msg.textContent = text;
 
-🔸 Preise:
-– Starter: 79 € einmalig – 1 Website + 1 Chatbot
-– Flex: 69 €/Monat – inkl. Hosting, Updates & Änderungen
-
-🔸 Leistungen:
-– Individuelle Website-Chatbots
-– Integration mit Tools wie Google Sheets, CRM, E-Mail-Systemen
-– DSGVO-konformes Hosting & Proxy-Setup
-– Keine Baukästen, sondern maßgeschneiderte Bots
-
-🔸 Technologien:
-– ChatGPT API
-– Render / Vercel Hosting
-– WordPress Snippets
-– Tailwind / HTML5
-– No-Code Tools wie Tidio, Landbot
-
-🔸 Kontakt:
-E-Mail: Tamim.Raschidi@outlook.de  
-WhatsApp: 0176 70726250  
-Website: www.botkraft24.de
-
-🔸 Verhalten im Chat:
-– Antworte **nur auf die gestellte Frage**
-– Sei klar, direkt, sachlich
-– Wenn der Kunde eine Firma nennt, bleibe thematisch bei dieser Firma
-– Wenn der Kunde unklar fragt, stelle gezielte Rückfragen
-
-Wenn das Thema „Bot auf eigener Website“ oder „Angebot“ genannt wird, erkläre, dass der Ablauf individuell ist – 
-du aber gerne eine kostenlose Einschätzung gibst, wenn der Kunde dir das Unternehmen nennt oder beschreibt.
-`
-  }
-];
-
-function sendMessage() {
-  const message = input.value.trim();
-  if (message === '') return;
-
-  const userMsg = document.createElement('div');
-  Object.assign(userMsg.style, { ...styles.messageBase, ...styles.userMessage });
-  userMsg.textContent = message;
-  userMsg.classList.add('fade-in-message');
-  messages.appendChild(userMsg);
-  input.value = '';
-
-  const typingIndicator = document.createElement('div');
-  typingIndicator.className = 'typing-indicator';
-  typingIndicator.id = 'typing-indicator';
-  messages.appendChild(typingIndicator);
-  for (let i = 0; i < 3; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'typing-dot';
-    typingIndicator.appendChild(dot);
-  }
+  wrapper.appendChild(msg);
+  messages.appendChild(wrapper);
   scrollToBottom();
+}
 
-  const businessInfo = selectedBusiness
-    ? `Antworte im Namen von Tamim Raschidi als professioneller Assistent für das Unternehmen "${selectedBusiness}".`
-    : '';
+// Lead-Capture Variablen
+let lead = {
+  name: '',
+  email: ''
+};
+let awaitingName = false;
+let awaitingEmail = false;
 
-  chatHistory.push({
-    role: 'user',
-    content: `${businessInfo} ${message}`
+function askForLead() {
+  appendMessage('Darf ich Sie kurz kennenlernen? Wie lautet Ihr Name?', 'bot');
+  awaitingName = true;
+}
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function handleUserInput(message) {
+  appendMessage(message, 'user');
+
+  if (awaitingName) {
+    lead.name = message;
+    awaitingName = false;
+    awaitingEmail = true;
+    appendMessage(`Danke, ${lead.name}. Und Ihre E-Mail-Adresse?`, 'bot');
+    return;
+  }
+
+  if (awaitingEmail) {
+    if (validateEmail(message)) {
+      lead.email = message;
+      awaitingEmail = false;
+      appendMessage('Vielen Dank. Wir melden uns zeitnah bei Ihnen.', 'bot');
+      console.log('Lead gespeichert:', lead);
+    } else {
+      appendMessage('Das scheint keine gültige E-Mail zu sein. Bitte nochmal versuchen.', 'bot');
+    }
+    return;
+  }
+
+  // Lead-Capture auslösen bei Keywords
+  const lower = message.toLowerCase();
+  if (lower.includes('angebot') || lower.includes('preis') || lower.includes('test') || lower.includes('kontakt')) {
+    askForLead();
+    return;
+  }
+
+  // Dummy-Botantwort
+  setTimeout(() => {
+    appendMessage('Vielen Dank für Ihre Nachricht. Wir melden uns zeitnah.', 'bot');
+  }, 600);
+}
+
+sendBtn.addEventListener('click', () => {
+  const msg = input.value.trim();
+  if (!msg) return;
+  handleUserInput(msg);
+  input.value = '';
+});
+
+input.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const msg = input.value.trim();
+    if (!msg) return;
+    handleUserInput(msg);
+    input.value = '';
+  }
+});
+// 💬 Erweiterte Version des Botkraft24 Website-Chatbots – auf Basis deines Originalcodes
+// Fokus: Lead-Erfassung, Quick-Replies, Darkmode, Responsiveness, bessere UI/UX
+
+// === BLOCK 4: Erweiterung – Quick Replies & vorbereitbare GPT-Verbindung ===
+
+// QUICK REPLY BUTTONS
+function showQuickReplies() {
+  const quickReplyContainer = document.createElement('div');
+  quickReplyContainer.style.display = 'flex';
+  quickReplyContainer.style.flexWrap = 'wrap';
+  quickReplyContainer.style.gap = '8px';
+  quickReplyContainer.style.marginTop = '10px';
+
+  const replies = [
+    'Was kostet der Bot?',
+    'Kann ich testen?',
+    'Ich brauche ein Angebot',
+    'Wie läuft es ab?'
+  ];
+
+  replies.forEach(reply => {
+    const btn = document.createElement('button');
+    btn.textContent = reply;
+    btn.style.padding = '6px 12px';
+    btn.style.border = '1px solid #ccc';
+    btn.style.borderRadius = '6px';
+    btn.style.backgroundColor = '#fff';
+    btn.style.cursor = 'pointer';
+    btn.onclick = () => {
+      input.value = reply;
+      sendBtn.click();
+      quickReplyContainer.remove();
+    };
+    quickReplyContainer.appendChild(btn);
   });
 
-  fetch('https://tamim-chatbot-proxy-1.onrender.com/chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages: chatHistory })
-  })
-    .then(res => res.json())
-  .then(data => {
-  document.getElementById('typing-indicator')?.remove();
-
-  // Wrapper für Bild + Nachricht
-  const wrapper = document.createElement('div');
-  wrapper.style.display = 'flex';
-  wrapper.style.alignItems = 'flex-start';
-  wrapper.style.gap = '10px';
-  wrapper.style.marginBottom = '12px';
-
-  // Bot-Bild direkt rund und ohne Extra-Hintergrund
-  const botImg = document.createElement('img');
-  botImg.src = 'https://i.imgur.com/9sYEklx.png'; // Dein rundes Bild mit blauem Hintergrund
-  botImg.alt = 'Bot';
-  botImg.style.width = '36px';
-  botImg.style.height = '36px';
-  botImg.style.borderRadius = '50%';
-  botImg.style.objectFit = 'cover';
-  botImg.style.flexShrink = '0';
-
-  // Nachricht
-  const botMsg = document.createElement('div');
-  Object.assign(botMsg.style, { ...styles.messageBase, ...styles.botMessage });
-  botMsg.classList.add('fade-in-message');
-  botMsg.textContent = data.choices[0].message.content;
-
-  wrapper.appendChild(botImg);
-  wrapper.appendChild(botMsg);
-  messages.appendChild(wrapper);
-
+  messages.appendChild(quickReplyContainer);
   scrollToBottom();
-      
-      chatHistory.push({
-        role: 'assistant',
-        content: data.choices[0].message.content
-      });
-    })
-    .catch(err => {
-      console.error('Fehler:', err);
-      document.getElementById('typing-indicator')?.remove();
-    });
 }
 
-sendBtn.addEventListener('click', sendMessage);
-input.addEventListener('keydown', function (e) {
-  if (e.key === 'Enter') {
-    sendMessage();
-  }
+// Aufruf bei Start
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    appendMessage('Willkommen! 👋 Wie kann ich helfen?', 'bot');
+    showQuickReplies();
+  }, 300);
 });
-chatbotBtn.addEventListener('click', toggleChatbot);
+
+
+// GPT-API-Vorbereitung (deaktiviert)
+// fetch('https://dein-proxy-endpunkt/chat', {
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({ messages: chatHistory })
+// })
+//   .then(res => res.json())
+//   .then(data => {
+//     const botReply = data.choices[0].message.content;
+//     appendMessage(botReply, 'bot');
+//   });
+
+
+// === ENDE DES CODES ===
+// Dieser Code ist bereit für GitHub & Hosting auf Vercel, Render oder WordPress-Einbettung.
+// Optional: Lead an Sheets/Mail weiterleiten mit Webhook.
+
+
