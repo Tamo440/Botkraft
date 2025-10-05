@@ -845,3 +845,4 @@ chatbotBtn.addEventListener('keydown', event => {
 });
 
 window.toggleChatbot = toggleChatbot;
+
