@@ -141,7 +141,56 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 52px;
+      align-items: stretch;
+    }
+
+    .hero-visual {
+      position: relative;
+      background: linear-gradient(150deg, rgba(15, 23, 42, 0.95), rgba(67, 56, 202, 0.85));
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--card-shadow);
+      display: grid;
+      gap: 22px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-media-badge {
+      display: inline-flex;
       align-items: center;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.78);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.35);
+      justify-self: start;
+    }
+
+    .hero-media-badge i {
+      color: #facc15;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: -40% -30% auto auto;
+      height: 220px;
+      width: 220px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.6), transparent 65%);
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    .hero-screenshot {
+      width: 100%;
+      border-radius: var(--radius-md);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
+      object-fit: cover;
+      max-height: 420px;
     }
 
     .hero h1 {
@@ -228,11 +277,13 @@
     .hero-card {
       background: linear-gradient(145deg, rgba(15, 23, 42, 0.92), rgba(30, 64, 175, 0.9));
       border-radius: var(--radius-lg);
-      padding: 38px;
+      padding: 32px;
       color: white;
       box-shadow: var(--card-shadow);
       position: relative;
       overflow: hidden;
+      display: grid;
+      gap: 18px;
     }
 
     .hero-card::after {
@@ -245,7 +296,7 @@
 
     .hero-card h2 {
       font-size: 1.4rem;
-      margin-bottom: 14px;
+      margin: 0;
     }
 
     .hero-card ul {
@@ -371,9 +422,37 @@
 
     .case-study {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 36px;
-      align-items: center;
+      align-items: stretch;
+    }
+
+    .case-media {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      min-height: 320px;
+    }
+
+    .case-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05);
+    }
+
+    .case-media figcaption {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.78);
+      color: white;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
     }
 
     .case-card {
@@ -508,22 +587,53 @@
       padding: 32px;
       box-shadow: var(--card-shadow);
       display: grid;
-      gap: 20px;
+      gap: 18px;
     }
 
     .testimonial header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
       padding: 0;
+    }
+
+    .testimonial-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
     }
 
     .testimonial cite {
       font-weight: 600;
       color: var(--text-main);
       font-style: normal;
+      display: block;
     }
 
     .testimonial .role {
       color: var(--text-muted);
       font-size: 0.9rem;
+    }
+
+    .testimonial blockquote {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 1.02rem;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    .testimonial blockquote::before {
+      content: "\201C";
+      position: absolute;
+      top: -26px;
+      left: -12px;
+      font-size: 3.6rem;
+      color: rgba(99, 102, 241, 0.18);
+      font-family: 'Times New Roman', serif;
+      line-height: 1;
     }
 
     .integration-band {
@@ -786,16 +896,23 @@
           <span style="font-size:0.88rem; color:var(--text-muted);">Keine Verpflichtung · Wir melden uns in 24 Std.</span>
         </div>
       </div>
-      <div class="hero-card" aria-label="Highlights unserer Chatbot-Ergebnisse">
-        <h2>Sales Intelligence Dashboard</h2>
-        <ul>
-          <li><span><i class="fa-solid fa-filter"></i></span>Lead-Scoring nach Reifegrad</li>
-          <li><span><i class="fa-solid fa-chart-line"></i></span>Echtzeit KPIs &amp; Abschlussrate</li>
-          <li><span><i class="fa-solid fa-language"></i></span>Mehrsprachige Dialoge out of the box</li>
-        </ul>
-        <div class="stat">
-          <strong>+63 %</strong>
-          <span>mehr qualifizierte Buchungen bei Dienstleistern nach 90 Tagen.</span>
+      <div class="hero-visual" aria-label="Botkraft Chatbot in Aktion">
+        <div class="hero-media-badge">
+          <i class="fa-solid fa-star"></i>
+          4.9 ⭐ Kundenservice-Erlebnis
+        </div>
+        <img class="hero-screenshot" src="https://images.unsplash.com/photo-1525182008055-f88b95ff7980?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Beraterin präsentiert den Botkraft-Chatbot auf einem Laptop" loading="lazy">
+        <div class="hero-card" aria-label="Highlights unserer Chatbot-Ergebnisse">
+          <h2>Sales Intelligence Dashboard</h2>
+          <ul>
+            <li><span><i class="fa-solid fa-filter"></i></span>Lead-Scoring nach Reifegrad</li>
+            <li><span><i class="fa-solid fa-chart-line"></i></span>Echtzeit KPIs &amp; Abschlussrate</li>
+            <li><span><i class="fa-solid fa-language"></i></span>Mehrsprachige Dialoge out of the box</li>
+          </ul>
+          <div class="stat">
+            <strong>+63 %</strong>
+            <span>mehr qualifizierte Buchungen bei Dienstleistern nach 90 Tagen.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -840,6 +957,10 @@
 
   <section class="section" id="case">
     <div class="case-study">
+      <figure class="case-media">
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Immobilienberaterin im Gespräch mit Kundschaft und digitalem Tablet" loading="lazy">
+        <figcaption>Live-Beratung mit Botkraft als digitalem Assistenten</figcaption>
+      </figure>
       <div>
         <h2>Fallstudie: Immobilienbüro skaliert Beratungsgespräche.</h2>
         <p class="section-lead">Für ImmobilienPro haben wir in nur drei Wochen einen Beratungsbot live gebracht. Ergebnis: Jede Anfrage wird vorqualifiziert, Termine werden automatisch gebucht und das Team spart täglich 4 Stunden Telefonzeit.</p>
@@ -937,22 +1058,37 @@
       <figure class="testimonial">
         <blockquote>„Der Bot von Botkraft führt Erstgespräche, priorisiert Nachfassaktionen und bucht automatisch Beratungsslots. Unser Team verkauft, während der Bot qualifiziert.“</blockquote>
         <figcaption>
-          <cite>Sarah W., Gründerin BeautyLab</cite>
-          <span class="role">Dienstleistungsbranche · 2 Monate ROI</span>
+          <header>
+            <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&amp;fit=crop&amp;w=240&amp;q=80" alt="Porträt von Sarah W., Gründerin BeautyLab" loading="lazy">
+            <div>
+              <cite>Sarah W., Gründerin BeautyLab</cite>
+              <span class="role">Dienstleistungsbranche · 2 Monate ROI</span>
+            </div>
+          </header>
         </figcaption>
       </figure>
       <figure class="testimonial">
         <blockquote>„Wir dachten, Chatbots seien nur Support-Gadgets. Jetzt schließen wir hochpreisige Coachings direkt im Chat ab – inklusive Zahlungslink.“</blockquote>
         <figcaption>
-          <cite>Leon R., Coach &amp; Berater</cite>
-          <span class="role">Coaching · 3,4x mehr Buchungen</span>
+          <header>
+            <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&amp;fit=crop&amp;w=240&amp;q=80" alt="Porträt von Leon R., Coach und Berater" loading="lazy">
+            <div>
+              <cite>Leon R., Coach &amp; Berater</cite>
+              <span class="role">Coaching · 3,4x mehr Buchungen</span>
+            </div>
+          </header>
         </figcaption>
       </figure>
       <figure class="testimonial">
         <blockquote>„Das Team hat unsere komplexen internen Prozesse verstanden und sauber automatisiert. DSGVO-Audits waren kein Problem.“</blockquote>
         <figcaption>
-          <cite>Julia M., Head of Operations FinTech Hub</cite>
-          <span class="role">FinTech · Enterprise Rollout</span>
+          <header>
+            <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=format&amp;fit=crop&amp;w=240&amp;q=80" alt="Porträt von Julia M., Head of Operations beim FinTech Hub" loading="lazy">
+            <div>
+              <cite>Julia M., Head of Operations FinTech Hub</cite>
+              <span class="role">FinTech · Enterprise Rollout</span>
+            </div>
+          </header>
         </figcaption>
       </figure>
     </div>
@@ -1153,3 +1289,5 @@
   <script src="chatbot.js"></script>
 </body>
 </html>
+</html>
+
