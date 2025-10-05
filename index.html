@@ -3,754 +3,1153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Botkraft – Smarte Chatbot-Integrationen</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>Botkraft – Conversational AI, die verkauft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-fb1hQ9Sj+p7HgkTrUMIqFZ3VAb9Y/jGj33jjXNMTvEihQ/HUkNzxaz2YsmiVjCwXTlzAIXazhbugzuDUFcAU9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-     @keyframes slideChatbotIn {
-    0% {
-      opacity: 0;
-      transform: scaleY(0) translateY(100%);
-      transform-origin: bottom right;
+    :root {
+      --bg-primary: #020617;
+      --bg-secondary: #0f172a;
+      --bg-soft: #f8fafc;
+      --brand-primary: #6366f1;
+      --brand-accent: #f97316;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-light: #e2e8f0;
+      --card-shadow: 0 24px 60px -24px rgba(15, 23, 42, 0.32);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
     }
-    100% {
-      opacity: 1;
-      transform: scaleY(1) translateY(0);
-      transform-origin: bottom right;
-    }
-  }
 
-  @keyframes slideChatbotOut {
-    0% {
-      opacity: 1;
-      transform: scaleY(1) translateY(0);
-      transform-origin: bottom right;
+    * {
+      box-sizing: border-box;
     }
-    100% {
-      opacity: 0;
-      transform: scaleY(0) translateY(100%);
-      transform-origin: bottom right;
-    }
-  }
 
-  .chatbot-container-animated {
-    animation: slideChatbotIn 0.4s ease forwards;
-  }
-
-  .chatbot-container-hidden {
-    animation: slideChatbotOut 0.3s ease forwards;
-  }
-    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif;
       margin: 0;
-      background: linear-gradient(to bottom, #f9f9f9, #e0e7ff);
-      color: #1e1e2f;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 45%, #e0e7ff 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    header {
-      background: #0f172a;
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
-    header h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-    header p {
-      font-size: 20px;
-      color: #cbd5e1;
-    }
+
     nav {
-      background: white;
-      padding: 10px 20px;
       position: sticky;
       top: 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      width: 100%;
+      background: rgba(248, 250, 252, 0.96);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 24px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      z-index: 999;
+      justify-content: space-between;
+      gap: 24px;
     }
-    nav a {
-      text-decoration: none;
-      color: #1e293b;
-      margin: 0 12px;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--bg-secondary);
+    }
+
+    .brand span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+      color: white;
+      font-size: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 6px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+      transition: width 0.3s ease;
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+      color: white;
+      border-radius: 999px;
       font-weight: 600;
+      box-shadow: 0 14px 30px rgba(99, 102, 241, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .section {
-      padding: 60px 20px;
-      max-width: 1200px;
-      margin: auto;
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(249, 115, 22, 0.25);
     }
-    .section h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
+
+    header {
+      padding: 120px 24px 80px;
+      position: relative;
     }
-    .features {
+
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 52px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5vw, 3.6rem);
+      margin-bottom: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      max-width: 540px;
+    }
+
+    .hero-points {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .hero-points li {
+      list-style: none;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .hero-points span {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--brand-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .hero-cta {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 16px;
+      align-items: center;
     }
-    .feature {
-      flex: 1 1 300px;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    .feature i {
-      font-size: 28px;
-      color: #6366f1;
-      margin-bottom: 10px;
-    }
-    .cta {
-      background: #4f46e5;
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .cta h3 {
-      font-size: 28px;
-    }
-    .cta a {
-      margin-top: 20px;
-      display: inline-block;
-      background: white;
-      color: #4f46e5;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
+
+    .btn-primary {
+      padding: 16px 32px;
+      border-radius: 999px;
       font-weight: 600;
-    }
-    footer {
-      background: #0f172a;
-      color: #94a3b8;
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 14px;
-    }
-    .scroll-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #4f46e5;
+      background: linear-gradient(135deg, var(--brand-primary), #4338ca);
       color: white;
-      border: none;
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      font-size: 20px;
-      cursor: pointer;
-      display: none;
+      box-shadow: 0 18px 40px rgba(99, 102, 241, 0.35);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .chatbot-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background-color: #4f46e5;
-      border-radius: 50%;
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 60px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-secondary {
+      padding: 16px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      background: white;
+      color: var(--text-main);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(99, 102, 241, 0.08);
+      border-color: rgba(99, 102, 241, 0.5);
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.92), rgba(30, 64, 175, 0.9));
+      border-radius: var(--radius-lg);
+      padding: 38px;
+      color: white;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.6), transparent 55%);
+      pointer-events: none;
+    }
+
+    .hero-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+    }
+
+    .hero-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 16px;
+    }
+
+    .hero-card li {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    .hero-card li span {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: white;
+    }
+
+    .hero-card .stat {
+      margin-top: 28px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .hero-card .stat strong {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 100px 24px;
+    }
+
+    .section h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 18px;
+      letter-spacing: -0.015em;
+    }
+
+    .section-lead {
+      max-width: 640px;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 48px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--card-shadow);
+      display: grid;
+      gap: 18px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 70px -34px rgba(15, 23, 42, 0.45);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background: rgba(99, 102, 241, 0.12);
+      color: var(--brand-primary);
+    }
+
+    .feature-card h3 {
+      margin: 0;
+      font-size: 1.28rem;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    .trust-band {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-      z-index: 9999;
+      gap: 44px;
+      color: var(--text-muted);
+      box-shadow: var(--card-shadow);
+      flex-wrap: wrap;
     }
-    .chatbot-button i {
+
+    .trust-band span {
+      font-weight: 600;
+      opacity: 0.7;
+      letter-spacing: 0.08em;
+    }
+
+    .case-study {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 36px;
+      align-items: center;
+    }
+
+    .case-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--card-shadow);
+      display: grid;
+      gap: 18px;
+    }
+
+    .case-stat-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 18px;
+    }
+
+    .case-stat {
+      background: rgba(99, 102, 241, 0.08);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .case-stat strong {
+      font-size: 1.8rem;
+      color: var(--brand-primary);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .pricing-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 36px 32px;
+      box-shadow: var(--card-shadow);
+      display: grid;
+      gap: 20px;
+      border: 1px solid rgba(99, 102, 241, 0.14);
+      position: relative;
+    }
+
+    .pricing-card.recommended::after {
+      content: "Beliebtestes Paket";
+      position: absolute;
+      top: -14px;
+      left: 24px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--brand-accent), #fb923c);
       color: white;
-      font-size: 24px;
+      box-shadow: 0 12px 24px rgba(249, 115, 22, 0.25);
+    }
+
+    .price {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .price small {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .pricing-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 14px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .pricing-list li {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+    }
+
+    .pricing-list li i {
+      color: #16a34a;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .process-step {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      border: 1px solid rgba(99, 102, 241, 0.12);
+      backdrop-filter: blur(6px);
+      display: grid;
+      gap: 12px;
+    }
+
+    .process-step span {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(99, 102, 241, 0.12);
+      color: var(--brand-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .testimonial {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--card-shadow);
+      display: grid;
+      gap: 20px;
+    }
+
+    .testimonial header {
+      padding: 0;
+    }
+
+    .testimonial cite {
+      font-weight: 600;
+      color: var(--text-main);
+      font-style: normal;
+    }
+
+    .testimonial .role {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .integration-band {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      align-items: center;
+      text-align: center;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .faq {
+      max-width: 820px;
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(99, 102, 241, 0.14);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px 26px;
+      background: transparent;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .faq-question i {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+      padding: 0 26px 24px;
+      color: var(--text-muted);
+      display: none;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .faq-item.open .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .cta-section {
+      margin: 0 auto;
+      max-width: 960px;
+      padding: 80px 24px;
+      background: linear-gradient(135deg, var(--brand-primary), #312e81);
+      border-radius: var(--radius-lg);
+      color: white;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+    }
+
+    .cta-section p {
+      font-size: 1.05rem;
+      color: rgba(226, 232, 240, 0.92);
+    }
+
+    .contact-wrapper {
+      max-width: 920px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      align-items: start;
+    }
+
+    form {
+      background: white;
+      padding: 34px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--card-shadow);
+      display: grid;
+      gap: 18px;
+      border: 1px solid rgba(99, 102, 241, 0.12);
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    input, textarea {
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 1rem;
+      font-family: inherit;
+      background: rgba(248, 250, 252, 0.8);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 20px;
+      padding: 34px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(160deg, rgba(99, 102, 241, 0.1), rgba(15, 23, 42, 0.08));
+      border: 1px solid rgba(99, 102, 241, 0.12);
+    }
+
+    .contact-info div {
+      display: grid;
+      gap: 6px;
+    }
+
+    footer {
+      background: var(--bg-primary);
+      color: var(--text-light);
+      padding: 60px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      gap: 30px;
+    }
+
+    .footer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 0.92rem;
+      color: rgba(226, 232, 240, 0.7);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .scroll-top {
+      position: fixed;
+      right: 26px;
+      bottom: 26px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+      color: white;
+      font-size: 20px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+      cursor: pointer;
+      z-index: 900;
+    }
+
+    .floating-demo {
+      position: fixed;
+      right: 26px;
+      bottom: 96px;
+      padding: 14px 22px;
+      border-radius: 14px;
+      background: white;
+      border: 1px solid rgba(99, 102, 241, 0.18);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 910;
+      transition: transform 0.3s ease;
+    }
+
+    .floating-demo:hover {
+      transform: translateY(-4px);
+    }
+
+    @media (max-width: 960px) {
+      .nav-links {
+        display: none;
+      }
+
+      header {
+        padding-top: 90px;
+      }
+
+      .floating-demo {
+        right: 18px;
+        bottom: 90px;
+      }
+
+      .scroll-top {
+        right: 18px;
+        bottom: 18px;
+      }
     }
   </style>
-   
 </head>
 <body>
   <nav>
-    <div><strong>Botkraft</strong></div>
-    <div>
-      <a href="#services">Leistungen</a>
-      <a href="#technologien">Technologien</a>
-      <a href="#preise">Preise</a>
-      <a href="#kontakt">Kontakt</a>
+    <div class="nav-inner">
+      <a class="brand" href="#hero"><span>BK</span> Botkraft</a>
+      <div class="nav-links">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#case">Ergebnisse</a>
+        <a href="#preise">Preise</a>
+        <a href="#ablauf">Ablauf</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <a class="nav-cta" href="#kontakt">
+        <i class="fa-solid fa-bolt"></i>
+        Kostenlose Erstberatung
+      </a>
     </div>
   </nav>
 
-  <header>
-    <h1>Botkraft – Smarte Chatbot-Integrationen</h1>
-    <p>Wir bauen maßgeschneiderte Chatbots für Websites, Shops & Unternehmen</p>
+  <header id="hero">
+    <div class="hero">
+      <div>
+        <p style="display:inline-flex; gap:10px; align-items:center; padding:10px 18px; border-radius:999px; background:rgba(99,102,241,0.12); color:var(--brand-primary); font-weight:600; font-size:0.88rem;">🚀 Conversational Commerce für ambitionierte Teams</p>
+        <h1>Dein KI-Verkäufer, der jede Anfrage in Umsatz verwandelt.</h1>
+        <p class="hero-subtitle">Botkraft verbindet generative KI mit bewährten Sales-Playbooks. So bekommst du einen Chatbot, der qualifiziert, segmentiert und Leads in Echtzeit abschließt – 24/7, DSGVO-konform und komplett auf deine Marke abgestimmt.</p>
+        <ul class="hero-points">
+          <li><span><i class="fa-solid fa-check"></i></span>Conversion-Steigerung bis zu 41 % in den ersten 30 Tagen</li>
+          <li><span><i class="fa-solid fa-check"></i></span>Plug &amp; Play-Integrationen in CRM, Kalender &amp; Payment-Flows</li>
+          <li><span><i class="fa-solid fa-check"></i></span>Enterprise-Sicherheit mit Hosting in Deutschland</li>
+        </ul>
+        <div class="hero-cta">
+          <a class="btn-primary" href="#kontakt">Strategie-Call buchen</a>
+          <button class="btn-secondary" onclick="toggleChatbot(true)">
+            <i class="fa-solid fa-robot"></i>
+            Live-Demo starten
+          </button>
+          <span style="font-size:0.88rem; color:var(--text-muted);">Keine Verpflichtung · Wir melden uns in 24 Std.</span>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Highlights unserer Chatbot-Ergebnisse">
+        <h2>Sales Intelligence Dashboard</h2>
+        <ul>
+          <li><span><i class="fa-solid fa-filter"></i></span>Lead-Scoring nach Reifegrad</li>
+          <li><span><i class="fa-solid fa-chart-line"></i></span>Echtzeit KPIs &amp; Abschlussrate</li>
+          <li><span><i class="fa-solid fa-language"></i></span>Mehrsprachige Dialoge out of the box</li>
+        </ul>
+        <div class="stat">
+          <strong>+63 %</strong>
+          <span>mehr qualifizierte Buchungen bei Dienstleistern nach 90 Tagen.</span>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <section id="services" class="section">
-    <h2>Unsere Leistungen</h2>
-    <div class="features">
-      <div class="feature">
-        <i class="fas fa-robot"></i>
-        <h4>Website-Chatbots</h4>
-        <p>Individuelle Chatbots, die Besucher führen, Fragen beantworten & Termine buchen.</p>
+  <section class="section" aria-label="Vertrauen">
+    <div class="trust-band">
+      <span>VERTRAUT VON</span>
+      <img src="https://dummyimage.com/120x32/ffffff/94a3b8&text=FinTech+Hub" alt="FinTech Hub" loading="lazy">
+      <img src="https://dummyimage.com/120x32/ffffff/94a3b8&text=ImmobilienPro" alt="ImmobilienPro" loading="lazy">
+      <img src="https://dummyimage.com/120x32/ffffff/94a3b8&text=BeautyLab" alt="BeautyLab" loading="lazy">
+      <img src="https://dummyimage.com/120x32/ffffff/94a3b8&text=Coaching+360" alt="Coaching 360" loading="lazy">
+    </div>
+  </section>
+
+  <section class="section" id="leistungen">
+    <h2>Erlebe eine Chatbot-Erfahrung, die verkauft – nicht vertröstet.</h2>
+    <p class="section-lead">Wir entwickeln dialogische Funnels, die deine Interessenten in Kunden verwandeln. Von der ersten Begrüßung bis zum finalen Checkout bleiben Tonalität, Inhalte und Optik zu 100 % in deiner Markenwelt.</p>
+    <div class="feature-grid">
+      <article class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+        <h3>Strategische Persona &amp; Skripte</h3>
+        <p>Wir analysieren deine Buyer Journey und trainieren den Bot mit Sales-Skripten, Einwandbehandlung und Upsell-Logik.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-sitemap"></i></div>
+        <h3>Omni-Channel Automationen</h3>
+        <p>Verknüpfe Website, WhatsApp, Newsletter &amp; CRM. Botkraft synchronisiert Daten in Echtzeit, inklusive Webhooks &amp; API-Anbindungen.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>DSGVO-Sicherheit</h3>
+        <p>Hosting in Deutschland, Audit-Logging, konfigurierbare Speicherregeln und Datenschutzprozesse, die jede Prüfung bestehen.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <h3>Performance Cockpit</h3>
+        <p>Messe Abschlüsse, Reaktionsgeschwindigkeit und Stimmungen. Unser Dashboard liefert Insights für Marketing &amp; Vertrieb.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="case">
+    <div class="case-study">
+      <div>
+        <h2>Fallstudie: Immobilienbüro skaliert Beratungsgespräche.</h2>
+        <p class="section-lead">Für ImmobilienPro haben wir in nur drei Wochen einen Beratungsbot live gebracht. Ergebnis: Jede Anfrage wird vorqualifiziert, Termine werden automatisch gebucht und das Team spart täglich 4 Stunden Telefonzeit.</p>
+        <ul class="hero-points" style="margin: 0;">
+          <li><span><i class="fa-solid fa-circle-check"></i></span>Integration in HubSpot &amp; Google Calendar</li>
+          <li><span><i class="fa-solid fa-circle-check"></i></span>Automatische Dokumenten-Übergabe nach Termin</li>
+          <li><span><i class="fa-solid fa-circle-check"></i></span>Premium UI mit Immobilien-Branding</li>
+        </ul>
       </div>
-      <div class="feature">
-        <i class="fas fa-bolt"></i>
-        <h4>Automatisierungen</h4>
-        <p>Wir verbinden deinen Bot mit Google Sheets, E-Mail-Marketing, CRMs & mehr.</p>
-      </div>
-      <div class="feature">
-        <i class="fas fa-shield-alt"></i>
-        <h4>Datenschutz & Sicherheit</h4>
-        <p>Hosting mit DSGVO-konformen Proxys & anonymem Nutzerhandling – made in Germany.</p>
+      <div class="case-card">
+        <div class="case-stat-group">
+          <div class="case-stat">
+            <strong>+41 %</strong>
+            <span>mehr Besichtigungstermine innerhalb von 30 Tagen.</span>
+          </div>
+          <div class="case-stat">
+            <strong>3×</strong>
+            <span>schnellere Lead-Qualifizierung gegenüber manuellen Prozessen.</span>
+          </div>
+          <div class="case-stat">
+            <strong>0</strong>
+            <span>Verlorene Chats dank 24/7 Betreuung und Eskalationslogik.</span>
+          </div>
+        </div>
+        <p style="margin: 0; color: var(--text-muted);">„Botkraft hat uns einen virtuellen Berater gebaut, der wie unser bestes Teammitglied agiert. Interessenten fühlen sich abgeholt, wir erhalten qualifizierte Leads und unser Vertrieb konzentriert sich auf Abschlüsse.“</p>
+        <cite style="font-weight:600;">— Markus B., Geschäftsführer ImmobilienPro</cite>
       </div>
     </div>
   </section>
 
-<!-- Technologien-Block mit Animationen -->
-<style>
-  .tech-section {
-    padding: 60px;
-    background: #f8f9fc;
-    text-align: center;
-  }
-  .tech-title {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px;
-    max-width: 1000px;
-    margin: auto;
-  }
-  .card {
-    background: white;
-    padding: 24px;
-    border-radius: 14px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  }
-  .card.fade-in {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .card-icon {
-    font-size: 28px;
-    margin-bottom: 12px;
-    animation: pop 0.6s ease-in-out forwards;
-  }
-  @keyframes pop {
-    0% { transform: scale(0.5); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-  .card-title {
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  .card-text {
-    font-size: 14px;
-    color: #333;
-  }
-</style>
-
-<section style="padding: 60px 20px; background: #ffffff; text-align: center;">
-  <h2 style="font-size: 32px; font-weight: bold; margin-bottom: 40px;">💬 Was unsere Kunden sagen</h2>
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1000px; margin: auto;">
-    
-    <div style="background: #f9f9f9; padding: 20px; border-radius: 12px; max-width: 280px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
-      <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Kundin" style="width: 60px; height: 60px; border-radius: 50%; margin-bottom: 10px;">
-      <p style="font-size: 14px; color: #333;">„Der Bot von Botkraft hat in 2 Tagen mehr Kundenfragen beantwortet als ich in einer Woche. Einfach genial.“</p>
-      <strong>Sarah W. – Friseursalon</strong>
+  <section class="section" id="preise">
+    <h2>Transparente Pakete für jede Wachstumsphase.</h2>
+    <p class="section-lead">Alle Pakete enthalten ein Marken-Branding, DSGVO-Konfiguration, Onboarding deiner Teams sowie kontinuierliche Optimierung der Konversationen.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Launch</h3>
+        <div class="price">79 € <small>einmalig</small></div>
+        <ul class="pricing-list">
+          <li><i class="fa-solid fa-check"></i>1 Marke · 1 Website-Widget</li>
+          <li><i class="fa-solid fa-check"></i>CI-konformes Design &amp; Voice</li>
+          <li><i class="fa-solid fa-check"></i>Basis-Automationen &amp; Handovers</li>
+          <li><i class="fa-solid fa-check"></i>Schulungsvideo für dein Team</li>
+        </ul>
+        <a class="btn-secondary" href="#kontakt">Projekt anfragen</a>
+      </div>
+      <div class="pricing-card recommended">
+        <h3>Scale</h3>
+        <div class="price">69 € <small>pro Monat</small></div>
+        <ul class="pricing-list">
+          <li><i class="fa-solid fa-check"></i>Hosting, Updates &amp; Support inklusive</li>
+          <li><i class="fa-solid fa-check"></i>Unbegrenzte Text- &amp; Funnel-Optimierungen</li>
+          <li><i class="fa-solid fa-check"></i>CRM-, Kalender- &amp; Payment-Anbindung</li>
+          <li><i class="fa-solid fa-check"></i>Quartalsweise Wachstums-Workshops</li>
+        </ul>
+        <a class="btn-primary" href="#kontakt">Scale-Demo sichern</a>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="price">Auf Anfrage</div>
+        <ul class="pricing-list">
+          <li><i class="fa-solid fa-check"></i>Mehrsprachige Experience</li>
+          <li><i class="fa-solid fa-check"></i>SLA &amp; dedizierter Success Manager</li>
+          <li><i class="fa-solid fa-check"></i>Custom Data Lake &amp; Analytics API</li>
+          <li><i class="fa-solid fa-check"></i>Security Audits &amp; On-Premise Optionen</li>
+        </ul>
+        <a class="btn-secondary" href="mailto:Tamim.Raschidi@outlook.de">Enterprise-Gespräch vereinbaren</a>
+      </div>
     </div>
+  </section>
 
-    <div style="background: #f9f9f9; padding: 20px; border-radius: 12px; max-width: 280px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
-      <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Kunde" style="width: 60px; height: 60px; border-radius: 50%; margin-bottom: 10px;">
-      <p style="font-size: 14px; color: #333;">„Unsere Makler sparen täglich Zeit. Der Bot begrüßt Besucher rund um die Uhr. 100 % empfehlenswert.“</p>
-      <strong>Markus B. – Immobilienbüro</strong>
+  <section class="section" id="ablauf" style="padding-top: 80px; padding-bottom: 80px;">
+    <h2>In 14 Tagen live – mit einem klaren Prozess.</h2>
+    <div class="process-grid">
+      <div class="process-step">
+        <span>1</span>
+        <h3>Analyse &amp; Blueprint</h3>
+        <p>Kick-off Workshop, Zielgruppen-Analyse, Definition der Conversational Journey, KPI-Setup.</p>
+      </div>
+      <div class="process-step">
+        <span>2</span>
+        <h3>Training &amp; Automationen</h3>
+        <p>Custom Prompt-Engineering, Datenanbindung, Aufbau von CRM-, Kalender- und Ticket-Flows.</p>
+      </div>
+      <div class="process-step">
+        <span>3</span>
+        <h3>Launch &amp; Optimierung</h3>
+        <p>QA-Testing, Team-Onboarding, Conversion-Tracking und fortlaufende Conversion-Sprints.</p>
+      </div>
     </div>
+  </section>
 
-    <div style="background: #f9f9f9; padding: 20px; border-radius: 12px; max-width: 280px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
-      <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Kunde" style="width: 60px; height: 60px; border-radius: 50%; margin-bottom: 10px;">
-      <p style="font-size: 14px; color: #333;">„Ich bin Coach – und der Chatbot filtert mir automatisch die ernsthaften Anfragen raus. Top.“</p>
-      <strong>Leon R. – Coach & Berater</strong>
+  <section class="section" aria-label="Testimonials">
+    <h2>Was Kund:innen über Botkraft sagen.</h2>
+    <div class="testimonial-grid">
+      <figure class="testimonial">
+        <blockquote>„Der Bot von Botkraft führt Erstgespräche, priorisiert Nachfassaktionen und bucht automatisch Beratungsslots. Unser Team verkauft, während der Bot qualifiziert.“</blockquote>
+        <figcaption>
+          <cite>Sarah W., Gründerin BeautyLab</cite>
+          <span class="role">Dienstleistungsbranche · 2 Monate ROI</span>
+        </figcaption>
+      </figure>
+      <figure class="testimonial">
+        <blockquote>„Wir dachten, Chatbots seien nur Support-Gadgets. Jetzt schließen wir hochpreisige Coachings direkt im Chat ab – inklusive Zahlungslink.“</blockquote>
+        <figcaption>
+          <cite>Leon R., Coach &amp; Berater</cite>
+          <span class="role">Coaching · 3,4x mehr Buchungen</span>
+        </figcaption>
+      </figure>
+      <figure class="testimonial">
+        <blockquote>„Das Team hat unsere komplexen internen Prozesse verstanden und sauber automatisiert. DSGVO-Audits waren kein Problem.“</blockquote>
+        <figcaption>
+          <cite>Julia M., Head of Operations FinTech Hub</cite>
+          <span class="role">FinTech · Enterprise Rollout</span>
+        </figcaption>
+      </figure>
     </div>
+  </section>
 
+  <section class="section" aria-label="Integrationen" style="padding-top: 60px; padding-bottom: 60px;">
+    <h2>Plug &amp; Play in deine bestehende Tool-Landschaft.</h2>
+    <p class="section-lead" style="margin-bottom: 36px;">Botkraft verbindet sich nahtlos mit deinen Lieblings-Tools – ohne langwierige IT-Projekte.</p>
+    <div class="integration-band">
+      <span><i class="fa-brands fa-hubspot"></i> HubSpot</span>
+      <span><i class="fa-brands fa-slack"></i> Slack</span>
+      <span><i class="fa-solid fa-database"></i> Airtable</span>
+      <span><i class="fa-solid fa-calendar-check"></i> Calendly</span>
+      <span><i class="fa-brands fa-shopify"></i> Shopify</span>
+      <span><i class="fa-solid fa-envelope-open-text"></i> Mailchimp</span>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 60px;">
+    <div class="cta-section">
+      <h2>Starte heute mit einer kostenlosen Chatbot-Analyse.</h2>
+      <p>Sichere dir einen 30-minütigen Strategie-Call mit Tamim Raschidi. Wir prüfen dein Potenzial, skizzieren eine individuelle Journey und du erhältst einen klaren Aktionsplan – ohne Risiko.</p>
+      <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:30px;">
+        <a class="btn-secondary" href="#kontakt">Strategie-Call reservieren</a>
+        <button class="btn-primary" onclick="toggleChatbot(true)">Interaktive Demo öffnen</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <h2>FAQ – Antworten auf deine wichtigsten Fragen.</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-question">Wie schnell sind wir live? <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-answer">Nach dem Kick-off liefern wir dir innerhalb von 10–14 Werktagen einen produktionsreifen Bot inklusive Automationen und Branding.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Kann ich Inhalte jederzeit ändern? <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-answer">Ja. Im Scale- und Enterprise-Paket sind laufende Text-, Automations- und Funnel-Updates inkludiert. Du meldest Änderungen – wir setzen sie um.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Wie funktioniert der Datenschutz? <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-answer">Wir betreiben deine Lösung auf deutschen Servern, speichern Chatverläufe nach deinen Richtlinien und stellen dir AV-Vertrag &amp; TOMs zur Verfügung.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Ersetzt der Bot mein Team? <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-answer">Nein. Botkraft unterstützt dein Team, indem Routinefragen automatisiert beantwortet und nur qualifizierte Anfragen an Sales oder Support übergeben werden.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="kontakt" style="padding-top: 80px;">
+    <h2>Lass uns über deine Conversational-Strategie sprechen.</h2>
+    <p class="section-lead">Fülle das Formular aus oder schreibe direkt an <a href="mailto:Tamim.Raschidi@outlook.de">Tamim.Raschidi@outlook.de</a>. Wir melden uns innerhalb eines Werktags.</p>
+    <div class="contact-wrapper">
+      <form action="https://formspree.io/f/xpwradny" method="POST" id="contactForm">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Dein Name" required>
+        </div>
+        <div>
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" name="email" placeholder="Deine E-Mail-Adresse" required>
+        </div>
+        <div>
+          <label for="company">Unternehmen</label>
+          <input type="text" id="company" name="company" placeholder="Firmenname oder Projekt" required>
+        </div>
+        <div>
+          <label for="message">Projekt &amp; Ziele</label>
+          <textarea id="message" name="message" placeholder="Wie können wir euch unterstützen?" required></textarea>
+        </div>
+        <input type="hidden" name="_autoresponse" value="Vielen Dank für deine Anfrage bei Botkraft. Wir melden uns in Kürze. – Tamim Raschidi">
+        <input type="hidden" name="_redirect" value="https://tamo440.github.io/mein-chatbot/#danke">
+        <button class="btn-primary" type="submit" style="justify-self:flex-start;">Nachricht senden</button>
+        <p id="dankeMessage" style="display:none; padding:14px 16px; border-radius:12px; background:rgba(34,197,94,0.12); color:#166534; font-weight:600;">🎉 Danke für deine Nachricht! Wir melden uns so schnell wie möglich.</p>
+      </form>
+      <aside class="contact-info">
+        <div>
+          <strong>Direkter Kontakt</strong>
+          <a href="mailto:Tamim.Raschidi@outlook.de">Tamim.Raschidi@outlook.de</a>
+          <a href="https://wa.me/4917670726250" target="_blank" rel="noopener">WhatsApp: +49 176 70726250</a>
+        </div>
+        <div>
+          <strong>Standort</strong>
+          <span>Hamburg · Deutschland</span>
+        </div>
+        <div>
+          <strong>Leistungsspektrum</strong>
+          <span>Conversational Strategie · Automatisierung · Enterprise Hosting · Conversion Optimierung</span>
+        </div>
+        <div>
+          <strong>Impressum</strong>
+          <span>Tamim Raschidi · Botkraft · www.botkraft24.de</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="impressum" style="padding-top: 60px; padding-bottom: 60px;">
+    <h2>Impressum</h2>
+    <div style="background:white; padding:32px; border-radius:var(--radius-md); box-shadow:var(--card-shadow); max-width:820px;">
+      <p style="margin:0 0 12px;"><strong>Verantwortlich für den Inhalt:</strong> Tamim Raschidi</p>
+      <p style="margin:0 0 12px;">Botkraft · Hamburg · Deutschland</p>
+      <p style="margin:0 0 12px;">Kontakt: <a href="mailto:Tamim.Raschidi@outlook.de">Tamim.Raschidi@outlook.de</a></p>
+      <p style="margin:0 0 12px;">Telefon / WhatsApp: <a href="https://wa.me/4917670726250" target="_blank" rel="noopener">+49 176 70726250</a></p>
+      <p style="margin:0 0 12px;">USt-ID: wird bei Projektstart kommuniziert.</p>
+      <p style="margin:0;">Inhaltlich verantwortlich gemäß § 5 TMG: Tamim Raschidi</p>
+    </div>
+  </section>
+
+  <section class="section" id="datenschutz" style="padding-top: 0; padding-bottom: 80px;">
+    <h2>Datenschutz</h2>
+    <div style="background:white; padding:32px; border-radius:var(--radius-md); box-shadow:var(--card-shadow); max-width:820px; display:grid; gap:14px; color:var(--text-muted);">
+      <p>Diese Website setzt keine Tracking-Cookies und speichert keine personenbezogenen Daten ohne deine Einwilligung.</p>
+      <p>Der eingebundene Chatbot nutzt die OpenAI-Technologie. Eingaben werden ausschließlich zur Beantwortung deiner Anfrage verarbeitet. Es erfolgt keine dauerhafte Speicherung deiner Daten auf dieser Website.</p>
+      <p>Beim Ausfüllen des Kontaktformulars werden die angegebenen Informationen zur Bearbeitung deiner Anfrage verwendet. Eine Weitergabe an Dritte findet nicht statt.</p>
+      <p>Für Fragen zum Datenschutz schreibe bitte an <a href="mailto:Tamim.Raschidi@outlook.de">Tamim.Raschidi@outlook.de</a>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div style="display:grid; gap:8px;">
+        <a class="brand" href="#hero" style="color:white;"><span>BK</span> Botkraft</a>
+        <p style="margin:0; color:rgba(226,232,240,0.75); max-width:480px;">Botkraft entwickelt Conversational AI, die Leads qualifiziert, Abschlüsse vorbereitet und Service-Teams entlastet. Maßgeschneidert für digitale Marken, Dienstleister und B2B-Vertrieb.</p>
+      </div>
+      <div class="footer-meta">
+        <div>
+          &copy; 2025 Botkraft – Tamim Raschidi · Hamburg, Deutschland
+        </div>
+        <div class="footer-links">
+          <a href="#kontakt">Kontakt</a>
+          <a href="#faq">FAQ</a>
+          <a href="#impressum">Impressum</a>
+          <a href="#datenschutz">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" type="button" aria-label="Nach oben scrollen">⬆</button>
+  <div class="floating-demo" role="button" tabindex="0" aria-label="Chatbot-Demo starten" onclick="toggleChatbot(true)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleChatbot(true);}">
+    <i class="fa-solid fa-message"></i>
+    Jetzt Chatbot testen
   </div>
-</section>
 
-  
-<section class="tech-section" id="technologien">
-  <h2 class="tech-title">💡 Unsere Technologien</h2>
-  <div class="tech-grid">
-    <div class="card">
-      <div class="card-icon">🧠</div>
-      <div class="card-title">ChatGPT API</div>
-      <div class="card-text">Antwortet intelligent und präzise auf Kundenfragen.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon">🔗</div>
-      <div class="card-title">Render / Vercel</div>
-      <div class="card-text">Stabiles Hosting für deine Chatbot-Logik.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon">🌀</div>
-      <div class="card-title">WordPress Snippet</div>
-      <div class="card-text">Einfache Integration in bestehende Seiten.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon">⚙️</div>
-      <div class="card-title">No-Code Tools</div>
-      <div class="card-text">Tidio, Landbot und mehr für einfache Automationen.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon">🎨</div>
-      <div class="card-title">Tailwind / HTML5</div>
-      <div class="card-text">Modernes Webdesign & saubere Umsetzung.</div>
-    </div>
-  </div>
-</section>
-
-<script>
-  // Scroll-Fade-In Effekt
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.card').forEach(el => {
-    observer.observe(el);
-  });
-</script>
-
-<style>
-  .price-container {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 20px;
-    padding: 40px 20px;
-    scroll-snap-type: x mandatory;
-    scroll-padding: 20px;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .price-card {
-    flex: 0 0 85%;
-    max-width: 320px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    padding: 24px;
-    scroll-snap-align: start;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    text-align: center;
-    position: relative;
-  }
-
-  .price-card:hover {
-    transform: scale(1.04) rotateX(1deg);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-  }
-
-  .price-tag {
-    font-size: 26px;
-    color: #ff6900;
-    font-weight: bold;
-    margin: 15px 0;
-  }
-
-  .feature-list {
-    text-align: left;
-    padding: 0;
-    list-style: none;
-  }
-
-  .feature-list li::before {
-    content: "✔️";
-    margin-right: 8px;
-    color: green;
-  }
-
-  .price-cta {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 20px;
-    background: #ff6900;
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-    text-decoration: none;
-    box-shadow: 0 0 12px #ff690080;
-    transition: background 0.3s ease;
-  }
-
-  .price-cta:hover {
-    background: #e65a00;
-  }
-
-  @media (min-width: 768px) {
-    .price-container {
-      justify-content: center;
-    }
-    .price-card {
-      flex: 0 0 300px;
-    }
-  }
-</style>
-
-<section id="preise" style="text-align:center;">
-  <h2 style="font-size:32px;">💸 Unsere Pakete</h2>
-  <div class="price-container">
-    
-    <div class="price-card">
-      <h3>Starter</h3>
-      <div class="price-tag">79 € einmalig</div>
-      <ul class="feature-list">
-        <li>1 Website</li>
-        <li>1 Chatbot</li>
-        <li>Fix & fertig eingebaut</li>
-        <li>Design inklusive</li>
-      </ul>
-      <a href="#kontakt" class="price-cta">Jetzt starten</a>
-    </div>
-
-    <div class="price-card">
-      <h3>Flex</h3>
-      <div class="price-tag">69 €/Monat</div>
-      <ul class="feature-list">
-        <li>Hosting & Support inkl.</li>
-        <li>Unbegrenzte Änderungen</li>
-        <li>Immer aktuell</li>
-        <li>DSGVO & API-Pflege</li>
-      </ul>
-      <a href="#kontakt" class="price-cta">Flex buchen</a>
-    </div>
-
-  </div>
-</section>
-
-<section style="background: linear-gradient(to bottom right, #1e293b, #0f172a); color: #f1f5f9; padding: 80px 20px;">
-  <h2 style="text-align:center; font-size: 32px; margin-bottom: 50px; font-weight: 800;">
-    💡 Warum du Botkraft vertrauen kannst
-  </h2>
-
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; max-width: 1100px; margin: auto;">
-    
-    <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 30px; text-align: center; transition: 0.3s; box-shadow: 0 0 0 transparent;">
-      <div style="font-size: 48px;">🔒</div>
-      <h4 style="margin: 10px 0;">SSL-verschlüsselt</h4>
-      <p style="color: #cbd5e1;">Alle Formulare und Chats sind sicher & verschlüsselt.</p>
-    </div>
-
-    <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 30px; text-align: center; transition: 0.3s;">
-      <div style="font-size: 48px;">🇩🇪</div>
-      <h4 style="margin: 10px 0;">Server in Deutschland</h4>
-      <p style="color: #cbd5e1;">Deine Daten bleiben in Europa – 100 % DSGVO-ready.</p>
-    </div>
-
-    <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 30px; text-align: center; transition: 0.3s;">
-      <div style="font-size: 48px;">🛡️</div>
-      <h4 style="margin: 10px 0;">DSGVO-Konform</h4>
-      <p style="color: #cbd5e1;">Keine unnötige Speicherung. Keine Cookies. Kein Risiko.</p>
-    </div>
-
-    <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 30px; text-align: center; transition: 0.3s;">
-      <div style="font-size: 48px;">⭐️⭐️⭐️⭐️⭐️</div>
-      <h4 style="margin: 10px 0;">Kundenliebling</h4>
-      <p style="color: #cbd5e1;">Wir liefern zuverlässig – und unsere Kunden feiern’s.</p>
-    </div>
-
-  </div>
-</section>
-
-  <section id="faq" style="background: #0f172a; color: #f1f5f9; padding: 80px 20px;">
-  <h2 style="text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 40px;">❓ Häufige Fragen (FAQ)</h2>
-  
-  <div style="max-width: 800px; margin: auto;">
-
-    <div class="faq-item">
-      <button class="faq-question">📅 Wie lange dauert die Einrichtung?</button>
-      <div class="faq-answer">In der Regel 2–4 Werktage – je nach Anforderungen sogar schneller!</div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">🌐 Brauche ich eine eigene Website?</button>
-      <div class="faq-answer">Nein! Wir können dir auch ohne eigene Seite eine Demo erstellen oder einbauen.</div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">✏️ Kann ich den Chatbot später ändern?</button>
-      <div class="faq-answer">Ja, jederzeit. Im Flex-Paket sind alle Änderungen inklusive.</div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">❌ Was passiert bei Kündigung?</button>
-      <div class="faq-answer">Du kannst jederzeit kündigen. Der Bot bleibt aktiv bis zum Monatsende.</div>
-    </div>
-
-  </div>
-</section>
-
-<style>
-  .faq-question {
-    width: 100%;
-    text-align: left;
-    padding: 16px 20px;
-    background: #1e293b;
-    color: white;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    transition: background 0.3s ease;
-  }
-
-  .faq-question:hover {
-    background: #334155;
-  }
-
-  .faq-answer {
-    background: #1e293b;
-    padding: 16px 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    display: none;
-    font-size: 15px;
-    color: #cbd5e1;
-  }
-</style>
-
-<script>
-  document.querySelectorAll('.faq-question').forEach(button => {
-    button.addEventListener('click', () => {
-      const answer = button.nextElementSibling;
-      const isOpen = answer.style.display === 'block';
-
-      document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
-      if (!isOpen) answer.style.display = 'block';
-    });
-  });
-</script>
-  
-<script>
-  const track = document.querySelector('.pricing-track');
-  const dots = document.querySelectorAll('.slider-dot');
-  let index = 0;
-
-  function updateSlider() {
-    track.style.transform = 'translateX(' + (-index * 100) + '%)';
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === index);
-    });
-  }
-
-  function nextSlide() {
-    index = (index + 1) % 2;
-    updateSlider();
-  }
-
-  function prevSlide() {
-    index = (index - 1 + 2) % 2;
-    updateSlider();
-  }
-
-  let startX = 0;
-  document.getElementById('pricingSlider').addEventListener('touchstart', e => startX = e.touches[0].clientX);
-  document.getElementById('pricingSlider').addEventListener('touchend', e => {
-    const diff = e.changedTouches[0].clientX - startX;
-    if (diff > 50) prevSlide();
-    if (diff < -50) nextSlide();
-  });
-</script>
-
-<section id="kontakt" class="cta">
-  <h2>📨 Kontakt aufnehmen</h2>
-  <p>Hinterlasse uns deine Anfrage – wir melden uns in Kürze!</p>
-
-  <form action="https://formspree.io/f/xpwradny" method="POST" style="max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 15px;">
-    
-    <input type="text" name="name" placeholder="Dein Name" required style="padding: 12px; border-radius: 8px; border: none; font-size: 16px;">
-    
-    <input type="email" name="email" placeholder="Deine E-Mail" required style="padding: 12px; border-radius: 8px; border: none; font-size: 16px;">
-    
-    <textarea name="message" placeholder="Deine Nachricht..." rows="5" required style="padding: 12px; border-radius: 8px; border: none; font-size: 16px;"></textarea>
-
-    <!-- 🔁 Automatische Antwort -->
-    <input type="hidden" name="_autoresponse" value="Vielen Dank für deine Anfrage bei Botkraft. Wir melden uns in Kürze. – Tamim Raschidi">
-
-    <!-- ✅ Optionale Weiterleitung nach dem Absenden -->
-    <input type="hidden" name="_redirect" value="https://tamo440.github.io/mein-chatbot/#danke">
-
-    <button type="submit" style="padding: 14px; background: white; color: #4f46e5; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Anfrage senden</button>
-  </form>
-  <div id="dankeMessage" style="display: none; margin-top: 30px; background: #e0fce9; padding: 20px; border-radius: 8px; color: #065f46;">
-  🎉 Danke für deine Nachricht! Wir melden uns so schnell wie möglich zurück.
-</div>
-  <p style="margin-top: 30px; text-align: center; font-size: 15px; color: #e2e8f0;">
-  📲 Oder kontaktiere mich direkt über WhatsApp: <br>
-  <a href="https://wa.me/4917670726250" target="_blank" style="color: #22c55e; font-weight: bold; text-decoration: none;">
-    +49 176 70726250
-  </a>
-</p>
-</section>
-  
-  <footer style="background: #0f172a; color: #94a3b8; text-align: center; padding: 40px 20px; font-size: 14px;">
-  <p>&copy; 2025 Botkraft – Smarte Chatbot-Integrationen<br>
-    Verantwortlich: Tamim Raschidi | Hamburg, DE<br>
-    <a href="mailto:tamo.ra@outlook.de" style="color: #60a5fa;">tamo.ra@outlook.de</a>
-  </p>
-  
-  <p style="margin-top: 20px;">
-    <a href="#impressum" style="color: #60a5fa; margin-right: 10px;">Impressum</a> |
-    <a href="#datenschutz" style="color: #60a5fa; margin-left: 10px;">Datenschutz</a>
-  </p>
-</footer>
-
-  <button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">⬆</button>
   <script>
+    const scrollButton = document.querySelector('.scroll-top');
     window.addEventListener('scroll', () => {
-      const btn = document.querySelector('.scroll-top');
-      if (window.scrollY > 200) btn.style.display = 'block';
-      else btn.style.display = 'none';
-    });
-  </script>
- <script src="chatbot.js"></script>
-
-<!-- Chatbot-Hinweis-Nachricht -->
-<style>
-  .chatbot-callout {
-    position: fixed;
-    bottom: 100px;
-    right: 90px;
-    background-color: #ff6900;
-    color: white;
-    padding: 10px 16px;
-    border-radius: 8px;
-    font-weight: bold;
-    animation: fadeInOut 10s infinite;
-    z-index: 9998;
-    font-family: Arial, sans-serif;
-    cursor: pointer;
-  }
-
-  @keyframes fadeInOut {
-    0% {opacity: 0;}
-    10% {opacity: 1;}
-    30% {opacity: 1;}
-    40% {opacity: 0;}
-    100% {opacity: 0;}
-  }
-
-  .chatbot-arrow {
-    position: fixed;
-    bottom: 90px;
-    right: 30px;
-    font-size: 30px;
-    color: #ff6900;
-    animation: bounce 2s infinite;
-    z-index: 9997;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-
-  .scroll-to-top {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background-color: #085186;
-    color: white;
-    padding: 12px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 9999;
-  }
-</style>
-
-<!-- Pfeil & Nachricht -->
-<div class="chatbot-callout" role="button" tabindex="0" aria-label="Chatbot öffnen" onclick="toggleChatbot(true)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleChatbot(true);}">👉 Jetzt den Bot testen!</div>
-<div class="chatbot-arrow">⬇️</div>
-
-
-<!-- Zurück-nach-oben Button -->
-<div class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
-
-<script>
-  // Popup alle 10 Sekunden anzeigen für 3 Sek.
-  setInterval(() => {
-    const popup = document.getElementById('popupMessage');
-    if (!popup) return;
-    popup.style.display = 'block';
-    setTimeout(() => popup.style.display = 'none', 3000);
-  }, 10000);
-</script>
-</body>
-  <script>
-  const form = document.querySelector('form[action="https://formspree.io/f/xpwradny"]');
-  const dankeMessage = document.getElementById('dankeMessage');
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-
-    const response = await fetch(form.action, {
-      method: "POST",
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
+      scrollButton.style.display = window.scrollY > 320 ? 'flex' : 'none';
     });
 
-    if (response.ok) {
-      form.reset();
-      dankeMessage.style.display = 'block';
-    } else {
-      alert("Fehler beim Senden. Bitte versuch es später nochmal.");
+    scrollButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+        item.classList.toggle('open');
+      });
+    });
+
+    const form = document.getElementById('contactForm');
+    if (form) {
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const submitButton = form.querySelector('button[type="submit"]');
+        const dankeMessage = document.getElementById('dankeMessage');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Wird gesendet…';
+
+        try {
+          const formData = new FormData(form);
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            form.reset();
+            if (dankeMessage) {
+              dankeMessage.style.display = 'block';
+            }
+          } else {
+            alert('Leider gab es ein Problem. Bitte probiere es später erneut oder schreibe direkt an Tamim.Raschidi@outlook.de.');
+          }
+        } catch (error) {
+          alert('Netzwerkfehler. Bitte kontaktiere uns direkt unter Tamim.Raschidi@outlook.de.');
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Nachricht senden';
+        }
+      });
     }
-  });
-</script>
-<section id="impressum" style="background: #f1f5f9; color: #1e293b; padding: 60px 20px;">
-  <h2 style="text-align:center;">🧾 Impressum</h2>
-  <div style="max-width: 800px; margin: auto; font-size: 15px;">
-    <p><strong>Verantwortlich:</strong> Tamim Raschidi</p>
-    <p><strong>Ort:</strong> Hamburg, Deutschland</p>
-    <p><strong>Kontakt:</strong> <a href="mailto:tamo.ra@outlook.de">tamo.ra@outlook.de</a></p>
-    <p>Dieses Projekt dient der Präsentation digitaler Chatbot-Dienstleistungen. Es handelt sich nicht um einen Onlineshop oder eine Plattform mit Nutzerkonto.</p>
-    <p>Inhaltlich verantwortlich gemäß § 5 TMG: Tamim Raschidi</p>
-  </div>
-</section>
-
-<section id="datenschutz" style="background: #f8fafc; color: #1e293b; padding: 60px 20px;">
-  <h2 style="text-align:center;">🔒 Datenschutz</h2>
-  <div style="max-width: 800px; margin: auto; font-size: 15px;">
-    <p>Diese Website verwendet keine Cookies und erhebt keine personenbezogenen Daten.</p>
-    <p>Der eingebundene Chatbot basiert auf der OpenAI GPT-Technologie. Bei Nutzung des Chatbots werden eingegebene Daten an die OpenAI-API übermittelt, um eine Antwort zu generieren. Es erfolgt keine dauerhafte Speicherung dieser Inhalte auf dem Server dieser Website.</p>
-    <p>Mit Absenden des Kontaktformulars erklärst du dich einverstanden, dass wir deine Angaben zum Zweck der Kontaktaufnahme verwenden dürfen. Eine Weitergabe erfolgt nicht.</p>
-    <p>Bei Fragen zum Datenschutz: <a href="mailto:tamo.ra@outlook.de">tamo.ra@outlook.de</a></p>
-  </div>
-</section>
-
+  </script>
+  <script src="chatbot.js"></script>
 </body>
 </html>
-
-</html>
-
-
-
