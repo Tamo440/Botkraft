@@ -401,6 +401,187 @@
       font-size: 0.98rem;
     }
 
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .experience-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: 340px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: flex-end;
+      background: #0f172a;
+      isolation: isolate;
+    }
+
+    .experience-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .experience-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .experience-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0) 10%, rgba(2, 6, 23, 0.45) 45%, rgba(2, 6, 23, 0.85) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    .experience-content {
+      position: relative;
+      padding: 32px;
+      display: grid;
+      gap: 12px;
+      color: white;
+    }
+
+    .experience-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, 0.22);
+      font-size: 0.82rem;
+      font-weight: 600;
+      backdrop-filter: blur(6px);
+      align-self: flex-start;
+    }
+
+    .experience-content h3 {
+      margin: 0;
+      font-size: 1.34rem;
+      letter-spacing: -0.01em;
+    }
+
+    .experience-content p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: rgba(226, 232, 240, 0.88);
+    }
+
+    .experience-metric {
+      margin-top: 6px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: rgba(244, 244, 255, 0.96);
+    }
+
+    .studio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 36px;
+      align-items: center;
+    }
+
+    .studio-visual {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      min-height: 380px;
+      background: linear-gradient(160deg, rgba(15, 23, 42, 0.95), rgba(79, 70, 229, 0.65));
+    }
+
+    .studio-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: lighten;
+      opacity: 0.85;
+    }
+
+    .studio-visual .tag {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.72);
+      color: white;
+      font-weight: 600;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .studio-visual .stat-card {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(248, 250, 252, 0.92);
+      color: var(--text-main);
+      padding: 18px 22px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.28);
+      display: grid;
+      gap: 6px;
+      text-align: right;
+    }
+
+    .studio-visual .stat-card strong {
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+    }
+
+    .studio-visual .stat-card span {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .studio h3 {
+      margin: 0 0 14px;
+      font-size: 1.6rem;
+    }
+
+    .studio p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
+
+    .studio-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 16px;
+    }
+
+    .studio-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .studio-list li span {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(99, 102, 241, 0.12);
+      color: var(--brand-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
     .trust-band {
       background: white;
       border-radius: var(--radius-md);
@@ -928,6 +1109,40 @@
     </div>
   </section>
 
+  <section class="section" id="showcase">
+    <h2>So fühlt sich ein Premium-Chatbot mit Botkraft an.</h2>
+    <p class="section-lead">Jede Experience ist visuell gebrandet, individuell trainiert und konvertiert auf jedem Gerät. Unsere Strateg:innen kombinieren High-End-Design mit Sales-Playbooks, damit sich Interessenten gesehen fühlen – und kaufen.</p>
+    <div class="experience-grid">
+      <figure class="experience-card">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Beratungsgespräch mit Laptop und Chatbot-Dashboard" loading="lazy">
+        <figcaption class="experience-content">
+          <span class="experience-badge"><i class="fa-solid fa-rocket"></i> Launch in 14 Tagen</span>
+          <h3>Onboarding-Assistent, der sich wie dein Team anfühlt.</h3>
+          <p>Vom ersten Hallo bis zum Follow-up: Der Bot erkennt Intentionen, segmentiert Leads und übergibt warme Kontakte direkt in deinen Kalender.</p>
+          <span class="experience-metric">🔥 7 von 10 Interessenten vereinbaren ein Gespräch bereits im Erstkontakt.</span>
+        </figcaption>
+      </figure>
+      <figure class="experience-card">
+        <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Smartphone mit Chat-Konversation" loading="lazy">
+        <figcaption class="experience-content">
+          <span class="experience-badge"><i class="fa-solid fa-bolt"></i> Mobile Perfected</span>
+          <h3>Konversionstarke Flows für jede Customer Journey.</h3>
+          <p>Kurze Antworten, Button-Pfade, Payment-Links – alles optimiert für Daumenbedienung und spontane Entscheider:innen.</p>
+          <span class="experience-metric">📈 38 % höhere Abschlussrate auf mobilen Landingpages.</span>
+        </figcaption>
+      </figure>
+      <figure class="experience-card">
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Team arbeitet gemeinsam mit digitalen Tools" loading="lazy">
+        <figcaption class="experience-content">
+          <span class="experience-badge"><i class="fa-solid fa-circle-nodes"></i> Deep Integrations</span>
+          <h3>Erlebe echte Teamarbeit zwischen Mensch und KI.</h3>
+          <p>Botkraft orchestriert CRM, Support-Tools und interne Wissensdatenbanken – inklusive Eskalation an deine Expert:innen.</p>
+          <span class="experience-metric">🤝 98 % Kundenzufriedenheit nach der Einführung.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="section" id="leistungen">
     <h2>Erlebe eine Chatbot-Erfahrung, die verkauft – nicht vertröstet.</h2>
     <p class="section-lead">Wir entwickeln dialogische Funnels, die deine Interessenten in Kunden verwandeln. Von der ersten Begrüßung bis zum finalen Checkout bleiben Tonalität, Inhalte und Optik zu 100 % in deiner Markenwelt.</p>
@@ -952,6 +1167,28 @@
         <h3>Performance Cockpit</h3>
         <p>Messe Abschlüsse, Reaktionsgeschwindigkeit und Stimmungen. Unser Dashboard liefert Insights für Marketing &amp; Vertrieb.</p>
       </article>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Botkraft Studio">
+    <div class="studio">
+      <div class="studio-visual">
+        <div class="tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Botkraft Studio</div>
+        <img src="https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="Creative Studio mit mehreren Bildschirmen und Chatbot-Design" loading="lazy">
+        <div class="stat-card">
+          <strong>+212&nbsp;%</strong>
+          <span>mehr qualifizierte Leads nach dem ersten Optimierungs-Sprint.</span>
+        </div>
+      </div>
+      <div>
+        <h3>Wir kreieren Experiences, die deine Marke fühlen lassen.</h3>
+        <p>Unser interdisziplinäres Team gestaltet jeden Chatbot als digitales Beratungsgespräch – mit Motion Design, personalisierten Textbausteinen und Sales-Automationen, die im Hintergrund arbeiten.</p>
+        <ul class="studio-list">
+          <li><span><i class="fa-solid fa-pen-nib"></i></span>Markenkonformes UI/UX mit individuellen Illustrationen, Animationen und Farbschemata.</li>
+          <li><span><i class="fa-solid fa-chart-simple"></i></span>Performance Audits mit A/B-Dialogtests und Heatmap-Analysen für jede Funnel-Phase.</li>
+          <li><span><i class="fa-solid fa-headset"></i></span>Hands-on Enablement: Workshops, Playbooks &amp; Templates für dein Sales- und Support-Team.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -1289,5 +1526,3 @@
   <script src="chatbot.js"></script>
 </body>
 </html>
-</html>
-
