@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -26,6 +26,10 @@
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -436,16 +440,21 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(2, 6, 23, 0) 10%, rgba(2, 6, 23, 0.45) 45%, rgba(2, 6, 23, 0.85) 100%);
-      mix-blend-mode: multiply;
+      background: linear-gradient(200deg, rgba(2, 6, 23, 0.05) 0%, rgba(2, 6, 23, 0.55) 38%, rgba(2, 6, 23, 0.92) 100%);
+      mix-blend-mode: normal;
     }
 
     .experience-content {
       position: relative;
-      padding: 32px;
+      padding: 28px;
+      margin: 24px;
       display: grid;
-      gap: 12px;
+      gap: 14px;
       color: white;
+      background: linear-gradient(160deg, rgba(15, 23, 42, 0.92), rgba(30, 64, 175, 0.72));
+      border-radius: 22px;
+      box-shadow: 0 20px 48px rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(10px);
     }
 
     .experience-badge {
@@ -463,21 +472,141 @@
 
     .experience-content h3 {
       margin: 0;
-      font-size: 1.34rem;
+      font-size: 1.4rem;
       letter-spacing: -0.01em;
     }
 
     .experience-content p {
       margin: 0;
-      font-size: 0.95rem;
-      color: rgba(226, 232, 240, 0.88);
+      font-size: 0.98rem;
+      color: rgba(226, 232, 240, 0.92);
     }
 
     .experience-metric {
       margin-top: 6px;
       font-weight: 600;
-      font-size: 0.92rem;
-      color: rgba(244, 244, 255, 0.96);
+      font-size: 0.95rem;
+      color: rgba(244, 244, 255, 0.95);
+    }
+
+    .showcase-slider {
+      position: relative;
+      margin-top: 32px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.22), transparent 55%), #0b1224;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      min-height: 420px;
+      isolation: isolate;
+    }
+
+    .showcase-slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      padding: 40px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .showcase-slide.is-active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .showcase-media {
+      width: 100%;
+      height: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      box-shadow: 0 24px 54px rgba(15, 23, 42, 0.45);
+    }
+
+    .showcase-copy {
+      display: grid;
+      gap: 16px;
+      color: white;
+      align-content: center;
+    }
+
+    .showcase-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(226, 232, 240, 0.12);
+      font-size: 0.88rem;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    .showcase-copy h3 {
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .showcase-copy p {
+      margin: 0;
+      color: rgba(226, 232, 240, 0.9);
+      max-width: 520px;
+    }
+
+    .showcase-points {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+      font-size: 0.98rem;
+      color: rgba(226, 232, 240, 0.92);
+    }
+
+    .showcase-points li {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .showcase-points i {
+      color: var(--brand-accent);
+    }
+
+    .showcase-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .showcase-dot {
+      width: 42px;
+      height: 6px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(148, 163, 184, 0.4);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .showcase-dot.is-active {
+      background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+      transform: scaleX(1.12);
+    }
+
+    .showcase-slider:focus-within .showcase-dot.is-active,
+    .showcase-slider:hover .showcase-dot.is-active {
+      box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.18);
     }
 
     .studio {
@@ -1000,22 +1129,70 @@
       position: fixed;
       right: 26px;
       bottom: 96px;
-      padding: 14px 22px;
-      border-radius: 14px;
-      background: white;
-      border: 1px solid rgba(99, 102, 241, 0.18);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 600;
+      gap: 14px;
       cursor: pointer;
       z-index: 910;
       transition: transform 0.3s ease;
+      background: none;
+      border: none;
+    }
+
+    .floating-demo:focus-visible {
+      outline: none;
+      transform: translateY(-3px);
     }
 
     .floating-demo:hover {
       transform: translateY(-4px);
+    }
+
+    .floating-bubble {
+      background: white;
+      border-radius: 20px 20px 20px 8px;
+      padding: 12px 18px;
+      font-weight: 600;
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.28);
+      color: var(--text-main);
+      position: relative;
+    }
+
+    .floating-bubble::after {
+      content: "";
+      position: absolute;
+      right: -6px;
+      bottom: 14px;
+      width: 12px;
+      height: 12px;
+      background: white;
+      transform: rotate(45deg);
+      box-shadow: 4px 4px 12px rgba(15, 23, 42, 0.18);
+    }
+
+    .floating-avatar {
+      position: relative;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.32);
+    }
+
+    .floating-status {
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #22c55e;
+      border: 2px solid white;
     }
 
     @media (max-width: 960px) {
@@ -1032,9 +1209,57 @@
         bottom: 90px;
       }
 
+      .floating-bubble {
+        font-size: 0.92rem;
+        padding: 11px 16px;
+      }
+
+      .showcase-slide {
+        grid-template-columns: 1fr;
+        padding: 32px;
+      }
+
+      .showcase-media {
+        max-height: 260px;
+      }
+
       .scroll-top {
         right: 18px;
         bottom: 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .floating-demo {
+        gap: 10px;
+        align-items: flex-end;
+      }
+
+      .floating-avatar {
+        width: 52px;
+        height: 52px;
+        font-size: 22px;
+      }
+
+      .experience-content {
+        margin: 18px;
+        padding: 22px;
+      }
+
+      .showcase-slide {
+        padding: 26px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .showcase-slide {
+        transition: none;
+      }
+
+      .floating-demo,
+      .floating-demo:hover,
+      .floating-demo:focus-visible {
+        transform: none;
       }
     }
   </style>
@@ -1112,6 +1337,52 @@
   <section class="section" id="showcase">
     <h2>So fühlt sich ein Premium-Chatbot mit Botkraft an.</h2>
     <p class="section-lead">Jede Experience ist visuell gebrandet, individuell trainiert und konvertiert auf jedem Gerät. Unsere Strateg:innen kombinieren High-End-Design mit Sales-Playbooks, damit sich Interessenten gesehen fühlen – und kaufen.</p>
+    <div class="showcase-slider" data-slider aria-live="polite">
+      <article class="showcase-slide is-active" data-index="0">
+        <img class="showcase-media" src="https://images.unsplash.com/photo-1515165562835-c4c2b1c0c4d8?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="E-Commerce-Marketer verfolgt Live-Chats auf einem Laptop" loading="lazy">
+        <div class="showcase-copy">
+          <span class="showcase-tag"><i class="fa-solid fa-cart-shopping"></i> E-Commerce Launchpad</span>
+          <h3>Verwandle Produkt-Interesse in Warenkörbe voller Upsells.</h3>
+          <p>Der Botkraft-Checkout begleitet Kund:innen wie eine persönliche Beratung: Empfehlungen, Bundles und Payment – alles im Dialog.</p>
+          <ul class="showcase-points">
+            <li><i class="fa-solid fa-arrow-trend-up"></i> +27 % durchschnittlicher Warenkorbwert durch intelligente Cross-Sells</li>
+            <li><i class="fa-solid fa-stopwatch"></i> Checkout in &lt; 60 Sekunden mit gespeicherten Zahlungspräferenzen</li>
+            <li><i class="fa-solid fa-gift"></i> Loyalty-Trigger &amp; Promo-Codes werden automatisch ausgespielt</li>
+          </ul>
+        </div>
+      </article>
+      <article class="showcase-slide" data-index="1">
+        <img class="showcase-media" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="Beratungsteam nutzt den Botkraft-Chatbot auf dem Tablet" loading="lazy">
+        <div class="showcase-copy">
+          <span class="showcase-tag"><i class="fa-solid fa-handshake-angle"></i> Service Concierge</span>
+          <h3>Automatisiere Beratung, ohne deinen Premium-Anspruch zu verlieren.</h3>
+          <p>Unsere Dialoge führen Fragende durch Diagnosen, Terminierung und Follow-ups – inklusive persönlicher Video- oder Call-Übergabe.</p>
+          <ul class="showcase-points">
+            <li><i class="fa-solid fa-calendar-check"></i> 81 % der Leads buchen direkt einen Termin</li>
+            <li><i class="fa-solid fa-language"></i> 6 Sprachen mit Markentonalität aus einer zentralen Wissensbasis</li>
+            <li><i class="fa-solid fa-circle-check"></i> Eskalationen an dein Team in Echtzeit inkl. CRM-Notizen</li>
+          </ul>
+        </div>
+      </article>
+      <article class="showcase-slide" data-index="2">
+        <img class="showcase-media" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="Immobilienmaklerin präsentiert virtuelle Rundgänge mit dem Botkraft-Chatbot" loading="lazy">
+        <div class="showcase-copy">
+          <span class="showcase-tag"><i class="fa-solid fa-building"></i> High-Ticket Pipeline</span>
+          <h3>Qualifiziere komplexe B2B- oder Immobilien-Anfragen automatisch vor.</h3>
+          <p>Botkraft sammelt Bedarfe, Budget und Zeitrahmen, spielt passende Referenzen aus und legt unterschriftsreife Angebote im CRM an.</p>
+          <ul class="showcase-points">
+            <li><i class="fa-solid fa-list-check"></i> Dynamic Forms &amp; Dateiupload für vollständige Briefings</li>
+            <li><i class="fa-solid fa-gauge-high"></i> Priorisierung nach Deal-Größe inklusive Scoring-Logik</li>
+            <li><i class="fa-solid fa-chart-simple"></i> Executive-Report nach jedem Gespräch direkt in Slack</li>
+          </ul>
+        </div>
+      </article>
+      <div class="showcase-dots" role="tablist" aria-label="Botkraft Use-Cases">
+        <button class="showcase-dot is-active" type="button" data-slide="0" aria-label="E-Commerce Use Case" aria-pressed="true"></button>
+        <button class="showcase-dot" type="button" data-slide="1" aria-label="Service Use Case" aria-pressed="false"></button>
+        <button class="showcase-dot" type="button" data-slide="2" aria-label="High-Ticket Use Case" aria-pressed="false"></button>
+      </div>
+    </div>
     <div class="experience-grid">
       <figure class="experience-card">
         <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Beratungsgespräch mit Laptop und Chatbot-Dashboard" loading="lazy">
@@ -1469,25 +1740,132 @@
 
   <button class="scroll-top" type="button" aria-label="Nach oben scrollen">⬆</button>
   <div class="floating-demo" role="button" tabindex="0" aria-label="Chatbot-Demo starten" onclick="toggleChatbot(true)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleChatbot(true);}">
-    <i class="fa-solid fa-message"></i>
-    Jetzt Chatbot testen
+    <span class="floating-bubble">Jetzt Chatbot testen</span>
+    <span class="floating-avatar" aria-hidden="true">
+      <i class="fa-solid fa-message" aria-hidden="true"></i>
+      <span class="floating-status"></span>
+    </span>
   </div>
 
   <script>
+    const navElement = document.querySelector('nav');
     const scrollButton = document.querySelector('.scroll-top');
-    window.addEventListener('scroll', () => {
-      scrollButton.style.display = window.scrollY > 320 ? 'flex' : 'none';
+
+    const smoothScrollTo = (hash, instant = false) => {
+      if (!hash || hash === '#') return;
+      const target = document.querySelector(hash);
+      if (!target) return;
+      const offset = (navElement?.offsetHeight || 0) + 12;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: instant ? 'auto' : 'smooth' });
+    };
+
+    Array.from(document.querySelectorAll('a[href^="#"]')).forEach(link => {
+      const hash = link.getAttribute('href');
+      if (!hash || hash === '#') return;
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        smoothScrollTo(hash);
+      });
     });
 
-    scrollButton.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (window.location.hash) {
+      window.addEventListener('load', () => smoothScrollTo(window.location.hash, true));
+    }
+
+    if (scrollButton) {
+      window.addEventListener('scroll', () => {
+        scrollButton.style.display = window.scrollY > 320 ? 'flex' : 'none';
+      });
+
+      scrollButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
     document.querySelectorAll('.faq-item').forEach(item => {
-      item.querySelector('.faq-question').addEventListener('click', () => {
+      const question = item.querySelector('.faq-question');
+      if (!question) return;
+      question.addEventListener('click', () => {
         item.classList.toggle('open');
       });
     });
+
+    const showcaseSlider = document.querySelector('[data-slider]');
+    if (showcaseSlider) {
+      const slides = Array.from(showcaseSlider.querySelectorAll('.showcase-slide'));
+      const dots = Array.from(showcaseSlider.querySelectorAll('.showcase-dot'));
+      let activeIndex = 0;
+      let autoplayId = null;
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const setActiveSlide = index => {
+        if (!slides.length) return;
+        activeIndex = index % slides.length;
+        slides.forEach((slide, idx) => slide.classList.toggle('is-active', idx === activeIndex));
+        dots.forEach((dot, idx) => {
+          const isActive = idx === activeIndex;
+          dot.classList.toggle('is-active', isActive);
+          dot.setAttribute('aria-pressed', isActive.toString());
+        });
+      };
+
+      const stopAutoplay = () => {
+        if (autoplayId) {
+          clearInterval(autoplayId);
+          autoplayId = null;
+        }
+      };
+
+      const startAutoplay = () => {
+        if (motionQuery.matches || slides.length <= 1) return;
+        stopAutoplay();
+        autoplayId = setInterval(() => {
+          setActiveSlide((activeIndex + 1) % slides.length);
+        }, 6000);
+      };
+
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+          setActiveSlide(idx);
+          startAutoplay();
+        });
+        dot.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            setActiveSlide(idx);
+            startAutoplay();
+          }
+        });
+      });
+
+      showcaseSlider.addEventListener('pointerenter', stopAutoplay);
+      showcaseSlider.addEventListener('pointerleave', startAutoplay);
+      showcaseSlider.addEventListener('focusin', stopAutoplay);
+      showcaseSlider.addEventListener('focusout', event => {
+        const nextTarget = event.relatedTarget || document.activeElement;
+        if (!showcaseSlider.contains(nextTarget)) {
+          startAutoplay();
+        }
+      });
+
+      const handleMotionPreference = () => {
+        if (motionQuery.matches) {
+          stopAutoplay();
+        } else {
+          startAutoplay();
+        }
+      };
+
+      if (typeof motionQuery.addEventListener === 'function') {
+        motionQuery.addEventListener('change', handleMotionPreference);
+      } else if (typeof motionQuery.addListener === 'function') {
+        motionQuery.addListener(handleMotionPreference);
+      }
+
+      setActiveSlide(0);
+      startAutoplay();
+    }
 
     const form = document.getElementById('contactForm');
     if (form) {
