@@ -1,3 +1,4 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/chatbot.js b/chatbot.js
 index e3fb463de3830ce78902d3391187828ab14c1b3c..406fd260fee991ded6e93863960025bffca7e05c 100644
 --- a/chatbot.js
@@ -1386,3 +1387,6 @@ index e3fb463de3830ce78902d3391187828ab14c1b3c..406fd260fee991ded6e93863960025bf
 +});
 +
 +window.toggleChatbot = toggleChatbot;
+ 
+EOF
+)
