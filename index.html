@@ -618,10 +618,6 @@
   </p>
 </footer>
 
-  <div class="chatbot-button" onclick="toggleChatbot()">
-    <i class="fas fa-comment-dots"></i>
-  </div>
-
   <button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">⬆</button>
   <script>
     window.addEventListener('scroll', () => {
@@ -630,9 +626,6 @@
       else btn.style.display = 'none';
     });
   </script>
- <div class="chatbot-button" onclick="toggleChatbot()">
-  <i class="fas fa-comment-dots"></i>
-</div>
  <script src="chatbot.js"></script>
 
 <!-- Chatbot-Hinweis-Nachricht -->
@@ -649,6 +642,7 @@
     animation: fadeInOut 10s infinite;
     z-index: 9998;
     font-family: Arial, sans-serif;
+    cursor: pointer;
   }
 
   @keyframes fadeInOut {
@@ -690,7 +684,7 @@
 </style>
 
 <!-- Pfeil & Nachricht -->
-<div class="chatbot-callout">👉 Jetzt den Bot testen!</div>
+<div class="chatbot-callout" role="button" tabindex="0" aria-label="Chatbot öffnen" onclick="toggleChatbot(true)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleChatbot(true);}">👉 Jetzt den Bot testen!</div>
 <div class="chatbot-arrow">⬇️</div>
 
 
@@ -701,14 +695,12 @@
   // Popup alle 10 Sekunden anzeigen für 3 Sek.
   setInterval(() => {
     const popup = document.getElementById('popupMessage');
+    if (!popup) return;
     popup.style.display = 'block';
     setTimeout(() => popup.style.display = 'none', 3000);
   }, 10000);
 </script>
 </body>
-  <!-- ganz am Ende der Datei -->
-<script src="chatbot.js"></script>
-
   <script>
   const form = document.querySelector('form[action="https://formspree.io/f/xpwradny"]');
   const dankeMessage = document.getElementById('dankeMessage');
@@ -759,5 +751,6 @@
 </html>
 
 </html>
+
 
 
