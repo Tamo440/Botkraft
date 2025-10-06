@@ -254,6 +254,10 @@
       color: white;
       box-shadow: 0 18px 40px rgba(99, 102, 241, 0.35);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
     .btn-primary:hover {
@@ -794,12 +798,6 @@
       color: var(--brand-primary);
     }
 
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-
     .pricing-card {
       background: white;
       border-radius: var(--radius-md);
@@ -809,20 +807,6 @@
       gap: 20px;
       border: 1px solid rgba(99, 102, 241, 0.14);
       position: relative;
-    }
-
-    .pricing-card.recommended::after {
-      content: "Beliebtestes Paket";
-      position: absolute;
-      top: -14px;
-      left: 24px;
-      padding: 6px 14px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--brand-accent), #fb923c);
-      color: white;
-      box-shadow: 0 12px 24px rgba(249, 115, 22, 0.25);
     }
 
     .price {
@@ -837,13 +821,106 @@
       font-weight: 500;
     }
 
+    .pricing-spotlight {
+      position: relative;
+      max-width: 780px;
+      margin: 48px auto 0;
+      padding: 0 16px;
+    }
+
+    .pricing-spotlight::before {
+      content: "";
+      position: absolute;
+      inset: -20% -6%;
+      background: conic-gradient(from 180deg at 50% 50%, rgba(99, 102, 241, 0.55), rgba(249, 115, 22, 0.35), rgba(56, 189, 248, 0.4), rgba(99, 102, 241, 0.55));
+      filter: blur(80px);
+      opacity: 0.7;
+      animation: pricingOrbit 12s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .pricing-card.pricing-single {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(79, 70, 229, 0.88));
+      color: white;
+      padding: 52px 48px;
+      border-radius: 28px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: 0 40px 90px -28px rgba(15, 23, 42, 0.65);
+      gap: 24px;
+      z-index: 1;
+    }
+
+    .pricing-card.pricing-single h3 {
+      font-size: 2.2rem;
+      margin: 0;
+      color: white;
+      letter-spacing: -0.02em;
+    }
+
+    .pricing-card.pricing-single .price {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: baseline;
+      font-size: 3rem;
+    }
+
+    .pricing-card.pricing-single .price strong {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .pricing-card.pricing-single .price small {
+      font-size: 1rem;
+      color: rgba(224, 231, 255, 0.9);
+      font-weight: 500;
+    }
+
+    .pricing-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(241, 245, 249, 0.16);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(224, 231, 255, 0.95);
+      box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-tag::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      transform: translateX(-120%);
+      animation: tagShimmer 3.6s ease-in-out infinite;
+    }
+
+    .pricing-tag i {
+      color: #facc15;
+    }
+
+    .pricing-sub {
+      font-size: 1.05rem;
+      color: rgba(226, 232, 240, 0.92);
+      max-width: 540px;
+    }
+
     .pricing-list {
       margin: 0;
       padding: 0;
       list-style: none;
       display: grid;
       gap: 14px;
-      color: var(--text-muted);
+      color: rgba(226, 232, 240, 0.86);
       font-size: 0.95rem;
     }
 
@@ -854,7 +931,91 @@
     }
 
     .pricing-list li i {
-      color: #16a34a;
+      color: #a3e635;
+    }
+
+    .btn-primary.btn-glow {
+      position: relative;
+      justify-content: center;
+      animation: pulseGlow 2.4s ease-in-out infinite;
+    }
+
+    .btn-primary.btn-glow::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.45), transparent 68%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-primary.btn-glow:hover::after {
+      opacity: 1;
+    }
+
+    .pricing-addon {
+      margin-top: 12px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      display: grid;
+      gap: 6px;
+      color: rgba(226, 232, 240, 0.88);
+      font-size: 0.92rem;
+    }
+
+    .pricing-addon strong {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(248, 250, 252, 0.95);
+    }
+
+    .pricing-addon a {
+      color: rgba(129, 140, 248, 0.95);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    @keyframes pricingOrbit {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 18px 40px rgba(99, 102, 241, 0.4);
+        transform: translateY(0);
+      }
+      50% {
+        box-shadow: 0 26px 60px rgba(249, 115, 22, 0.4);
+        transform: translateY(-4px);
+      }
+    }
+
+    @keyframes tagShimmer {
+      0% {
+        transform: translateX(-120%);
+      }
+      50% {
+        transform: translateX(120%);
+      }
+      100% {
+        transform: translateX(120%);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pricing-spotlight::before,
+      .btn-primary.btn-glow,
+      .btn-primary.btn-glow::after,
+      .pricing-tag::after {
+        animation: none !important;
+      }
     }
 
     .process-grid {
@@ -1574,41 +1735,26 @@
   </section>
 
   <section class="section" id="preise">
-    <h2>Transparente Pakete für jede Wachstumsphase.</h2>
-    <p class="section-lead">Alle Pakete enthalten ein Marken-Branding, DSGVO-Konfiguration, Onboarding deiner Teams sowie kontinuierliche Optimierung der Konversationen.</p>
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <h3>Launch</h3>
-        <div class="price">79 € <small>einmalig</small></div>
+    <h2>Ein Angebot, das sofort überzeugt.</h2>
+    <p class="section-lead">Wir aktivieren deinen verkaufsstarken Bot in Rekordzeit – inklusive Branding, DSGVO-Setup und Live-Coaching für dein Team.</p>
+    <div class="pricing-spotlight">
+      <div class="pricing-card pricing-single">
+        <span class="pricing-tag"><i class="fa-solid fa-bolt"></i> Launch in 48&nbsp;Stunden</span>
+        <h3>Botkraft Aktivierungs-Paket</h3>
+        <div class="price"><strong>50 €</strong> <small>einmalig · inklusive Setup &amp; Onboarding</small></div>
+        <p class="pricing-sub">Erhalte deinen individuellen Chatbot mit Premium-Branding, trainierten Verkaufsdialogen und einer geführten Einführung für dein gesamtes Team.</p>
         <ul class="pricing-list">
-          <li><i class="fa-solid fa-check"></i>1 Marke · 1 Website-Widget</li>
-          <li><i class="fa-solid fa-check"></i>CI-konformes Design &amp; Voice</li>
-          <li><i class="fa-solid fa-check"></i>Basis-Automationen &amp; Handovers</li>
-          <li><i class="fa-solid fa-check"></i>Schulungsvideo für dein Team</li>
+          <li><i class="fa-solid fa-check"></i>Maßgeschneiderte Gesprächsflows &amp; Lead-Routing</li>
+          <li><i class="fa-solid fa-check"></i>Einbindung als Floating-Widget &amp; CRM-Übergabe</li>
+          <li><i class="fa-solid fa-check"></i>Datenschutz-Check &amp; sichere Hosting-Infrastruktur</li>
+          <li><i class="fa-solid fa-check"></i>Live-Optimierungs-Session mit Conversion-Plays</li>
         </ul>
-        <a class="btn-secondary" href="#kontakt">Projekt anfragen</a>
-      </div>
-      <div class="pricing-card recommended">
-        <h3>Scale</h3>
-        <div class="price">69 € <small>pro Monat</small></div>
-        <ul class="pricing-list">
-          <li><i class="fa-solid fa-check"></i>Hosting, Updates &amp; Support inklusive</li>
-          <li><i class="fa-solid fa-check"></i>Unbegrenzte Text- &amp; Funnel-Optimierungen</li>
-          <li><i class="fa-solid fa-check"></i>CRM-, Kalender- &amp; Payment-Anbindung</li>
-          <li><i class="fa-solid fa-check"></i>Quartalsweise Wachstums-Workshops</li>
-        </ul>
-        <a class="btn-primary" href="#kontakt">Scale-Demo sichern</a>
-      </div>
-      <div class="pricing-card">
-        <h3>Enterprise</h3>
-        <div class="price">Auf Anfrage</div>
-        <ul class="pricing-list">
-          <li><i class="fa-solid fa-check"></i>Mehrsprachige Experience</li>
-          <li><i class="fa-solid fa-check"></i>SLA &amp; dedizierter Success Manager</li>
-          <li><i class="fa-solid fa-check"></i>Custom Data Lake &amp; Analytics API</li>
-          <li><i class="fa-solid fa-check"></i>Security Audits &amp; On-Premise Optionen</li>
-        </ul>
-        <a class="btn-secondary" href="mailto:Tamim.Raschidi@outlook.de">Enterprise-Gespräch vereinbaren</a>
+        <a class="btn-primary btn-glow" href="#kontakt">Jetzt aktivieren</a>
+        <div class="pricing-addon">
+          <strong>Abo auf Anfrage</strong>
+          <span>Du willst, dass wir deinen Bot kontinuierlich weiterentwickeln? Unser skalierbares Abo mit frischen Playbooks, Datenreviews und Done-for-you-Optimierungen schnüren wir dir individuell.</span>
+          <a href="#kontakt">Mehr dazu im Gespräch</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1970,5 +2116,3 @@
   <script src="chatbot.js"></script>
 </body>
 </html>
-
-
