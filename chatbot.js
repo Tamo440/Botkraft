@@ -166,18 +166,11 @@ const colors = {
 const styles = {
   button: {
     position: 'fixed',
-    bottom: '20px',
-    right: '20px',
-    width: '60px',
-    height: '60px',
-    backgroundColor: colors.primary,
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    zIndex: '9999',
     cursor: 'pointer',
-    boxShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)',
-    zIndex: '9999'
+    background: 'none',
+    border: 'none',
+    padding: '0'
   },
   icon: {
     color: 'white',
@@ -282,23 +275,23 @@ chatbotBtn.setAttribute('role', 'button');
 chatbotBtn.setAttribute('aria-label', 'Chatbot öffnen');
 chatbotBtn.setAttribute('tabindex', '0');
 chatbotBtn.setAttribute('aria-expanded', 'false');
-chatbotBtn.innerHTML = '<i class="fas fa-comment-dots"></i>';
+chatbotBtn.innerHTML = `
+  <span class="chatbot-launcher-bubble">
+    <span class="chatbot-launcher-live">
+      <span class="chatbot-launcher-live-dot"></span>
+      Live
+    </span>
+    Jetzt Chatbot testen
+  </span>
+  <span class="chatbot-launcher-avatar" aria-hidden="true">
+    <i class="fas fa-comment-dots" aria-hidden="true"></i>
+    <span class="chatbot-launcher-status"></span>
+  </span>
+`;
 document.body.appendChild(chatbotBtn);
 
 const chatbotIcon = chatbotBtn.querySelector('i');
 Object.assign(chatbotIcon.style, styles.icon);
-
-const onlineStatus = document.createElement('div');
-onlineStatus.style.position = 'absolute';
-onlineStatus.style.bottom = '6px';
-onlineStatus.style.right = '6px';
-onlineStatus.style.width = '12px';
-onlineStatus.style.height = '12px';
-onlineStatus.style.backgroundColor = '#28c76f';
-onlineStatus.style.border = '2px solid white';
-onlineStatus.style.borderRadius = '50%';
-onlineStatus.style.boxShadow = '0 0 4px rgba(0,0,0,0.2)';
-chatbotBtn.appendChild(onlineStatus);
 
 const chatbotContainer = document.createElement('div');
 chatbotContainer.id = 'chatbot';
@@ -845,4 +838,5 @@ chatbotBtn.addEventListener('keydown', event => {
 });
 
 window.toggleChatbot = toggleChatbot;
+
 
