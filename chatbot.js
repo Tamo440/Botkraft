@@ -285,9 +285,11 @@ chatbotBtn.innerHTML = `
   </span>
   <span class="chatbot-launcher-avatar" aria-hidden="true">
     <span class="chatbot-launcher-icon" aria-hidden="true">
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" role="presentation">
-        <circle cx="20" cy="20" r="20" fill="currentColor"></circle>
-        <path d="M12 12h16a2 2 0 0 1 2 2v9.5a2 2 0 0 1-2 2h-6.17l-4.58 3.66a1 1 0 0 1-1.62-.78V25H12a2 2 0 0 1-2-2V14a2 2 0 0 1 2-2Zm2 5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z" fill="#fff"></path>
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="presentation">
+        <path fill="#fff" d="M16.5 10H31c5.385 0 9.75 3.909 9.75 8.727v9.546C40.75 33.091 36.385 37 31 37h-7.86l-5.906 4.432c-1.028.772-2.484.022-2.484-1.255V37H16.5c-5.385 0-9.75-3.909-9.75-8.727v-9.546C6.75 13.909 11.115 10 16.5 10Z"/>
+        <circle cx="19" cy="23" r="2.2" fill="#0f172a" fill-opacity="0.85"/>
+        <circle cx="24" cy="23" r="2.2" fill="#0f172a" fill-opacity="0.85"/>
+        <circle cx="29" cy="23" r="2.2" fill="#0f172a" fill-opacity="0.85"/>
       </svg>
     </span>
     <span class="chatbot-launcher-status"></span>
@@ -845,3 +847,4 @@ chatbotBtn.addEventListener('keydown', event => {
 });
 
 window.toggleChatbot = toggleChatbot;
+
