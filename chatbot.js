@@ -284,14 +284,21 @@ chatbotBtn.innerHTML = `
     Jetzt Chatbot testen
   </span>
   <span class="chatbot-launcher-avatar" aria-hidden="true">
-    <i class="fas fa-comment-dots" aria-hidden="true"></i>
+    <span class="chatbot-launcher-icon" aria-hidden="true">
+      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" role="presentation">
+        <circle cx="20" cy="20" r="20" fill="currentColor"></circle>
+        <path d="M12 12h16a2 2 0 0 1 2 2v9.5a2 2 0 0 1-2 2h-6.17l-4.58 3.66a1 1 0 0 1-1.62-.78V25H12a2 2 0 0 1-2-2V14a2 2 0 0 1 2-2Zm2 5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z" fill="#fff"></path>
+      </svg>
+    </span>
     <span class="chatbot-launcher-status"></span>
   </span>
 `;
 document.body.appendChild(chatbotBtn);
 
-const chatbotIcon = chatbotBtn.querySelector('i');
-Object.assign(chatbotIcon.style, styles.icon);
+const chatbotIcon = chatbotBtn.querySelector('.chatbot-launcher-icon svg');
+if (chatbotIcon) {
+  chatbotIcon.setAttribute('aria-hidden', 'true');
+}
 
 const chatbotContainer = document.createElement('div');
 chatbotContainer.id = 'chatbot';
@@ -838,5 +845,3 @@ chatbotBtn.addEventListener('keydown', event => {
 });
 
 window.toggleChatbot = toggleChatbot;
-
-
