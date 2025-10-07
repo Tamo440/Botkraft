@@ -366,6 +366,182 @@
       margin-bottom: 48px;
     }
 
+    .promo-video-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .video-shell {
+      position: relative;
+      border-radius: calc(var(--radius-lg) + 6px);
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.45), transparent 55%),
+        radial-gradient(circle at 80% 30%, rgba(249, 115, 22, 0.35), transparent 60%),
+        rgba(15, 23, 42, 0.9);
+      padding: 16px;
+      box-shadow: 0 40px 80px -50px rgba(15, 23, 42, 0.8);
+      isolation: isolate;
+    }
+
+    .video-frame {
+      position: relative;
+      border-radius: calc(var(--radius-lg) - 4px);
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .promo-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(15, 23, 42, 0.25) 20%, rgba(15, 23, 42, 0.75) 75%);
+      color: white;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 14px;
+      pointer-events: none;
+    }
+
+    .video-overlay h3 {
+      margin: 0;
+      font-size: clamp(1.4rem, 2vw, 1.9rem);
+      letter-spacing: -0.01em;
+    }
+
+    .video-overlay p {
+      margin: 0;
+      font-size: 1rem;
+      max-width: 420px;
+      color: rgba(226, 232, 240, 0.88);
+    }
+
+    .video-overlay .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .video-overlay .badge-row span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.55);
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .video-play {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.18);
+      color: white;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      z-index: 2;
+    }
+
+    .video-play i {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 1), rgba(14, 165, 233, 1));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      box-shadow: 0 12px 25px rgba(79, 70, 229, 0.45);
+    }
+
+    .video-play:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.26);
+    }
+
+    .video-shell.is-paused .video-play {
+      background: rgba(15, 23, 42, 0.55);
+    }
+
+    .video-details {
+      display: grid;
+      gap: 24px;
+    }
+
+    .video-details > div {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--card-shadow);
+      display: grid;
+      gap: 18px;
+    }
+
+    .video-metrics {
+      display: grid;
+      gap: 16px;
+    }
+
+    .video-metric {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .video-metric:last-child {
+      border-bottom: none;
+    }
+
+    .video-metric strong {
+      font-size: 1.6rem;
+      color: var(--brand-primary);
+    }
+
+    .video-metric span {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .video-actions {
+      display: grid;
+      gap: 12px;
+    }
+
+    .video-actions .btn-primary {
+      justify-content: center;
+    }
+
+    .video-actions small {
+      color: var(--text-muted);
+      text-align: center;
+    }
+
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1422,6 +1598,14 @@
         padding-top: 90px;
       }
 
+      .promo-video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .video-details > div {
+        padding: 24px;
+      }
+
       .chatbot-launcher {
         right: 18px;
         bottom: 22px;
@@ -1459,6 +1643,20 @@
         right: 16px;
         bottom: 20px;
         gap: 8px;
+      }
+
+      .video-shell {
+        padding: 12px;
+        border-radius: var(--radius-md);
+      }
+
+      .video-play {
+        top: 18px;
+        left: 18px;
+      }
+
+      .video-overlay {
+        padding: 22px;
       }
 
       .chatbot-launcher-bubble {
@@ -1822,6 +2020,59 @@
     </div>
   </section>
 
+  <section class="section" id="promo-video" aria-label="Werbevideo">
+    <h2>Erlebe den Botkraft-Flow in einem 60-Sekunden-Werbevideo.</h2>
+    <p class="section-lead">Das Spotlight zeigt, wie unsere KI potenzielle Kund:innen anspricht, qualifiziert und zum Abschluss führt. Perfekt für Ads, Landingpages oder Messen – inklusive Motion Branding im Botkraft-Stil.</p>
+    <div class="promo-video-grid">
+      <div class="video-shell" data-video-shell>
+        <div class="video-frame">
+          <video class="promo-video" data-promo-video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
+            <source src="https://cdn.coverr.co/videos/coverr-talking-through-the-app-4804/1080p.mp4" type="video/mp4">
+            Dein Browser unterstützt das Video-Element nicht. Lade das Video <a href="https://cdn.coverr.co/videos/coverr-talking-through-the-app-4804/download">hier herunter</a>.
+          </video>
+          <button class="video-play" type="button" data-video-play aria-label="Sound für das Werbevideo umschalten">
+            <i class="fa-solid fa-play"></i>
+            <span>Sound an</span>
+          </button>
+          <div class="video-overlay">
+            <div class="badge-row">
+              <span><i class="fa-solid fa-bolt"></i> 24/7 aktiv</span>
+              <span><i class="fa-solid fa-handshake-angle"></i> Conversational Closing</span>
+              <span><i class="fa-solid fa-shield"></i> DSGVO-ready</span>
+            </div>
+            <h3>Vom ersten „Hallo“ bis zum gebuchten Termin – alles in 60 Sekunden.</h3>
+            <p>Storytelling, Social Proof, Einwandbehandlung und Call-to-Action werden nahtlos orchestriert. Du erhältst ein editierbares Masterfile für Paid Ads, Events und deine Website.</p>
+          </div>
+        </div>
+      </div>
+      <div class="video-details">
+        <div>
+          <h3>Video-Highlights</h3>
+          <p>Wir produzieren dein Werbevideo in unserem Botkraft Studio – mit Skript, Motion Design und personalisierter Markenwelt.</p>
+          <ul class="video-metrics">
+            <li class="video-metric"><span>Hook-Rate</span><strong>78 %</strong></li>
+            <li class="video-metric"><span>Lead-to-Call</span><strong>+42 %</strong></li>
+            <li class="video-metric"><span>Kosten pro Lead</span><strong>-31 %</strong></li>
+          </ul>
+        </div>
+        <div>
+          <h3>So läuft die Produktion ab</h3>
+          <ol style="margin:0; padding-left:22px; color:var(--text-muted); display:grid; gap:10px;">
+            <li>Creative Briefing &amp; Zielgruppen-Analyse</li>
+            <li>Skript &amp; Storyboard inklusive Feedbackschleife</li>
+            <li>Design &amp; Animation im Botkraft Branding</li>
+            <li>Sounddesign, Untertitel &amp; Übergabe in Wunschformaten</li>
+          </ol>
+          <div class="video-actions">
+            <a class="btn-primary" href="#kontakt">Werbevideo anfragen</a>
+            <button class="btn-secondary" type="button" onclick="toggleChatbot(true)">Chatbot-Demo mit Video sehen</button>
+            <small>100 % maßgeschneidert · Lieferung in 10 Werktagen · Optional mit Kampagnen-Setup</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" aria-label="Integrationen" style="padding-top: 60px; padding-bottom: 60px;">
     <h2>Plug &amp; Play in deine bestehende Tool-Landschaft.</h2>
     <p class="section-lead" style="margin-bottom: 36px;">Botkraft verbindet sich nahtlos mit deinen Lieblings-Tools – ohne langwierige IT-Projekte.</p>
@@ -2077,6 +2328,98 @@
 
       setActiveSlide(0);
       startAutoplay();
+    }
+
+    const promoVideo = document.querySelector('[data-promo-video]');
+    if (promoVideo) {
+      const shell = document.querySelector('[data-video-shell]');
+      const playButton = document.querySelector('[data-video-play]');
+      const playLabel = playButton?.querySelector('span');
+      const motionQueryVideo = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let autoPausing = false;
+
+      const updatePlayLabel = () => {
+        if (!playButton || !playLabel) return;
+        const isMuted = promoVideo.muted;
+        playLabel.textContent = isMuted ? 'Sound an' : 'Sound aus';
+        playButton.setAttribute('aria-pressed', (!isMuted).toString());
+      };
+
+      const handleMotionPreference = () => {
+        if (motionQueryVideo.matches) {
+          promoVideo.removeAttribute('autoplay');
+          promoVideo.controls = true;
+          promoVideo.muted = true;
+          shell?.classList.add('is-paused');
+          if (!promoVideo.paused) {
+            promoVideo.pause();
+          }
+        } else {
+          promoVideo.controls = false;
+          promoVideo.setAttribute('autoplay', '');
+          if (promoVideo.dataset.userPaused !== 'true' && promoVideo.paused) {
+            promoVideo.play().catch(() => {});
+          }
+        }
+        updatePlayLabel();
+      };
+
+      if (playButton) {
+        playButton.addEventListener('click', () => {
+          promoVideo.muted = !promoVideo.muted;
+          if (promoVideo.paused) {
+            promoVideo.play().catch(() => {});
+          }
+          updatePlayLabel();
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              shell?.classList.remove('is-paused');
+              if (!motionQueryVideo.matches && promoVideo.paused && promoVideo.dataset.userPaused !== 'true') {
+                promoVideo.play().catch(() => {});
+              }
+            } else if (!promoVideo.paused) {
+              autoPausing = true;
+              promoVideo.pause();
+              shell?.classList.add('is-paused');
+            }
+          });
+        }, { threshold: 0.45 });
+
+        observer.observe(promoVideo);
+      } else if (!motionQueryVideo.matches) {
+        promoVideo.play().catch(() => {});
+      }
+
+      promoVideo.addEventListener('pause', () => {
+        if (autoPausing) {
+          autoPausing = false;
+          return;
+        }
+        promoVideo.dataset.userPaused = 'true';
+        shell?.classList.add('is-paused');
+      });
+
+      promoVideo.addEventListener('play', () => {
+        delete promoVideo.dataset.userPaused;
+        shell?.classList.remove('is-paused');
+      });
+
+      promoVideo.addEventListener('volumechange', updatePlayLabel);
+
+      const handleMotionChange = () => handleMotionPreference();
+      if (typeof motionQueryVideo.addEventListener === 'function') {
+        motionQueryVideo.addEventListener('change', handleMotionChange);
+      } else if (typeof motionQueryVideo.addListener === 'function') {
+        motionQueryVideo.addListener(handleMotionChange);
+      }
+
+      handleMotionPreference();
+      shell?.classList.add('is-paused');
     }
 
     const form = document.getElementById('contactForm');
